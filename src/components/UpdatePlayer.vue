@@ -26,8 +26,7 @@
         <br>
         <br>
         <br>
-        Hero Rank:
-        <br>
+        <h2>Hero Rank:</h2>
         <label for="heroname">Hero Name</label>
         <input type="number" name="heroname">
         <br>
