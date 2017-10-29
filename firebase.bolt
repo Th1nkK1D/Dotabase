@@ -1,0 +1,50 @@
+path / {
+  read() { true }
+  write() { true }
+}
+
+path /Heroes/{id} is Hero {}
+path /Heroes/{id}/skills/{id} is Skill {}
+
+type Hero {
+  heroName: String,
+  avatar: String,
+  attribute: String,
+  roles: Object,
+  lore: String,
+  strBase: Number,
+  agiBase: Number,
+  intBase: Number,
+  strPerLevel: Number,
+  agiPerLevel: Number,
+  intPerLevel: Number,
+  hp: Number,
+  mana: Number,
+  hpRegen: Number,
+  manaRegen: Number
+  damage: Number,
+  armor: Number,
+  magicResistance: Number,
+  moveSpeed: Number,
+  attackRange: Number,
+  attackSpeed: Number,
+  skills: Object,
+  talents: Object
+}
+
+type Skill {
+  skillSlot: Number,
+  icon: String,
+  priority: Number,
+  skillName: String,
+  abilityType: String,
+  damageType: String,
+  pierceSpellImmunity: Boolean,
+  autoLearn: Boolean,
+  description: String,
+  withAghanim: Boolean,
+  maxUpgrade: Number,
+  minLearnLevel: Object,
+  attributes: Object
+}
+
