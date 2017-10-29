@@ -1,6 +1,10 @@
 <template>
   <div>
-    Welcome to Dotabase!
+    <img src="../assets/dota2.png">
+    <br>
+    <h1>Welcome to Dotabase!</h1>
+    
+    <br>
     <router-link to = "updatehero">
       <button>UpdateHero</button>
     </router-link>
