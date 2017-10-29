@@ -1,4 +1,4 @@
-path / {
+path /Heroes/ {
   read() { true }
   write() { true }
 }
