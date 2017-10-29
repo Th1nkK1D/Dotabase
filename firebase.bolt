@@ -3,11 +3,10 @@ path / {
   write() { true }
 }
 
-path /Heroes/{id} is Hero {}
-path /Heroes/{id}/skills/{id} is Skill {}
+path /Heroes/{name} is Hero {}
 
 type Hero {
-  heroName: String,
+  name: String,
   avatar: String,
   attribute: String,
   roles: Object,
@@ -28,16 +27,16 @@ type Hero {
   moveSpeed: Number,
   attackRange: Number,
   attackSpeed: Number,
-  skills: Object,
-  talents: Object
+  skills: Skill[],
+  talents: TalentOnLevel[]
 }
 
 type Skill {
-  skillSlot: Number,
+  slot: Number,
   icon: String,
   priority: Number,
-  skillName: String,
-  abilityType: String,
+  name: String,
+  isActive: Boolean,
   damageType: String,
   pierceSpellImmunity: Boolean,
   autoLearn: Boolean,
@@ -48,3 +47,12 @@ type Skill {
   attributes: Object
 }
 
+type SkillAttribute {
+  name: String,
+  value: Number,
+  withAghanim: Boolean
+}
+
+type TalentOnLevel {
+  slot: String[]
+}
