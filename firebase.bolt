@@ -27,8 +27,8 @@ type Hero {
   moveSpeed: Number,
   attackRange: Number,
   attackSpeed: Number,
-  skills: Map<Number,Skill>,
-  talents: Map<Number,TalentOnLevel>
+  skills: Skill[],
+  talents: TalentOnLevel[]
 }
 
 type Skill {
@@ -54,5 +54,5 @@ type SkillAttribute {
 }
 
 type TalentOnLevel {
-  slot: Map<Number,String>
+  slot: String[]
 }
