@@ -1,6 +1,22 @@
 <template>
   <div>
-    Welcome to Dotabase!
+    <img src="../assets/dota2.png">
+    <br>
+    <h1>Welcome to Dotabase!</h1>
+    <br>
+    <router-link to = "guidecomment">
+      <button>GuideComment</button>
+    </router-link>
+    <router-link to = "login">
+      <button>Login</button>
+    </router-link>
+    <router-link to = "register">
+      <button>Register</button>
+    </router-link>
+    <router-link to = "updateguide">
+      <button>UpdateGuide</button>
+    </router-link>
+    <br>
     <router-link to = "updatehero">
       <button>UpdateHero</button>
     </router-link>
