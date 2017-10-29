@@ -2,16 +2,16 @@
 	<div>
 		<h1>Update Hero</h1>
 		<div>
-			<label for="heroName">Hero Name</label>
-			<input type="text" name="heroName">
+			<label for="heroname">Hero Name</label>
+			<input type="text" name="heroname">
 			<br>
 
-			<label for="heroAvatar">Avatar</label>
-			<input type="text" name="heroAvatar">
+			<label for="heroavatar">Avatar</label>
+			<input type="text" name="heroavatar">
 			<br>
 
-			<label for="attribute">Attribute</label>
-			<input type="text" name="attribute" >
+			<label for="heroattribute">Attribute</label>
+			<input type="text" name="heroattribute" >
 			<br>
 
 			<label for="roles">Roles</label>
@@ -21,61 +21,61 @@
 		<div>
 			<h2>Hero Stats</h2>
 			<label for="str_start">STR : </label>
-			<input type="text" name="str_start" >
+			<input type="number" name="str_start" >
 			<label for="str_per_lvl">STR per level : </label>
-			<input type="text" name="str_per_lvl" >
+			<input type="number" name="str_per_lvl" >
 			<br>
 
 			<label for="agi_start">AGI : </label>
-			<input type="text" name="agi_start" >
+			<input type="number" name="agi_start" >
 			<label for="agi_per_lvl">AGI per level : </label>
-			<input type="text" name="agi_per_lvl" >
+			<input type="number" name="agi_per_lvl" >
 			<br>
 
 			<label for="int_start">INT : </label>
-			<input type="text" name="int_start" >
+			<input type="number" name="int_start" >
 			<label for="int_per_lvl">INT per level : </label>
-			<input type="text" name="int_per_lvl" >
+			<input type="number" name="int_per_lvl" >
 			<br>
 
 			<label for="health">Health : </label>
-			<input type="text" name="health" >
+			<input type="number" name="health" >
 			<br>
 
 			<label for="mana">Mana : </label>
-			<input type="text" name="mana" >
+			<input type="number" name="mana" >
 			<br>
 
 			<label for="armor">Armor : </label>
-			<input type="text" name="armor" >
+			<input type="number" name="armor" >
 			<br>
 
-			<label for="magicResist">Magic Resistance : </label>
-			<input type="text" name="magicResist" >
+			<label for="magicresistance">Magic Resistance : </label>
+			<input type="number" name="magicresistance" >
 			<br>
 
-			<label for="moveSpeed">Movement Speed : </label>
-			<input type="text" name="moveSpeed" >
+			<label for="movespeed">Movement Speed : </label>
+			<input type="number" name="movespeed" >
 			<br>
 
-			<label for="at_range">Attack Range : </label>
-			<input type="text" name="at_ramge" >
+			<label for="attackrange">Attack Range : </label>
+			<input type="number" name="attackrange" >
 			<br>
 
-			<label for="at_speed">Attack Speed : </label>
-			<input type="text" name="at_speed" >
+			<label for="attackspeed">Attack Speed : </label>
+			<input type="number" name="attackspeed" >
 			<br>
 
 			<label for="damage">Damage : </label>
-			<input type="text" name="damage" >
+			<input type="number" name="damage" >
 			<br>
 
-			<label for="health_regen">Health Regeneration : </label>
-			<input type="text" name="health_regen" >
+			<label for="healthregen">Health Regeneration : </label>
+			<input type="number" name="healthregen" >
 			<br>
 
-			<label for="mana_regen">Mana Regeneration : </label>
-			<input type="text" name="mana_regen" >
+			<label for="manaregen">Mana Regeneration : </label>
+			<input type="number" name="manaregen" >
 			<br>
 
 			<label for="lore">Lore</label>
@@ -89,101 +89,101 @@
 			<button type="button" name="moreSn"> + </button>
 			<br>
 
-			<label for="skillName">Skill Name : </label>
-			<input type="text" name="skillName" >
-			<label for="slot">Slot : </label>
-			<input type="text" name="slot" >
+			<label for="skillname">Skill Name : </label>
+			<input type="text" name="skillname" >
+			<label for="skillslot">Slot : </label>
+			<input type="number" name="skillslot" >
 			<br>
 
-			<label for="skillType">Skill Type : </label>
-			<input type="text" name="skillType" >
+			<label for="skilltype">Skill Type : </label>
+			<input type="text" name="skilltype" >
 			<br>
 
 			<div>
 				<h3>Normal Skill</h3>
-				<label for="aghanimUpgrade">Aghanim Upgrade : </label>
-				<input type="radio" name="aghanimUpgrade" value="true">
-				<label > Yes </label>
-				<input type="radio" name="aghanimUpgrade" value="false">
-				<label > No </label>
+				<label for="aghanimupgrade">Aghanim Upgrade : </label>
+				<input type="radio" name="aghanimupgrade" value="true">
+				Yes
+				<input type="radio" name="aghanimupgrade" value="false">
+				No
 				<br>
 				<div>
-					<label for="type">Type : </label>
-					<input type="radio" name="aghanimUpgrade" value="false">
-					<label > Passive </label>
-					<input type="radio" name="aghanimUpgrade" value="true">
-					<label > Active </label>
+					<label for="skilltype">Type : </label>
+					<input type="radio" name="skilltype" value="false">
+					Passive
+					<input type="radio" name="skilltype" value="true">
+					Active
 					<br>
-					<label for="damageType">Damage Type : </label>
-					<input type="text" name="damageType" >
+					<label for="damagetype">Damage Type : </label>
+					<input type="text" name="damagetype" >
 					<br>
-					<label for="spell_immune">Pierce Spell Immunuty : </label>
-					<input type="radio" name="spell_immune" value="true">
-					<label > Yes </label>
-					<input type="radio" name="spell_immune" value="false">
-					<label > No </label>
+					<label for="pirecespell">Pierce Spell Immunuty : </label>
+					<input type="radio" name="pirecespell" value="true">
+					Yes
+					<input type="radio" name="pirecespell" value="false">
+					No
 					<br>
-					<label for="description">Description : </label>
-					<input type="text" name="description" >
+					<label for="skilldescription">Description : </label>
+					<input type="text" name="skilldescription" >
 					<br>
-					<label for="icon">Icon : </label>
-					<input type="text" name="icon" >
+					<label for="skillicon">Icon : </label>
+					<input type="text" name="skillicon" >
 					<br>
-					<label for="skill_att">Attribute : </label><br>
+					<h5>Attribute :</h5>
 					<button type="button" name="AT1">AT 1</button>
 					<button type="button" name="moreAt"> + </button>
 					<br>
-					<label for="att_name">Name : </label>
-					<input type="text" name="att_name" >
+					<label for="attname">Name : </label>
+					<input type="text" name="attname" >
 					<br>
-					<label for="att_value">Value : </label>
-					<input type="text" name="att_value" >
+					<label for="attvalue">Value : </label>
+					<input type="text" name="attvalue" >
 					<br>
 				</div>
 				<div>
 					<h4>Aghanim Upgrade (Yes)</h4>
-					<label for="add_skill">Add Skill : </label>
-					<input type="radio" name="add_skill" value="true">
-					<label > Yes </label>
-					<input type="radio" name="add_skill" value="false">
-					<label > No </label>
+					<label for="addskill">Add Skill : </label>
+					<input type="radio" name="addskill" value="true">
+					Yes
+					<input type="radio" name="addskill" value="false">
+					No
 					<br>
-					<label for="ch_skill">Change Skill : </label>
-					<input type="radio" name="ch_skill" value="true">
-					<label > Yes </label>
-					<input type="radio" name="ch_skill" value="false">
-					<label > No </label>
+					<label for="changeskill">Change Skill : </label>
+					<input type="radio" name="changeskill" value="true">
+					Yes
+					<input type="radio" name="changeskill" value="false">
+					No
 					<br><br>
 					<label for="type">Type : </label>
-					<input type="radio" name="aghanimUpgrade" value="false">
-					<label > Passive </label>
-					<input type="radio" name="aghanimUpgrade" value="true">
-					<label > Active </label>
+					<input type="radio" name="aghanimupgrade" value="false">
+					Passive
+					<input type="radio" name="aghanimupgrade" value="true">
+					Active
 					<br>
-					<label for="damageType">Damage Type : </label>
-					<input type="text" name="damageType" >
+					<label for="damagetype">Damage Type : </label>
+					<input type="text" name="damagetype" >
 					<br>
-					<label for="spell_immune">Pierce Spell Immunuty : </label>
-					<input type="radio" name="spell_immune" value="true">
-					<label > Yes </label>
-					<input type="radio" name="spell_immune" value="false">
-					<label > No </label>
+					<label for="pirecespell">Pierce Spell Immunuty : </label>
+					<input type="radio" name="pirecespell" value="true">
+					Yes
+					<input type="radio" name="pirecespell" value="false">
+					No
 					<br>
-					<label for="description">Description : </label>
-					<input type="text" name="description" >
+					<label for="skilldescription">Description : </label>
+					<input type="text" name="skilldescription" >
 					<br>
-					<label for="icon">Icon : </label>
-					<input type="text" name="icon" >
+					<label for="skillicon">Icon : </label>
+					<input type="text" name="skillicon" >
 					<br>
-					<label for="skill_att">Attribute : </label><br>
+					<h5>Attribute :</h5>
 					<button type="button" name="AT1">AT 1</button>
 					<button type="button" name="moreAt"> + </button>
 					<br>
-					<label for="att_name">Name : </label>
-					<input type="text" name="att_name" >
+					<label for="attname">Name : </label>
+					<input type="text" name="attname" >
 					<br>
-					<label for="att_value">Value : </label>
-					<input type="text" name="att_value" >
+					<label for="attvalue">Value : </label>
+					<input type="text" name="attvalue" >
 					<br>
 				</div>
 			</div>
@@ -192,51 +192,51 @@
 				<button type="button" name="pr1">PR 1</button>
 				<button type="button" name="morePr"> + </button>
 				<br>
-				<label for="spc_skill_name">Name : </label>
-				<input type="text" name="spc_skill_name" >
+				<label for="spcskillname">Name : </label>
+				<input type="text" name="spcskillname" >
 				<br>
-				<label for="spc_dam_type">Damage Type : </label>
-				<input type="text" name="spc_dam_type" >
+				<label for="spcdamtype">Damage Type : </label>
+				<input type="text" name="spcdamtype" >
 				<br>
-				<label for="spc_spell_immune">Pierce Spell Immunuty : </label>
-				<input type="radio" name="spc_spell_immune" value="true">
-				<label > Yes </label>
-				<input type="radio" name="spc_spell_immune" value="false">
-				<label > No </label>
+				<label for="spcpirecespell">Pierce Spell Immunuty : </label>
+				<input type="radio" name="spcpirecespell" value="true">
+				Yes
+				<input type="radio" name="spcpirecespell" value="false">
+				No
 				<br>
-				<label for="spc_description">Description : </label>
-				<input type="text" name="spc_description" >
+				<label for="spcskilldescription">Description : </label>
+				<input type="text" name="spcskilldescription" >
 				<br>
-				<label for="spc_icon">Icon : </label>
-				<input type="text" name="spc_icon" >
+				<label for="spcskillicon">Icon : </label>
+				<input type="text" name="spcskillicon" >
 				<br>
-				<label for="spc_skill_att">Attribute : </label><br>
+				<h5>Attribute :</h5>
 				<button type="button" name="spc_AT1">AT 1</button>
 				<button type="button" name="more_spc_At"> + </button>
 				<br>
-				<label for="spc_att_name">Name : </label>
-				<input type="text" name="spc_att_name" >
+				<label for="spcattname">Name : </label>
+				<input type="text" name="spcattname" >
 				<br>
-				<label for="spc_att_value">Value : </label>
-				<input type="text" name="spc_att_value" >
+				<label for="spcattvalue">Value : </label>
+				<input type="text" name="spcattvalue" >
 				<br>
 			</div>
 			<div>
 				<h3>Talent Tree</h3>
 				<button type="button" name="lvl25_l">..........</button>
-				<label> 25 </label>
+				25
 				<button type="button" name="lvl25_r">..........</button>
 				<br>
 				<button type="button" name="lvl20_l">..........</button>
-				<label> 20 </label>
+				20
 				<button type="button" name="lvl20_r">..........</button>
 				<br>
 				<button type="button" name="lvl15_l">..........</button>
-				<label> 15 </label>
+				15
 				<button type="button" name="lvl15_r">..........</button>
 				<br>
 				<button type="button" name="lvl10_l">..........</button>
-				<label> 10 </label>
+				10
 				<button type="button" name="lvl10_r">..........</button>
 				<br>
 			</div>
