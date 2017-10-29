@@ -96,7 +96,7 @@
 
 <script>
 export default {
-  name: 'MainPage',
+  name: 'UpdateHero',
   data () {
     return {
       // Add data here
