@@ -43,6 +43,8 @@
             <br>
             <div>
               <!-- up skill 1-25 -->
+              <label for="1_skill"></label>            
+			        <input type="radio" name="1_skill" >
             </div>
           </div>
 
@@ -54,6 +56,8 @@
           <br>
           <div>
               <!-- up skill 1-25 -->
+              <label for="1_skill"></label>            
+			        <input type="radio" name="1_skill" >
           </div>
 
 <!-- Third skill -->
@@ -64,6 +68,8 @@
           <br>
           <div>
               <!-- up skill 1-25 -->
+              <label for="1_skill"></label>            
+			        <input type="radio" name="1_skill" >
           </div>
 
 <!-- Fourth skill -->
@@ -74,21 +80,53 @@
           <br>
           <div>
               <!-- up skill 1-25 -->
+              <label for="1_skill"></label>            
+			        <input type="radio" name="1_skill" >
           </div>
 
 <!-- Talent Level -->
           <div>
-            <img src="https://lh3.googleusercontent.com/qShpEIkHJJ36Jp7NPwyuGSs6KpzwthEoOJhHVWGIrv6pNtFySj2DhDsG479TWYmftE4=w300">
+            <img src="http://wiki.teamliquid.net/commons/images/5/54/Talents.png">
             Talent Level
           </div>
           <br>
           <div>
               <!-- up skill 1-25 -->
+              <label for="1_skill"></label>            
+			        <input type="radio" name="1_skill" >
           </div>
 
 <!-- Talent Tree -->
           <div>
-            <img src="https://i1.wp.com/thegamehaus.com/wp-content/uploads/2017/01/morphling.png">
+            <center>
+            Talent Tree
+            <br>
+            <div>
+              <!-- lv25 -->
+              <label for="t_l_25"></label>            
+			        <input type="radio" name="t_l_25" >
+              <label for="t_r_25">25</label>            
+			        <input type="radio" name="t_r_25" >
+              <br>
+              <!-- lv20 -->
+              <label for="t_l_20"></label>            
+			        <input type="radio" name="t_l_20" >
+              <label for="t_r_20">20</label>            
+			        <input type="radio" name="t_r_20" >
+              <br>
+              <!-- lv15 -->
+              <label for="t_l_15"></label>            
+			        <input type="radio" name="t_l_15" >
+              <label for="t_r_15">15</label>            
+			        <input type="radio" name="t_r_15" >
+              <br>
+              <!-- lv10 -->
+              <label for="t_l_10"></label>            
+			        <input type="radio" name="t_l_10" >
+              <label for="t_r_10">10</label>            
+			        <input type="radio" name="t_r_10" >
+            </div>
+            </center>
           </div>
 
         <br>
