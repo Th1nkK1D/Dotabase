@@ -11,75 +11,75 @@
 			<br>
 
 			<label for="heroattribute">Attribute</label>
-			<input type="text" name="heroattribute" >
+			<input type="text" name="heroattribute">
 			<br>
 
 			<label for="roles">Roles</label>
-			<input type="text" name="roles" >
+			<input type="text" name="roles">
 			<br>
 		</div>
 		<div>
 			<h2>Hero Stats</h2>
 			<label for="str_start">STR : </label>
-			<input type="number" name="str_start" >
+			<input type="number" name="str_start">
 			<label for="str_per_lvl">STR per level : </label>
-			<input type="number" name="str_per_lvl" >
+			<input type="number" name="str_per_lvl">
 			<br>
 
 			<label for="agi_start">AGI : </label>
-			<input type="number" name="agi_start" >
+			<input type="number" name="agi_start">
 			<label for="agi_per_lvl">AGI per level : </label>
-			<input type="number" name="agi_per_lvl" >
+			<input type="number" name="agi_per_lvl">
 			<br>
 
 			<label for="int_start">INT : </label>
-			<input type="number" name="int_start" >
+			<input type="number" name="int_start">
 			<label for="int_per_lvl">INT per level : </label>
-			<input type="number" name="int_per_lvl" >
+			<input type="number" name="int_per_lvl">
 			<br>
 
 			<label for="health">Health : </label>
-			<input type="number" name="health" >
+			<input type="number" name="health">
 			<br>
 
 			<label for="mana">Mana : </label>
-			<input type="number" name="mana" >
+			<input type="number" name="mana">
 			<br>
 
 			<label for="armor">Armor : </label>
-			<input type="number" name="armor" >
+			<input type="number" name="armor">
 			<br>
 
 			<label for="magicresistance">Magic Resistance : </label>
-			<input type="number" name="magicresistance" >
+			<input type="number" name="magicresistance">
 			<br>
 
 			<label for="movespeed">Movement Speed : </label>
-			<input type="number" name="movespeed" >
+			<input type="number" name="movespeed">
 			<br>
 
 			<label for="attackrange">Attack Range : </label>
-			<input type="number" name="attackrange" >
+			<input type="number" name="attackrange">
 			<br>
 
 			<label for="attackspeed">Attack Speed : </label>
-			<input type="number" name="attackspeed" >
+			<input type="number" name="attackspeed">
 			<br>
 
 			<label for="damage">Damage : </label>
-			<input type="number" name="damage" >
+			<input type="number" name="damage">
 			<br>
 
 			<label for="healthregen">Health Regeneration : </label>
-			<input type="number" name="healthregen" >
+			<input type="number" name="healthregen">
 			<br>
 
 			<label for="manaregen">Mana Regeneration : </label>
-			<input type="number" name="manaregen" >
+			<input type="number" name="manaregen">
 			<br>
 
 			<label for="lore">Lore</label>
-			<input type="text" name="lore" >
+			<input type="text" name="lore">
 			<br>
 		</div>
 
