@@ -9,7 +9,7 @@ type Hero {
   name: String,
   avatar: String,
   attribute: String,
-  roles: Object,
+  roles: String[],
   lore: String,
   strBase: Number,
   agiBase: Number,
@@ -43,8 +43,8 @@ type Skill {
   description: String,
   withAghanim: Boolean,
   maxUpgrade: Number,
-  minLearnLevel: Object,
-  attributes: Object
+  minLearnLevel: Number[],
+  attributes: String[]
 }
 
 type SkillAttribute {
