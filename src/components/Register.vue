@@ -1,5 +1,5 @@
 <template>
-    
+
     <div>
         <h1>Register</h1>
         <br>
@@ -19,7 +19,11 @@
         <button>Register</button>
         <br>
         <br>
-        <button>To Login Page</button>
+        Already have an account?
+        <br>
+        <router-link to = "login">
+          <button>To Login Page</button>
+        </router-link>
     </div>
 
 

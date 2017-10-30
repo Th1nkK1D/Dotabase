@@ -1,5 +1,5 @@
 <template>
-    
+
     <div>
         <h1>Login</h1>
         <br>
@@ -10,6 +10,13 @@
         <input type="password" name="password">
         <br>
         <button>Login</button>
+        <br>
+        <br>
+        Don't have an account?
+        <br>
+        <router-link to = "register">
+          <button>Create Account</button>
+        </router-link>
     </div>
 
 
