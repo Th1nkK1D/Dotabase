@@ -99,7 +99,7 @@
 			<input type="number" name="skillslot" v-model="Hero.Skill.slot">
 			<br>
 
-			<div>
+			<!-- <div>
 				<h3>Normal Skill</h3>
 				<label for="aghanimupgrade">Aghanim Upgrade : </label>
 				<input type="radio" name="aghanimupgrade" value="true">
@@ -186,8 +186,8 @@
 					<input type="text" name="attvalue" >
 					<br>
 				</div>
-			</div>
-			<div>
+			</div> -->
+			<!-- <div>
 				<h3>Special Skill</h3>
 				<button type="button" name="pr1">PR 1</button>
 				<button type="button" name="morePr"> + </button>
@@ -220,7 +220,7 @@
 				<label for="spcattvalue">Value : </label>
 				<input type="text" name="spcattvalue" >
 				<br>
-			</div>
+			</div> -->
 			<div>
 				<h3>Talent Tree</h3>
 				<button type="button" name="lvl25_l">..........</button>
