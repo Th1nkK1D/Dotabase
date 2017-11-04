@@ -4,19 +4,19 @@
         <h1>Register</h1>
         <br>
         <label for="username">Username</label>
-        <input type="text" name="username">
+        <input type="text" name="username" v-model="Member.username">
         <br>
         <label for="password">Password</label>
-        <input type="password" name="password">
+        <input type="password" name="password" v-model="Member.password">
         <br>
         <label for="email">E-mail</label>
-        <input type="text" name="email">
+        <input type="text" name="email" v-model="Member.email">
         <br>
-        <label for="memberavatar">Avatar</label>
-        <input type="text" name="memberavatar">
+        <label for="heroAvatar">Avatar</label>
+        <input type="text" name="heroAvatar" v-model="Member.heroAvatar">
         <br>
         <br>
-        <button>Register</button>
+        <button v-on:click="submit()">submit</button>
         <br>
         <br>
         Already have an account?
@@ -25,19 +25,37 @@
           <button>To Login Page</button>
         </router-link>
     </div>
-
-
-
 </template>
 
 <script>
-export default {
+
+import Firebase from 'firebase'
+
+var MemberDB = Firebase.database().ref('/Members') 
+
+export default 
+{
+  firebase:  {
+    nummember: MemberDB
+  },
   name: 'Register',
   data () {
     return {
-      // Add data here
-    }
-  }
+      Member:{
+        username: '',
+        password: '',
+        email: '',
+        heroAvatar: ''
+              }
+            }
+          },
+
+methods:{
+   submit: function() {
+        // Add/Update
+        MemberDB.child(this.Member.username).set(this.Member) 
+                      }
+        }
 }
 </script>
 
