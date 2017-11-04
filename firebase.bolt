@@ -43,9 +43,9 @@ path /Items/{name} is Item {}
 path /Guides/{id} is Guide {}
 path /Comments/{id} is Comment {}
 path /Rating/{id} is Rating {}
-path /Members/{id} is Member {}
-path /Players/{id} is Player {}
-path /Teams/{id} is Team {}
+path /Members/{name} is Member {}
+path /Players/{name} is Player {}
+path /Teams/{name} is Team {}
 
 type Hero {
   name: String,
@@ -147,7 +147,6 @@ type Rating {
 }
 
 type Member {
-  id: String,
   username: String,
   password: String,
   email: String,
