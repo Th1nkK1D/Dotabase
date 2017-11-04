@@ -1,39 +1,39 @@
-path /Heroes/ {
+path /Heroes {
   read() { true }
   write() { true }
 }
 
-path /Items/ {
+path /Items {
   read() { true }
   write() { true }
 }
 
-path /Guides/ {
+path /Guides {
   read() { true }
   write() { true }
 }
 
-path /Comments/ {
+path /Comments {
   read() { true }
   write() { true }
 }
 
-path /Rating/ {
+path /Rating {
   read() { true }
   write() { true }
 }
 
-path /Members/ {
+path /Members {
   read() { true }
   write() { true }
 }
 
-path /Teams/ {
+path /Teams {
   read() { true }
   write() { true }
 }
 
-path /Players/ {
+path /Players {
   read() { true }
   write() { true }
 }
@@ -101,7 +101,7 @@ type Item {
   recipePrice: Number,
   recipes: String[],
   lore: String,
-  abilities: Abilities[]
+  abilities: ItemAbility[]
 }
 
 type ItemAbility {
