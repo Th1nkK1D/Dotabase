@@ -3,7 +3,49 @@ path /Heroes/ {
   write() { true }
 }
 
+path /Items/ {
+  read() { true }
+  write() { true }
+}
+
+path /Guides/ {
+  read() { true }
+  write() { true }
+}
+
+path /Comments/ {
+  read() { true }
+  write() { true }
+}
+
+path /Rating/ {
+  read() { true }
+  write() { true }
+}
+
+path /Members/ {
+  read() { true }
+  write() { true }
+}
+
+path /Teams/ {
+  read() { true }
+  write() { true }
+}
+
+path /Players/ {
+  read() { true }
+  write() { true }
+}
+
 path /Heroes/{name} is Hero {}
+path /Items/{name} is Item {}
+path /Guides/{id} is Guide {}
+path /Comments/{id} is Comment {}
+path /Rating/{id} is Rating {}
+path /Members/{id} is Member {}
+path /Players/{id} is Player {}
+path /Teams/{id} is Team {}
 
 type Hero {
   name: String,
@@ -21,7 +63,8 @@ type Hero {
   mana: Number,
   hpRegen: Number,
   manaRegen: Number,
-  damage: Number,
+  damageMin: Number,
+  damageMax: Number,
   armor: Number,
   magicResistance: Number,
   moveSpeed: Number,
@@ -33,26 +76,101 @@ type Hero {
 
 type Skill {
   slot: Number,
-  icon: String,
-  priority: Number,
   name: String,
-  isActive: Boolean,
-  damageType: String,
-  pierceSpellImmunity: Boolean,
-  autoLearn: Boolean,
+  icon: String,
   description: String,
-  withAghanim: Boolean,
   maxUpgrade: Number,
   minLearnLevel: Number[],
-  attributes: String[]
+  attributes: Attribute[]
 }
 
-type SkillAttribute {
+type Attribute {
   name: String,
-  value: Number,
-  withAghanim: Boolean
+  value: String,
 }
 
 type TalentOnLevel {
-  slot: String[]
+  talent: String[]
+}
+
+type Item {
+  name: String,
+  icon: String,
+  category: String,
+  price: Number,
+  recipePrice: Number,
+  recipes: String[],
+  lore: String,
+  abilities: Abilities[]
+}
+
+type ItemAbility {
+  name: String,
+  description: String,
+  attributes: Attribute[]
+}
+
+type Guide {
+  id: String,
+  memberID: String,
+  name: String,
+  heroName: String,
+  dateCreated: String,
+  talentTree: Number[],
+  learnOrder: LearnOrder[],
+  purchaseCategory: PurchaseCategory[]
+}
+
+type LearnOrder {
+  level: Number,
+  isSkill: Boolean,
+  slot: Number | Null,
+}
+
+type PurchaseCategory {
+  name: String,
+  items: String[]
+}
+
+type Comment {
+  guideID: String,
+  memberID: String,
+  comment: String,
+  dateCreated: String,
+}
+
+type Rating {
+  guideID: String,
+  memberID: String,
+  rating: Number,
+  dateCreated: String,
+}
+
+type Member {
+  id: String,
+  username: String,
+  password: String,
+  email: String,
+  heroAvatar: String
+}
+
+type Team {
+  name: String,
+  region: String,
+}
+
+type Player {
+  name: String,
+  avatar: String,
+  teamName: String,
+  role: String,
+  mmrSolo: Number,
+  mmrParty: Number,
+  matchedPlay: Number,
+  heroRanks: HeroRank[]
+}
+
+type HeroRank {
+  heroName: String,
+  score: String
 }
