@@ -165,11 +165,11 @@ type Player {
   role: String,
   mmrSolo: Number,
   mmrParty: Number,
-  matchedPlay: Number,
-  heroRanks: HeroRank[]
+  matchPlayed: Number,
+  heroRanks: Any
 }
 
 type HeroRank {
   heroName: String,
-  score: String
+  score: Number,
 }

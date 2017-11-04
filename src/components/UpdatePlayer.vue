@@ -28,10 +28,10 @@
         <br>
         <h2>Hero Rank:</h2>
         <label for="heroname">Hero Name</label>
-        <input type="text" name="heroname" v-model="Player.HeroRank.heroName">
+        <input type="text" name="heroname" v-model="Player.heroRanks[0].heroName">
         <br>
         <label for="heroscore">Hero Score</label>
-        <input type="number" name="heroscore" v-model="Player.HeroRank.score">
+        <input type="number" name="heroscore" v-model="Player.heroRanks[0].score">
         <br>
         <button v-on:click="submit()">Submit</button>
         <br>
@@ -57,10 +57,10 @@ export default {
         mmrSolo: 0,
         mmrParty: 0,
         matchPlayed: 0,
-        HeroRank: {
+        heroRanks: [{
           heroName: '',
           score: 0,
-        }
+        }],
       }
     }
   },
