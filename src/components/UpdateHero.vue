@@ -3,83 +3,87 @@
 		<h1>Update Hero</h1>
 		<div>
 			<label for="heroname">Hero Name</label>
-			<input type="text" name="heroname">
+			<input type="text" name="heroname" v-model="Hero.name",>
 			<br>
 
 			<label for="heroavatar">Avatar</label>
-			<input type="text" name="heroavatar">
+			<input type="text" name="heroavatar" v-model="Hero.avatar">
 			<br>
 
 			<label for="heroattribute">Attribute</label>
-			<input type="text" name="heroattribute">
+			<input type="text" name="heroattribute" v-model="Hero.attribute">
 			<br>
 
 			<label for="roles">Roles</label>
-			<input type="text" name="roles">
+			<input type="text" name="roles" v-model="Hero.roles">
 			<br>
 		</div>
 		<div>
 			<h2>Hero Stats</h2>
 			<label for="str_start">STR : </label>
-			<input type="number" name="str_start">
+			<input type="number" name="str_start" v-model="Hero.strBase">
 			<label for="str_per_lvl">STR per level : </label>
-			<input type="number" name="str_per_lvl">
+			<input type="number" name="str_per_lvl" v-model="Hero.strGain">
 			<br>
 
 			<label for="agi_start">AGI : </label>
-			<input type="number" name="agi_start">
+			<input type="number" name="agi_start" v-model="Hero.agiBase">
 			<label for="agi_per_lvl">AGI per level : </label>
-			<input type="number" name="agi_per_lvl">
+			<input type="number" name="agi_per_lvl" v-model="Hero.agiGain">
 			<br>
 
 			<label for="int_start">INT : </label>
-			<input type="number" name="int_start">
+			<input type="number" name="int_start" v-model="Hero.intBase">
 			<label for="int_per_lvl">INT per level : </label>
-			<input type="number" name="int_per_lvl">
+			<input type="number" name="int_per_lvl" v-model="Hero.intGain">
 			<br>
 
 			<label for="health">Health : </label>
-			<input type="number" name="health">
+			<input type="number" name="health" v-model="Hero.hp">
 			<br>
 
 			<label for="mana">Mana : </label>
-			<input type="number" name="mana">
+			<input type="number" name="mana" v-model="Hero.mana">
 			<br>
 
 			<label for="armor">Armor : </label>
-			<input type="number" name="armor">
+			<input type="number" name="armor" v-model="Hero.armor">
 			<br>
 
 			<label for="magicresistance">Magic Resistance : </label>
-			<input type="number" name="magicresistance">
+			<input type="number" name="magicresistance" v-model="Hero.magicResistance">
 			<br>
 
 			<label for="movespeed">Movement Speed : </label>
-			<input type="number" name="movespeed">
+			<input type="number" name="movespeed" v-model="Hero.moveSpeed">
 			<br>
 
 			<label for="attackrange">Attack Range : </label>
-			<input type="number" name="attackrange">
+			<input type="number" name="attackrange" v-model="Hero.attackRange">
 			<br>
 
 			<label for="attackspeed">Attack Speed : </label>
-			<input type="number" name="attackspeed">
+			<input type="number" name="attackspeed" v-model="Hero.attackSpeed">
 			<br>
 
-			<label for="damage">Damage : </label>
-			<input type="number" name="damage">
+			<label for="damagemin">Min Damage : </label>
+			<input type="number" name="damage" v-model="Hero.damageMin">
+			<br>
+
+			<label for="damagemax">Max Damage : </label>
+			<input type="number" name="damage" v-model="Hero.damageMax">
 			<br>
 
 			<label for="healthregen">Health Regeneration : </label>
-			<input type="number" name="healthregen">
+			<input type="number" name="healthregen" v-model="Hero.hpRegen">
 			<br>
 
 			<label for="manaregen">Mana Regeneration : </label>
-			<input type="number" name="manaregen">
+			<input type="number" name="manaregen" v-model="Hero.manaRegen">
 			<br>
 
 			<label for="lore">Lore</label>
-			<input type="text" name="lore">
+			<input type="text" name="lore" v-model="Hero.lore">
 			<br>
 		</div>
 
@@ -90,13 +94,9 @@
 			<br>
 
 			<label for="skillname">Skill Name : </label>
-			<input type="text" name="skillname" >
+			<input type="text" name="skillname" v-model="Hero.Skill.name">
 			<label for="skillslot">Slot : </label>
-			<input type="number" name="skillslot" >
-			<br>
-
-			<label for="skilltype">Skill Type : </label>
-			<input type="text" name="skilltype" >
+			<input type="number" name="skillslot" v-model="Hero.Skill.slot">
 			<br>
 
 			<div>
