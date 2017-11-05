@@ -35,6 +35,7 @@
         <br>
         <button v-on:click="submit()">Submit</button>
         <br>
+        
         {{Player}}
     </div>
 

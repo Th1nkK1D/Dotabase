@@ -101,7 +101,13 @@ type Item {
   recipePrice: Number,
   recipes: String[],
   lore: String,
+  stats: ItemStat[],
   abilities: ItemAbility[]
+}
+
+type ItemStat {
+  name: String,
+  value: String,
 }
 
 type ItemAbility {
