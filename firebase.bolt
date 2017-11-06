@@ -168,7 +168,7 @@ type Player {
   mmrSolo: Number,
   mmrParty: Number,
   matchPlayed: Number,
-  heroRanks: Any
+  heroRanks: HeroRank[]
 }
 
 type HeroRank {

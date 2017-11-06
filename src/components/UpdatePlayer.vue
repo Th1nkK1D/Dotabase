@@ -16,13 +16,13 @@
         <input type="text" name="playerrole" v-model="Player.role">
         <br>
         <label for="solommr">MMR Solo</label>
-        <input type="number" name="solommr" v-model="Player.mmrSolo">
+        <input type="number" name="solommr" v-model.number="Player.mmrSolo">
         <br>
         <label for="partymmr">MMR Party</label>
-        <input type="number" name="partymmr" v-model="Player.mmrParty">
+        <input type="number" name="partymmr" v-model.number="Player.mmrParty">
         <br>
         <label for="matchplayed">Match Played</label>
-        <input type="number" name="matchplayed" v-model="Player.matchPlayed">
+        <input type="number" name="matchplayed" v-model.number="Player.matchPlayed">
         <br>
         <br>
         <br>
@@ -31,11 +31,12 @@
         <input type="text" name="heroname" v-model="Player.heroRanks[0].heroName">
         <br>
         <label for="heroscore">Hero Score</label>
-        <input type="number" name="heroscore" v-model="Player.heroRanks[0].score">
+        <input type="number" name="heroscore" v-model.number="Player.heroRanks[0].score">
         <br>
         <button v-on:click="submit()">Submit</button>
         <br>
-        
+        {{Player.heroRanks[0].score}}
+        <br>
         {{Player}}
     </div>
 
@@ -55,12 +56,12 @@ export default {
         avatar: '',
         teamName: '',
         role: '',
-        mmrSolo: 0,
-        mmrParty: 0,
-        matchPlayed: 0,
+        mmrSolo: null,
+        mmrParty: null,
+        matchPlayed: null,
         heroRanks: [{
           heroName: '',
-          score: 0,
+          score: null,
         }],
       }
     }
