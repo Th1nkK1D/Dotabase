@@ -74,7 +74,7 @@ export default {
         category: '',
         price: null,
         recipePrice: null,
-        recipes: [],
+        recipes: [''],
         lore: '',
         Stat: [{
           name: '',

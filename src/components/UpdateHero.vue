@@ -21,56 +21,56 @@
 		
 			<h2>Hero Stats</h2>
 			<label for="str_start">STR : </label>
-			<input type="number" name="str_start" v-model="Hero.strBase">
+			<input type="number" name="str_start" v-model.number="Hero.strBase">
 			<label for="str_per_lvl">STR per level : </label>
-			<input type="number" name="str_per_lvl" v-model="Hero.strGain">
+			<input type="number" name="str_per_lvl" v-model.number="Hero.strGain">
 			<br>
 			<label for="agi_start">AGI : </label>
-			<input type="number" name="agi_start" v-model="Hero.agiBase">
+			<input type="number" name="agi_start" v-model.number="Hero.agiBase">
 			<label for="agi_per_lvl">AGI per level : </label>
-			<input type="number" name="agi_per_lvl" v-model="Hero.agiGain">
+			<input type="number" name="agi_per_lvl" v-model.number="Hero.agiGain">
 			<br>
 			<label for="int_start">INT : </label>
-			<input type="number" name="int_start" v-model="Hero.intBase">
+			<input type="number" name="int_start" v-model.number="Hero.intBase">
 			<label for="int_per_lvl">INT per level : </label>
-			<input type="number" name="int_per_lvl" v-model="Hero.intGain">
+			<input type="number" name="int_per_lvl" v-model.number="Hero.intGain">
 			<br>
 
 			<label for="health">Health : </label>
-			<input type="number" name="health" v-model="Hero.hp">
+			<input type="number" name="health" v-model.number="Hero.hp">
 			<br>
 			<label for="mana">Mana : </label>
-			<input type="number" name="mana" v-model="Hero.mana">
+			<input type="number" name="mana" v-model.number="Hero.mana">
 			<br>
 			<label for="healthregen">Health Regeneration : </label>
-			<input type="number" name="healthregen" v-model="Hero.hpRegen">
+			<input type="number" name="healthregen" v-model.number="Hero.hpRegen">
 			<br>
 			<label for="manaregen">Mana Regeneration : </label>
-			<input type="number" name="manaregen" v-model="Hero.manaRegen">
+			<input type="number" name="manaregen" v-model.number="Hero.manaRegen">
 			<br>
 
 			<label for="damagemin">Min Damage : </label>
-			<input type="number" name="damage" v-model="Hero.damageMin">
+			<input type="number" name="damage" v-model.number="Hero.damageMin">
 			<br>
 			<label for="damagemax">Max Damage : </label>
-			<input type="number" name="damage" v-model="Hero.damageMax">
+			<input type="number" name="damage" v-model.number="Hero.damageMax">
 			<br>
 
 			<label for="armor">Armor : </label>
-			<input type="number" name="armor" v-model="Hero.armor">
+			<input type="number" name="armor" v-model.number="Hero.armor">
 			<br>
 			<label for="magicresistance">Magic Resistance : </label>
-			<input type="number" name="magicresistance" v-model="Hero.magicResistance">
+			<input type="number" name="magicresistance" v-model.number="Hero.magicResistance">
 			<br>
 
 			<label for="movespeed">Movement Speed : </label>
-			<input type="number" name="movespeed" v-model="Hero.moveSpeed">
+			<input type="number" name="movespeed" v-model.number="Hero.moveSpeed">
 			<br>
 			<label for="attackrange">Attack Range : </label>
-			<input type="number" name="attackrange" v-model="Hero.attackRange">
+			<input type="number" name="attackrange" v-model.number="Hero.attackRange">
 			<br>
 			<label for="attackspeed">Attack Speed : </label>
-			<input type="number" name="attackspeed" v-model="Hero.attackSpeed">
+			<input type="number" name="attackspeed" v-model.number="Hero.attackSpeed">
 			<br>
 
 		
@@ -84,7 +84,7 @@
 			<label for="skillname">Skill Name : </label>
 			<input type="text" name="skillname" v-model="Hero.Skill.name">
 			<label for="skillslot">Slot : </label>
-			<input type="number" name="skillslot" v-model="Hero.Skill.slot">
+			<input type="number" name="skillslot" v-model.number="Hero.Skill.slot">
 			<br>
 
 			<label for="skillicon">Icon : </label>
@@ -96,7 +96,7 @@
 			<br>
 
 			<label for="maxupgrade">Max Upgrade : </label>
-			<input type="number" name="maxupgrade" v-model="Hero.Skill.maxUpgrade">
+			<input type="number" name="maxupgrade" v-model.number="Hero.Skill.maxUpgrade">
 			<br>
 
 			<label for="minlearnlevel">Min Learn Level : </label>
@@ -146,7 +146,7 @@ export default {
 		  name: '',
 		  avatar: '',
 		  attribute: '',
-		  roles: [],
+		  roles: [''],
 		  lore: '',
 		  strBase: null,
 		  agiBase: null,
@@ -171,14 +171,14 @@ export default {
 			  icon: '',
 			  description: '',
 			  maxUpgrade: null,
-			  minLearnLevel: [],
+			  minLearnLevel: [''],
 			  Attribute: [{
 				  name: '',
 				  value: '',
 			  }],	
 		  }],
 		  Talent:[{
-			  talent:[],
+			  talent:[''],
 		  }],
 	  }
     }
