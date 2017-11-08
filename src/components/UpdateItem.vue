@@ -13,7 +13,7 @@
         <input type="text" name="type" v-model="Item.category">
         <br>
         <label for="itemcost">Cost</label>
-        <input type="number" name="itemcost" v-model="Item.price">
+        <input type="number" name="itemcost" v-model.number="Item.price">
         <br>
         <label for="itemdescription">Description</label>
         <input type="text" name="itemdescription" v-model="Item.lore">
@@ -24,7 +24,7 @@
         <input type="text" name="recipes" v-model="Item.recipes[0]">
         <br>
         <label for="recipeprice">Recipe Price</label>
-        <input type="number" name="recipeprice" v-model="Item.recipePrice">
+        <input type="number" name="recipeprice" v-model.number="Item.recipePrice">
         <br>
         <br>
         <br>
@@ -72,8 +72,8 @@ export default {
         name: '',
         icon: '',
         category: '',
-        price: 0,
-        recipePrice: 0,
+        price: null,
+        recipePrice: null,
         recipes: [],
         lore: '',
         Stat: [{
