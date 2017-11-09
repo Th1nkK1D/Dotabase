@@ -31,7 +31,7 @@
 
     <h2>Talents</h2>
     <table>
-      <tr v-for="talentEachLvl in hero.talents.reverse()" :key="talentEachLvl">
+      <tr v-for="talentEachLvl in sortedTalent" :key="talentEachLvl[0]">
         <td v-for="talent in talentEachLvl" :key="talent">{{talent}}</td>
       </tr>
     </table>
@@ -52,11 +52,17 @@ export default {
   },
   data () {
     return {
-      // Add data here
+      hero: {}
     }
   },
-  firebase:  {
-    hero: heroDB
+  computed: {
+    sortedTalent() {
+      if(this.hero !== undefined && this.hero.talents !== undefined) {
+        return this.hero.talents.reverse()
+      } else {
+        return null
+      }
+    }
   },
 }
 </script>
