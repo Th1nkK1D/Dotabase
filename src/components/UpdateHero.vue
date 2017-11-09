@@ -3,7 +3,7 @@
 		<h1>Update Hero</h1>
 		
 			<label for="heroname">Hero Name</label>
-			<input type="text" name="heroname" v-model="Hero.name",>
+			<input type="text" name="heroname" v-model="Hero.name">
 			<br>
 			<label for="heroavatar">Avatar</label>
 			<input type="text" name="heroavatar" v-model="Hero.avatar">
@@ -82,54 +82,54 @@
 			<br>
 
 			<label for="skillname">Skill Name : </label>
-			<input type="text" name="skillname" v-model="Hero.Skill.name">
+			<input type="text" name="skillname" v-model="Hero.skills[0].name">
 			<label for="skillslot">Slot : </label>
-			<input type="number" name="skillslot" v-model.number="Hero.Skill.slot">
+			<input type="number" name="skillslot" v-model.number="Hero.skills[0].slot">
 			<br>
 
 			<label for="skillicon">Icon : </label>
-			<input type="text" name="skillicon" v-model="Hero.Skill.icon">
+			<input type="text" name="skillicon" v-model="Hero.skills[0].icon">
 			<br>
 
 			<label for="skilldescription">Description : </label>
-			<input type="text" name="skilldescription" v-model="Hero.Skill.description">
+			<input type="text" name="skilldescription" v-model="Hero.skills[0].description">
 			<br>
 
 			<label for="maxupgrade">Max Upgrade : </label>
-			<input type="number" name="maxupgrade" v-model.number="Hero.Skill.maxUpgrade">
+			<input type="number" name="maxupgrade" v-model.number="Hero.skills[0].maxUpgrade">
 			<br>
 
 			<label for="minlearnlevel">Min Learn Level : </label>
-			<input type="text" name="minlearnlevel" v-model="Hero.Skill.minLearnLevel[0]">
+			<input type="text" name="minlearnlevel" v-model="Hero.skills[0].minLearnLevel[0]">
 			<br>
 
 			<h3>Attribute</h3>
-				<label for="attname">Name : </label>
-				<input type="text" name="attname" v-model="Hero.Skill.Attribute.name">
-				<br>
-				<label for="attvalue">Value : </label>
-				<input type="text" name="attvalue" v-model="Hero.Skill.Attribute.value">
-				<br>		
+			<label for="attname">Name : </label>
+			<input type="text" name="attname" v-model="Hero.skills[0].attribute.name">
+			<br>
+			<label for="attvalue">Value : </label>
+			<input type="text" name="attvalue" v-model="Hero.skills[0].attribute.value">
+			<br>		
 					
 		</div>
 			
 		<div>
 			<h3>Talent Tree</h3>
-			<input type="text" name="talent3.0" v-model="Hero.Talent.talent[3][0]">
+			<input type="text" name="talent3_0" v-model="Hero.talent[3][0]">
 			25
-			<input type="text" name="talent3.1" v-model="Hero.Talent.talent[3][1]">
+			<input type="text" name="talent3_1" v-model="Hero.talent[3][1]">
 			<br>
-			<input type="text" name="talent2.0" v-model="Hero.Talent.talent[2][0]">
+			<input type="text" name="talent2_0" v-model="Hero.talent[2][0]">
 			20
-			<input type="text" name="talent2.1" v-model="Hero.Talent.talent[2][1]">
+			<input type="text" name="talent2_1" v-model="Hero.talent[2][1]">
 			<br>
-			<input type="text" name="talent1.0" v-model="Hero.Talent.talent[1][0]">
+			<input type="text" name="talent1_0" v-model="Hero.talent[1][0]">
 			15
-			<input type="text" name="talent1.1" v-model="Hero.Talent.talent[1][1]">
+			<input type="text" name="talent1_1" v-model="Hero.talent[1][1]">
 			<br>
-			<input type="text" name="talent0.0" v-model="Hero.Talent.talent[0][0]">
+			<input type="text" name="talent0_0" v-model="Hero.talent[0][0]">
 			10
-			<input type="text" name="talent0.1" v-model="Hero.Talent.talent[0][1]">
+			<input type="text" name="talent0_1" v-model="Hero.talent[0][1]">
 			<br>
 		</div>
 	</div>
@@ -165,21 +165,19 @@ export default {
 		  moveSpeed: null,
 		  attackRange: null,
 		  attackSpeed: null,
-		  Skill:[{
+		  skills:[{
 			  name: '',
 			  slot: null,
 			  icon: '',
 			  description: '',
 			  maxUpgrade: null,
-			  minLearnLevel: [''],
-			  Attribute: [{
+			  minLearnLevel: [0,0,0,0],
+			  attribute: [{
 				  name: '',
 				  value: '',
 			  }],	
 		  }],
-		  Talent:[{
-			  talent:[''],
-		  }],
+		  talent:[[null,null],[null,null],[null,null],[null,null]],
 	  }
     }
   },
