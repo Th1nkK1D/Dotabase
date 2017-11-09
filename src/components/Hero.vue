@@ -28,6 +28,13 @@
         <li v-for="attr in skill.attributes" :key="attr.name">{{attr.name}}: <i>{{attr.value}}</i></li>
       </ul>
     </div>
+
+    <h2>Talents</h2>
+    <table>
+      <tr v-for="talentEachLvl in hero.talents.reverse()" :key="talentEachLvl">
+        <td v-for="talent in talentEachLvl" :key="talent">{{talent}}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
