@@ -9,6 +9,8 @@ import UpdateHero from '@/components/UpdateHero'
 import UpdateItem from '@/components/UpdateItem'
 import UpdatePlayer from '@/components/UpdatePlayer'
 import UpdateTeam from '@/components/UpdateTeam'
+import HeroesList from '@/components/HeroesList'
+import Hero from '@/components/Hero'
 
 Vue.use(Router)
 
@@ -59,6 +61,17 @@ export default new Router({
       path: '/updateteam',
       name: 'UpdateTeam',
       component: UpdateTeam
+    },
+    {
+      path: '/hero',
+      name: 'HeroesList',
+      component: HeroesList
+    },
+    {
+      path: '/hero/:heroKey',
+      name: 'Hero',
+      component: Hero,
+      props: true
     },
   ]
 })

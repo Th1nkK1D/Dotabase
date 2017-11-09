@@ -4,6 +4,9 @@
     <br>
     <h1>Welcome to Dotabase!</h1>
     <br>
+    <router-link to = "hero">
+      <button>Heroes List</button>
+    </router-link>
     <router-link to = "guidecomment">
       <button>GuideComment</button>
     </router-link>
