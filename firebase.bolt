@@ -75,7 +75,6 @@ type Hero {
 }
 
 type Skill {
-  slot: Number,
   name: String,
   icon: String,
   description: String,
