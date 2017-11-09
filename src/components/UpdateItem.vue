@@ -39,18 +39,18 @@
         <br>
         <h2>Abilities</h2>
         <label for="abilityname">Ability Name</label>
-        <input type="text" name="abilityname" v-model="Item.Ability.name">
+        <input type="text" name="abilityname" v-model="Item.abilities[0].name">
         <br>
         <label for="itemabilitydescription">Description</label>
-        <input type="text" name="itemabilitydescription" v-model="Item.Ability.description">
+        <input type="text" name="itemabilitydescription" v-model="Item.abilities[0].description">
         <br>
         Attributes:
         <br>
         <label for="attributename">Attribute Name</label>
-        <input type="text" name="attributename" v-model="Item.Ability.Attribute.name">
+        <input type="text" name="attributename" v-model="Item.abilities[0].attributes[0].name">
         <br>
         <label for="attributevalue">Value</label>
-        <input type="text" name="attributevalue" v-model="Item.Ability.Attribute.value">
+        <input type="text" name="attributevalue" v-model="Item.abilities[0].attributes[0].value">
         <br>
         
         <br>
@@ -80,10 +80,10 @@ export default {
           name: '',
           value: '',
         }],
-        Ability: [{
+        abilities: [{
           name: '',
           description: '',
-          Attribute: [{
+          attributes: [{
             name: '',
             value: '',
           }],
