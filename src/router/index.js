@@ -11,6 +11,12 @@ import UpdatePlayer from '@/components/UpdatePlayer'
 import UpdateTeam from '@/components/UpdateTeam'
 import HeroesList from '@/components/HeroesList'
 import Hero from '@/components/Hero'
+import ItemsList from '@/components/ItemsList'
+import Item from '@/components/Item'
+import PlayersList from '@/components/PlayersList'
+import Player from '@/components/Player'
+import TeamsList from '@/components/TeamsList'
+import Team from '@/components/Team'
 
 Vue.use(Router)
 
@@ -71,6 +77,39 @@ export default new Router({
       path: '/hero/:heroKey',
       name: 'Hero',
       component: Hero,
+      props: true
+    },
+    {
+      path: '/item',
+      name: 'ItemsList',
+      component: ItemsList
+    },
+    {
+      path: '/item/:itemKey',
+      name: 'Item',
+      component: Item,
+      props: true
+    },
+    {
+      path: '/player',
+      name: 'PlayersList',
+      component: PlayersList
+    },
+    {
+      path: '/player/:playerKey',
+      name: 'Player',
+      component: Player,
+      props: true
+    },
+    {
+      path: '/team',
+      name: 'TeamsList',
+      component: TeamsList
+    },
+    {
+      path: '/team/:teamKey',
+      name: 'Team',
+      component: Team,
       props: true
     },
   ]

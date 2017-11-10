@@ -7,19 +7,33 @@
     <router-link to = "hero">
       <button>Heroes List</button>
     </router-link>
-    <router-link to = "guidecomment">
-      <button>GuideComment</button>
+    <router-link to = "item">
+      <button>Items List</button>
     </router-link>
+    <router-link to = "player">
+      <button>Players List</button>
+    </router-link>
+    <router-link to = "team">
+      <button>Teams List</button>
+    </router-link>
+    <br>
+    <br>
+    <br>
     <router-link to = "login">
       <button>Login</button>
     </router-link>
     <router-link to = "register">
       <button>Register</button>
     </router-link>
+    <router-link to = "guidecomment">
+      <button>GuideComment</button>
+    </router-link>
+    <br>
+    <br>
+    <br>
     <router-link to = "updateguide">
       <button>UpdateGuide</button>
     </router-link>
-    <br>
     <router-link to = "updatehero">
       <button>UpdateHero</button>
     </router-link>
