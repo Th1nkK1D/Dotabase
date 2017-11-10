@@ -12,8 +12,6 @@
         <button v-on:click="submit()">Submit</button>
         <br>
         {{Team}}
-        <br>
-        <h1>DONE!</h1>
     </div>
   
 

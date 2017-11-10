@@ -38,8 +38,6 @@
         {{Player.heroRanks[0].score}}
         <br>
         {{Player}}
-        <br>
-        <h1>DONE!</h1>
     </div>
 
 
