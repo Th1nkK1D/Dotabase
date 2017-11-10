@@ -54,7 +54,7 @@
         <br>
         
         <br>
-        <button>Submit</button>
+        <button v-on:click="submit()">Submit</button>
     </div>
 
 

@@ -131,6 +131,8 @@
 			10
 			<input type="text" name="talent0_1" v-model="Hero.talent[0][1]">
 			<br>
+			<br>
+			<button v-on:click="submit()">Submit</button>
 		</div>
 	</div>
 </template>
