@@ -1,5 +1,4 @@
 <template>
-    
     <div>
         <h1>Update Item</h1>
         <br>
@@ -28,31 +27,44 @@
         <br>
         <br>
         <br>
-        <h2>Stats</h2> 
-        <label for="statname">Stat Name</label>
-        <input type="text" name="statname" v-model="Item.stats[0].name">
+
+        <h2>Stats</h2>
+        <button v-on:click="addStat()">+ stat</button>
+
+        <div v-for="(stat, si) in Item.stats" v-bind:key="si">
+          <label for="statname">Stat Name</label>
+          <input type="text" name="statname" v-model="stat.name">
+          <label for="itemstatvalue">Value</label>
+          <input type="text" name="itemstatvalue" v-model="stat.value">
+        </div>
         <br>
-        <label for="itemstatvalue">Value</label>
-        <input type="text" name="itemstatvalue" v-model="Item.stats[0].value">
         <br>
-        <br>
-        <br>
+
         <h2>Abilities</h2>
-        <label for="abilityname">Ability Name</label>
-        <input type="text" name="abilityname" v-model="Item.abilities[0].name">
-        <br>
-        <label for="itemabilitydescription">Description</label>
-        <input type="text" name="itemabilitydescription" v-model="Item.abilities[0].description">
-        <br>
-        Attributes:
-        <br>
-        <label for="attributename">Attribute Name</label>
-        <input type="text" name="attributename" v-model="Item.abilities[0].attributes[0].name">
-        <br>
-        <label for="attributevalue">Value</label>
-        <input type="text" name="attributevalue" v-model="Item.abilities[0].attributes[0].value">
-        <br>
+        <button v-on:click="addAbility()">+ ability</button>
+
+        <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
+          <label for="abilityname">Ability Name</label>
+          <input type="text" name="abilityname" v-model="ability.name">
+          <br>
+          <label for="itemabilitydescription">Description</label>
+          <input type="text" name="itemabilitydescription" v-model="ability.description">
+          <br>
+
+          Attributes:
+          <button v-on:click="addAbilityAttribute(ai)">+ attribute</button>
+          <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
+            <label for="attributename">Attribute Name</label>
+            <input type="text" name="attributename" v-model="attr.name">
+            <label for="attributevalue">Value</label>
+            <input type="text" name="attributevalue" v-model="attr.value">
+            <br>
+          </div>
+          
+          <br>
+        </div>
         
+        <br>
         {{Item}}
 
         <br>
@@ -75,24 +87,33 @@ export default {
         recipePrice: null,
         recipes: [''],
         lore: '',
-        stats: [{
-          name: '',
-          value: '',
-        }],
-        abilities: [{
-          name: '',
-          description: '',
-          attributes: [{
-            name: '',
-            value: '',
-          }],
-        }],
+        stats: [],
+        abilities: [],
       }
     }
   },
   methods: {
     submit: function() {
       itemdb.child(this.Item.name.replace(' ','_').toLowerCase()).set(this.Item)
+    },
+    addStat: function() {
+      this.Item.stats.push({
+        name: '',
+        value: '',
+      })
+    },
+    addAbility: function() {
+      this.Item.abilities.push({
+        name: '',
+        description: '',
+        attributes: [],
+      })
+    },
+    addAbilityAttribute: function(ai) {
+      this.Item.abilities[ai].attributes.push({
+        name: '',
+        value: '',
+      })
     }
   }
 }
