@@ -30,10 +30,10 @@
         <br>
         <h2>Stats</h2> 
         <label for="statname">Stat Name</label>
-        <input type="text" name="statname" v-model="Item.Stat.name">
+        <input type="text" name="statname" v-model="Item.stats[0].name">
         <br>
         <label for="itemstatvalue">Value</label>
-        <input type="text" name="itemstatvalue" v-model="Item.Stat.value">
+        <input type="text" name="itemstatvalue" v-model="Item.stats[0].value">
         <br>
         <br>
         <br>
@@ -53,12 +53,11 @@
         <input type="text" name="attributevalue" v-model="Item.abilities[0].attributes[0].value">
         <br>
         
+        {{Item}}
+
         <br>
         <button v-on:click="submit()">Submit</button>
     </div>
-
-
-
 </template>
 
 <script>
@@ -76,7 +75,7 @@ export default {
         recipePrice: null,
         recipes: [''],
         lore: '',
-        Stat: [{
+        stats: [{
           name: '',
           value: '',
         }],
@@ -93,7 +92,7 @@ export default {
   },
   methods: {
     submit: function() {
-      itemdb.child(this.Item.name).set(this.Item)
+      itemdb.child(this.Item.name.replace(' ','_').toLowerCase()).set(this.Item)
     }
   }
 }

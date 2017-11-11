@@ -96,12 +96,12 @@ type Item {
   name: String,
   icon: String,
   category: String,
-  price: Number,
-  recipePrice: Number,
-  recipes: String[],
+  price: Number | Null,
+  recipePrice: Number | Null,
+  recipes: String[] | Null,
   lore: String,
-  stats: Attribute[],
-  abilities: ItemAbility[]
+  stats: Attribute[] | Null,
+  abilities: ItemAbility[] | Null
 }
 
 
