@@ -37,7 +37,6 @@
 <!-- first skill -->
           <div>
             <div>
-               <img src="https://dota2.gamepedia.com/media/dota2.gamepedia.com/c/c1/Mana_Break_icon.png?version=c19f51e00b35bbd4c06190af131f7a00">
                 First Skill
             </div>
             <br>
@@ -50,7 +49,6 @@
 
 <!-- second skill -->
           <div>
-            <img src="https://dota2.gamepedia.com/media/dota2.gamepedia.com/c/ce/Blink_%28Anti-Mage%29_icon.png?version=f5de5ca6a6688d1b36f78f3af80cfe92">
             Second Skill
           </div>
           <br>
@@ -62,7 +60,6 @@
 
 <!-- Third skill -->
           <div>
-            <img src="https://dota2.gamepedia.com/media/dota2.gamepedia.com/a/a6/Spell_Shield_icon.png?version=5238b95c34062f0ecbd6d663056597a8">
             Third Skill
           </div>
           <br>
@@ -74,7 +71,6 @@
 
 <!-- Fourth skill -->
           <div>
-            <img src="https://dota2.gamepedia.com/media/dota2.gamepedia.com/f/fe/Mana_Void_icon.png?version=35c88d6b4098081cb4895350f184c6f0">
             Fourth Skill
           </div>
           <br>
@@ -86,8 +82,7 @@
 
 <!-- Talent Level -->
           <div>
-            <img src="http://wiki.teamliquid.net/commons/images/5/54/Talents.png">
-            Talent Level
+           Talent Level
           </div>
           <br>
           <div>
