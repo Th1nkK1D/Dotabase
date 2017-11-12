@@ -98,12 +98,15 @@ type Item {
   category: String,
   price: Number | Null,
   recipePrice: Number | Null,
-  recipes: String[] | Null,
+  recipes: Recipe[] | Null,
   lore: String,
   stats: Attribute[] | Null,
   abilities: ItemAbility[] | Null
 }
 
+type Recipe {
+  recipe: String,
+}
 
 type ItemAbility {
   name: String,

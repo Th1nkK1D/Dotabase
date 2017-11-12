@@ -19,12 +19,17 @@
         <br>
         <br>
         <br>
+        <button v-on:click="addRecipe()">+ recipe</button>
+        <div v-for="(recipes, re) in Item.recipes" v-bind:key="re">
         <label for="recipes">Recipes</label>
-        <input type="text" name="recipes" v-model="Item.recipes[0]">
+        <input type="text" name="recipes" v-model="Item.recipes.recipe">
+        </div>
+
         <br>
         <label for="recipeprice">Recipe Price</label>
         <input type="number" name="recipeprice" v-model.number="Item.recipePrice">
         <br>
+        
         <br>
         <br>
 
@@ -69,7 +74,9 @@
 
         <br>
         <button v-on:click="submit()">Submit</button>
-    </div>
+    
+  
+</div>
 </template>
 
 <script>
@@ -85,7 +92,7 @@ export default {
         category: '',
         price: null,
         recipePrice: null,
-        recipes: [''],
+        recipes: [],
         lore: '',
         stats: [],
         abilities: [],
@@ -95,6 +102,11 @@ export default {
   methods: {
     submit: function() {
       itemdb.child(this.Item.name.replace(' ','_').toLowerCase()).set(this.Item)
+    },
+    addRecipe: function() {
+      this.Item.recipes.push({
+        recipe: '',
+      })
     },
     addStat: function() {
       this.Item.stats.push({
