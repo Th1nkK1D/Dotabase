@@ -22,7 +22,7 @@
         <button v-on:click="addRecipe()">+ recipe</button>
         <div v-for="(recipes, re) in Item.recipes" v-bind:key="re">
         <label for="recipes">Recipes</label>
-        <input type="text" name="recipes" v-model="Item.recipes.recipe">
+        <input type="text" name="recipes" v-model="Item.recipes">
         </div>
 
         <br>
@@ -104,9 +104,7 @@ export default {
       itemdb.child(this.Item.name.replace(' ','_').toLowerCase()).set(this.Item)
     },
     addRecipe: function() {
-      this.Item.recipes.push({
-        recipe: '',
-      })
+      this.Item.recipes.push('')
     },
     addStat: function() {
       this.Item.stats.push({
