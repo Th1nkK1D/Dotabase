@@ -15,14 +15,16 @@
         <input type="number" name="itemcost" v-model.number="Item.price">
         <br>
         <label for="itemdescription">Description</label>
-        <input type="text" name="itemdescription" v-model="Item.lore">
+        <!-- <input type="text" name="itemdescription" v-model="Item.lore"> -->
+        <textarea name="itemdescription" id="" cols="100" rows="5" v-model="Item.lore"></textarea>
         <br>
         <br>
         <br>
         <button v-on:click="addRecipe()">+ recipe</button>
         <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
-        <label for="recipe">Recipe</label>
+        <label for="recipe">Recipe {{re}}</label>
         <input type="text" name="recipe" v-model="Item.recipe[re]">
+        <button v-on:click="removeRecipe(re)">Remove</button>
         </div>
 
         <br>
@@ -37,10 +39,11 @@
         <button v-on:click="addStat()">+ stat</button>
 
         <div v-for="(stat, si) in Item.stats" v-bind:key="si">
-          <label for="statname">Stat Name</label>
+          <label for="statname">Stat Name {{si}}</label>
           <input type="text" name="statname" v-model="stat.name">
           <label for="itemstatvalue">Value</label>
           <input type="text" name="itemstatvalue" v-model="stat.value">
+          <button v-on:click="removeStat(si)">Remove</button>
         </div>
         <br>
         <br>
@@ -49,6 +52,8 @@
         <button v-on:click="addAbility()">+ ability</button>
 
         <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
+          <h4>Ability {{ai}}</h4> <button v-on:click="removeAbility(ai)">Remove Ability</button>
+          <br>
           <label for="abilityname">Name</label>
           <input type="text" name="abilityname" v-model="ability.name">
           <br>
@@ -62,16 +67,17 @@
           <label for="abilitytype">Toggle</label>
           <br>
           <label for="itemabilitydescription">Description</label>
-          <input type="text" name="itemabilitydescription" v-model="ability.description">
+          <textarea name="itemdabilityescription" id="" cols="100" rows="5" v-model="ability.description"></textarea>
           <br>
 
-          Attributes:
           <button v-on:click="addAbilityAttribute(ai)">+ attribute</button>
           <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
-            <label for="attributename">Attribute Name</label>
+            Attribute {{ati}} : 
+            <label for="attributename">Name</label>
             <input type="text" name="attributename" v-model="attr.name">
             <label for="attributevalue">Value</label>
             <input type="text" name="attributevalue" v-model="attr.value">
+            <button v-on:click="removeAbilityAttribute(ati)">Remove</button>
             <br>
           </div>
           
@@ -134,7 +140,19 @@ export default {
         name: '',
         value: '',
       })
-    }
+    },
+    removeRecipe: function(re) {
+      this.Item.recipe.splice(re,1)
+    },
+    removeStat: function(si) {
+      this.Item.stats.splice(si,1)
+    },
+    removeAbility: function(ai) {
+      this.Item.abilities.splice(ai,1)
+    },
+    removeAbilityAttribute: function(ati,ai) {
+      this.Item.abilities[ai].attributes.splice(ati,1)
+    },
   }
 }
 </script>
