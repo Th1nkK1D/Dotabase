@@ -107,6 +107,7 @@ type Item {
 
 type ItemAbility {
   name: String,
+  abilityType: String,
   description: String,
   attributes: Attribute[]
 }

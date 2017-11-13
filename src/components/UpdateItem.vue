@@ -20,10 +20,9 @@
         <br>
         <br>
         <button v-on:click="addRecipe()">+ recipe</button>
-        <div v-for="recipe in Item.recipe" :key="recipe">
-        <!-- <div v-for="(recipe, re) in Item.recipe" v-bind:key="re"> -->
+        <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
         <label for="recipe">Recipe</label>
-        <input type="text" name="recipe" v-model="recipe[0]">
+        <input type="text" name="recipe" v-model="Item.recipe[re]">
         </div>
 
         <br>
@@ -50,8 +49,17 @@
         <button v-on:click="addAbility()">+ ability</button>
 
         <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
-          <label for="abilityname">Ability Name</label>
+          <label for="abilityname">Name</label>
           <input type="text" name="abilityname" v-model="ability.name">
+          <br>
+          Type
+          <br>
+          <input type="radio" name="abilitytype" value="active" v-model="ability.abilityType">
+          <label for="abilitytype">Active</label>
+          <input type="radio" name="abilitytype" value="passive" v-model="ability.abilityType">
+          <label for="abilitytype">Passive</label>
+          <input type="radio" name="abilitytype" value="toggle" v-model="ability.abilityType">
+          <label for="abilitytype">Toggle</label>
           <br>
           <label for="itemabilitydescription">Description</label>
           <input type="text" name="itemabilitydescription" v-model="ability.description">
@@ -105,7 +113,7 @@ export default {
       itemdb.child(this.Item.name.replace(' ','_').toLowerCase()).set(this.Item)
     },
     addRecipe: function() {
-      this.Item.recipe.push([null])
+      this.Item.recipe.push('')
     },
     addStat: function() {
       this.Item.stats.push({
@@ -116,6 +124,7 @@ export default {
     addAbility: function() {
       this.Item.abilities.push({
         name: '',
+        abilityType: '',
         description: '',
         attributes: [],
       })
