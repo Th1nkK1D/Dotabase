@@ -26,16 +26,20 @@
         <br>
         <br>
         <br>
+
         <h2>Hero Rank:</h2>
-        <label for="heroname">Hero Name</label>
-        <input type="text" name="heroname" v-model="Player.heroRanks[0].heroName">
+        <button v-on:click="addHero()">+ hero</button>
+        <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">
+          <label for="heroname">Hero Name {{hi+1}}</label>
+          <input type="text" name="heroname" v-model="heroRank.heroName">
+          <label for="heroscore">Hero Score</label>
+          <input type="number" name="heroscore" v-model.number="heroRank.score">
+          <button v-on:click="removeHero(hi)">Remove</button>
+        </div>
         <br>
-        <label for="heroscore">Hero Score</label>
-        <input type="number" name="heroscore" v-model.number="Player.heroRanks[0].score">
         <br>
         <button v-on:click="submit()">Submit</button>
         <br>
-        {{Player.heroRanks[0].score}}
         <br>
         {{Player}}
     </div>
@@ -59,17 +63,23 @@ export default {
         mmrSolo: null,
         mmrParty: null,
         matchPlayed: null,
-        heroRanks: [{
-          heroName: '',
-          score: null,
-        }],
+        heroRanks: [],
       }
     }
   },
   methods: {
     submit: function() {
       playerdb.child(this.Player.name).set(this.Player)
-    }
+    },
+    addHero: function() {
+      this.Player.heroRanks.push({
+        heroName: '',
+        score: null,
+      })
+    },
+    removeHero: function(hi) {
+      this.Player.heroRanks.splice(hi,1)
+    },
   }
 }
 </script>
