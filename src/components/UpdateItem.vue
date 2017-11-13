@@ -22,7 +22,7 @@
         <br>
         <button v-on:click="addRecipe()">+ recipe</button>
         <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
-        <label for="recipe">Recipe {{re}}</label>
+        <label for="recipe">Recipe {{re+1}}</label>
         <input type="text" name="recipe" v-model="Item.recipe[re]">
         <button v-on:click="removeRecipe(re)">Remove</button>
         </div>
@@ -39,7 +39,7 @@
         <button v-on:click="addStat()">+ stat</button>
 
         <div v-for="(stat, si) in Item.stats" v-bind:key="si">
-          <label for="statname">Stat Name {{si}}</label>
+          <label for="statname">Stat Name {{si+1}}</label>
           <input type="text" name="statname" v-model="stat.name">
           <label for="itemstatvalue">Value</label>
           <input type="text" name="itemstatvalue" v-model="stat.value">
@@ -52,7 +52,7 @@
         <button v-on:click="addAbility()">+ ability</button>
 
         <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
-          <h4>Ability {{ai}}</h4> <button v-on:click="removeAbility(ai)">Remove Ability</button>
+          <h4>Ability {{ai+1}}</h4> <button v-on:click="removeAbility(ai)">Remove Ability</button>
           <br>
           <label for="abilityname">Name</label>
           <input type="text" name="abilityname" v-model="ability.name">
@@ -72,7 +72,7 @@
 
           <button v-on:click="addAbilityAttribute(ai)">+ attribute</button>
           <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
-            Attribute {{ati}} : 
+            Attribute {{ati+1}} : 
             <label for="attributename">Name</label>
             <input type="text" name="attributename" v-model="attr.name">
             <label for="attributevalue">Value</label>
