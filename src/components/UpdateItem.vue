@@ -65,6 +65,8 @@
           <label for="abilitytype">Passive</label>
           <input type="radio" name="abilitytype" value="toggle" v-model="ability.abilityType">
           <label for="abilitytype">Toggle</label>
+          <input type="radio" name="abilitytype" value="use" v-model="ability.abilityType">
+          <label for="abilitytype">Use</label>
           <br>
           <label for="itemabilitydescription">Description</label>
           <textarea name="itemdabilityescription" id="" cols="100" rows="5" v-model="ability.description"></textarea>
