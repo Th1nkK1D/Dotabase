@@ -11,14 +11,19 @@
 			<label for="heroattribute">Attribute</label>
 			<input type="text" name="heroattribute" v-model="Hero.attribute">
 			<br>
-			<label for="roles">Roles</label>
-			<input type="text" name="roles" v-model="Hero.roles">
-			<br>
 			<label for="lore">Lore</label>
 			<input type="text" name="lore" v-model="Hero.lore">
 			<br>
 		
-		
+			<button v-on:click="addRole()">+ role</button>
+       		<div v-for="(roles, ri) in Hero.roles" v-bind:key="ri">
+       		<label for="roles">Roles {{ri+1}}</label>
+        	<input type="text" name="roles" v-model="Hero.roles[ri]">
+        	<button v-on:click="removeRole(ri)">Remove</button>
+        	</div>
+
+
+
 			<h2>Hero Stats</h2>
 			<label for="str_start">STR : </label>
 			<input type="number" name="str_start" v-model.number="Hero.strBase">
@@ -73,43 +78,101 @@
 			<input type="number" name="attackspeed" v-model.number="Hero.attackSpeed">
 			<br>
 
-		
 
-		<div>
-			<h2>Skills</h2>
-			<button type="button" name="sn1">SN 1</button>
-			<button type="button" name="moreSn"> + </button>
-			<br>
 
+
+
+
+
+
+
+
+
+
+
+			<!-- <button v-on:click="addAbility()">+ ability</button>
+
+        <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
+          <h4>Ability {{ai+1}}</h4> <button v-on:click="removeAbility(ai)">Remove Ability</button>
+          <br>
+          <label for="abilityname">Name</label>
+          <input type="text" name="abilityname" v-model="ability.name">
+          <br>
+          Type
+          <br>
+          <input type="radio" name="abilitytype" value="active" v-model="ability.abilityType">
+          <label for="abilitytype">Active</label>
+          <input type="radio" name="abilitytype" value="passive" v-model="ability.abilityType">
+          <label for="abilitytype">Passive</label>
+          <input type="radio" name="abilitytype" value="toggle" v-model="ability.abilityType">
+          <label for="abilitytype">Toggle</label>
+          <input type="radio" name="abilitytype" value="use" v-model="ability.abilityType">
+          <label for="abilitytype">Use</label>
+          <br>
+          <label for="itemabilitydescription">Description</label>
+          <textarea name="itemdabilityescription" id="" cols="100" rows="5" v-model="ability.description"></textarea>
+          <br>
+
+          <button v-on:click="addAbilityAttribute(ai)">+ attribute</button>
+          <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
+            Attribute {{ati+1}} : 
+            <label for="attributename">Name</label>
+            <input type="text" name="attributename" v-model="attr.name">
+            <label for="attributevalue">Value</label>
+            <input type="text" name="attributevalue" v-model="attr.value">
+            <button v-on:click="removeAbilityAttribute(ati)">Remove</button>
+            <br>
+          </div>
+          
+          <br>
+        </div> -->
+
+
+
+
+
+
+
+
+
+
+			
+
+		<h2>Skills</h2>
+			<button v-on:click="addSkill()">+ skill</button>
+		<div v-for="(skill, si) in Hero,skills" v-bind:key="si">
+			<h4>Skill {{si+1}}</h4>
 			<label for="skillname">Skill Name : </label>
-			<input type="text" name="skillname" v-model="Hero.skills[0].name">
-			<label for="skillslot">Slot : </label>
-			<input type="number" name="skillslot" v-model.number="Hero.skills[0].slot">
-			<br>
+			<input type="text" name="skillname" v-model="skill.name">
 
 			<label for="skillicon">Icon : </label>
-			<input type="text" name="skillicon" v-model="Hero.skills[0].icon">
+			<input type="text" name="skillicon" v-model="skill.icon">
 			<br>
 
 			<label for="skilldescription">Description : </label>
-			<input type="text" name="skilldescription" v-model="Hero.skills[0].description">
+			<input type="text" name="skilldescription" v-model="skill.description">
 			<br>
 
 			<label for="maxupgrade">Max Upgrade : </label>
-			<input type="number" name="maxupgrade" v-model.number="Hero.skills[0].maxUpgrade">
+			<input type="number" name="maxupgrade" v-model.number="skill.maxUpgrade">
 			<br>
 
-			<label for="minlearnlevel">Min Learn Level : </label>
-			<input type="text" name="minlearnlevel" v-model="Hero.skills[0].minLearnLevel[0]">
-			<br>
+			<!-- <label for="minlearnlevel">Min Learn Level : </label>
+			<input type="number" name="minlearnlevel" v-model="skill.minLearnLevel">
+			<br> -->
 
-			<h3>Attribute</h3>
-			<label for="attname">Name : </label>
-			<input type="text" name="attname" v-model="Hero.skills[0].attribute.name">
-			<br>
-			<label for="attvalue">Value : </label>
-			<input type="text" name="attvalue" v-model="Hero.skills[0].attribute.value">
-			<br>		
+
+
+			<button v-on:click="addSkillAttribute(si)">+ attribute</button>
+          	<div v-for="(attr, ati) in skill.attributes" v-bind:key="ati">
+				Attribute {{ati+1}} : 
+				<label for="attname">Name</label>
+				<input type="text" name="attname" v-model="attr.name">
+				<label for="attvalue">Value</label>
+				<input type="text" name="attvalue" v-model="attr.value">
+				<button v-on:click="removeSkillAttribute(ati)">Remove</button>
+				<br>
+          	</div>		
 					
 		</div>
 			
@@ -132,8 +195,9 @@
 			<input type="text" name="talent0_1" v-model="Hero.talent[0][1]">
 			<br>
 			<br>
-			<button v-on:click="submit()">Submit</button>
+			
 		</div>
+	<button v-on:click="submit()">Submit</button>
 	</div>
 </template>
 
@@ -148,7 +212,7 @@ export default {
 		  name: '',
 		  avatar: '',
 		  attribute: '',
-		  roles: [''],
+		  roles: [],
 		  lore: '',
 		  strBase: null,
 		  agiBase: null,
@@ -167,26 +231,43 @@ export default {
 		  moveSpeed: null,
 		  attackRange: null,
 		  attackSpeed: null,
-		  skills:[{
-			  name: '',
-			  slot: null,
-			  icon: '',
-			  description: '',
-			  maxUpgrade: null,
-			  minLearnLevel: [0,0,0,0],
-			  attribute: [{
-				  name: '',
-				  value: '',
-			  }],	
-		  }],
+		  skills:[],
 		  talent:[[null,null],[null,null],[null,null],[null,null]],
 	  }
     }
   },
 	methods: {
     submit: function() {
-      herodb.child(this.Hero.name).set(this.Hero)
-    }
+      herodb.child(this.Hero.name.replace(' ','_').toLowerCase()).set(this.Hero)
+    },
+	addRole: function() {
+      this.Hero.roles.push('')
+    },
+	addSkill: function() {
+      this.Hero.skills.push({
+        name: '',
+        icon: '',
+        description: '',
+		maxUpgrage: null,
+		// minLearnLevel: null,
+        attributes: [],
+      })
+    },
+	addSkillAttribute: function(si) {
+      this.Hero.skills[si].attributes.push({
+        name: '',
+        value: '',
+      })
+    },
+	removeRole: function(ri) {
+      this.Hero.roles.splice(ri,1)
+    },
+	removeSkill: function(si) {
+      this.Hero.skills.splice(si,1)
+    },
+	removeSkillAttribute: function(ati,si) {
+      this.Hero.skills[si].attributes.splice(ati,1)
+    },
 	}
 }
 </script>
