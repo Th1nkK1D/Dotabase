@@ -116,7 +116,7 @@ type Guide {
   id: String,
   memberID: String,
   name: String,
-  heroKey: String,
+  hero: String,
   dateCreated: String,
   talentTree: Number[],
   learnOrder: LearnOrder[],
@@ -124,7 +124,6 @@ type Guide {
 }
 
 type LearnOrder {
-  level: Number,
   isSkill: Boolean,
   slot: Number | Null,
 }

@@ -1,40 +1,52 @@
 <template>
-  <div class="columns">
-    <div class="column is-2"></div>
+  <div>
+    <b-field>
+      <b-input type="text" placeholder="Guidename" v-model="guide.name"></b-input>
+    </b-field>
 
-    <div class="column is-8">
-      <b-field>
-        <b-input type="text" placeholder="Guidename" v-model="guide.name"></b-input>
-      </b-field>
+    <b-field label="Hero">
+      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.hero = option ? option : null"></b-autocomplete>
+    </b-field>
 
-      <b-field label="Hero">
-        <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.heroKey = option ? option['.key'] : null"></b-autocomplete>
-      </b-field>
+    <button class="button" @click="addPC()">+ PurchaseCategory</button>
 
-      <button class="button" @click="addPC()">+ PurchaseCategory</button>
-
-      <!-- PurchaseCategory List -->
-      <div class="columns is-multiline">
-        <div class="column" v-for="(cat,c) in guide.purchaseCategory" :key="c">
-          <div class="box">
-            <b-field>
-              <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
-            </b-field>
-            <div class="columns is-multiline">
-              <div class="column">
-                <img :src="item.icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
-              </div>
+    <!-- PurchaseCategory List -->
+    <div class="columns is-multiline">
+      <div class="column" v-for="(cat,c) in guide.purchaseCategory" :key="c">
+        <div class="box">
+          <b-field>
+            <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
+          </b-field>
+          <div class="columns is-multiline">
+            <div class="column">
+              <img :src="item.icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
             </div>
-            <b-field>
-              <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(option) : null"></b-autocomplete>
-            </b-field>
           </div>
+          <b-field>
+            <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(option) : null"></b-autocomplete>
+          </b-field>
         </div>
-      </div><!-- End of PurchaseCategory List -->
-    </div>
+      </div>
+    </div><!-- End of PurchaseCategory List -->
 
-    <div class="column is-2"></div>
+    <!-- Learn Order -->
+    <div class="columns is-multiline" v-if="guide.hero">
+      <!-- Skills -->
+      <div class="column is-12" v-for="(skill,s) in guide.hero.skills" :key="s">
+        <img :src="skill.icon" alt="">
+        <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
+      </div><!-- End of Skills -->
+
+      <!-- Talents -->
+      <div class="column is-12">
+        Talent
+        <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: false}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
+      </div><!-- End of Talents -->
+    </div><!-- End of Learn Order -->
+
+    {{guide.learnOrder}}
   </div>
+
 </template>
 
 <script>
@@ -49,7 +61,8 @@ export default {
     return {
      guide: {
        name: '',
-       heroKey: '',
+       hero: '',
+       learnOrder: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
        purchaseCategory: []
      },
      heroSearch: '',
