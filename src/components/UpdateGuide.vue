@@ -2,14 +2,14 @@
   <div>
     <h1 class="title is-1">Create Guide</h1>
     <b-field>
-      <b-input type="text" placeholder="Guidename" v-model="guide.name"></b-input>
+      <b-input type="text" placeholder="Guidename" v-model="name"></b-input>
     </b-field>
 
     <b-field label="Hero">
-      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.hero = option ? option : null"></b-autocomplete>
+      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => hero = option ? option : null"></b-autocomplete>
     </b-field>
 
-    <div v-if="guide.hero">
+    <div v-if="hero">
 
       <h1 class="title">Purchase Category</h1>
       <!-- PurchaseCategory -->
@@ -17,7 +17,7 @@
         <button class="button" @click="addPC()">+ PurchaseCategory</button>
 
         <div class="columns is-multiline">
-          <div class="column" v-for="(cat,c) in guide.purchaseCategory" :key="c">
+          <div class="column" v-for="(cat,c) in purchaseCategory" :key="c">
             <div class="box">
               <b-field>
                 <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
@@ -39,36 +39,37 @@
       <!-- Learn Order -->
       <div class="columns is-multiline">
         <!-- Skills -->
-        <div class="column is-12" v-for="(skill,s) in guide.hero.skills" :key="s">
+        <div class="column is-12" v-for="(skill,s) in hero.skills" :key="s">
           <img :src="skill.icon" alt="">
-          <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
+          <b-radio v-for="(learn,l) in learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="learnOrder[l]" size="is-small"></b-radio>
         </div><!-- End of Skills -->
 
         <!-- Talents -->
         <div class="column is-12">
           Talent
-          <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: false}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
+          <b-radio v-for="(learn,l) in learnOrder" :key="l" :native-value="{isSkill: false}" v-model="learnOrder[l]" size="is-small"></b-radio>
         </div><!-- End of Talents -->
       </div><!-- End of Learn Order -->
 
       <h1 class="title">Talent Tree</h1>
       <!-- Talent Tree -->
       <div>
-        <div class="columns" v-for="(talentLvl,tl) in guide.talentTree" :key="tl">
+        <div class="columns" v-for="(talentLvl,tl) in talentTree" :key="tl">
           <div class="column">
-            <b-radio v-model="guide.talentTree[3-tl]" :native-value="0"></b-radio>
-            {{guide.hero.talents[3-tl][0]}}
+            <b-radio v-model="talentTree[tl]" :native-value="0"></b-radio>
+            {{hero.talents[3-tl][0]}}
           </div>
           <div class="column is-narrow">{{25 - tl*5}}</div>
           <div class="column">
-            <b-radio v-model="guide.talentTree[3-tl]" :native-value="1"></b-radio>
-            {{guide.hero.talents[3-tl][1]}}
+            <b-radio v-model="talentTree[tl]" :native-value="1"></b-radio>
+            {{hero.talents[3-tl][1]}}
           </div>
         </div>
-        {{guide.talentTree}}
+        {{talentTree}}
       </div><!-- End of Talent Tree -->
-    
     </div>
+
+    <button class="button is-primary" @click="save()">Save</button>
 
   </div>
 
@@ -84,15 +85,13 @@ export default {
 
   data () {
     return {
-     guide: {
-       name: '',
-       hero: '',
-       learnOrder: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-       talentTree: [null,null,null,null],
-       purchaseCategory: []
-     },
-     heroSearch: '',
-     itemSearch: ''
+      heroSearch: '',
+      itemSearch: '',
+      name: '',
+      hero: '',
+      purchaseCategory: [],
+      learnOrder: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null], 
+      talentTree: [null,null,null,null],
     }
   },
 
@@ -116,13 +115,36 @@ export default {
 
   methods: {
     addPC() {
-      this.guide.purchaseCategory.push({
+      this.purchaseCategory.push({
         name: '',
         items: []
       })
     },
     removeItem(c,i) {
-      this.guide.purchaseCategory[c].items.splice(i,1)
+      this.purchaseCategory[c].items.splice(i,1)
+    },
+    save() {
+      let guide = {}
+
+      guide.name = this.name
+      guide.hero = this.hero['.key']
+
+      guide.purchaseCategory = []
+      
+      for (let c = 0; c < this.purchaseCategory.length; c++) {
+        guide.purchaseCategory.push({
+          name: this.purchaseCategory[c].name,
+          items: this.purchaseCategory[c].items.map(i => i['.key'])
+        })
+      }
+
+      guide.learnOrder = this.learnOrder
+      guide.talentTree = [].concat(this.talentTree).reverse()
+
+      guide.memberID = 'testuser'
+      guide.dateCreated = new Date()
+
+      console.log(guide)
     }
   }
 }
