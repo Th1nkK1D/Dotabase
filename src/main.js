@@ -7,7 +7,11 @@ import router from './router'
 import VueFire from 'vuefire'
 import Firebase from 'firebase'
 
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
+
 Vue.use(VueFire)
+Vue.use(Buefy)
 
 Vue.config.productionTip = false
 

@@ -6,6 +6,7 @@
           <label for="name_guide">Guide Name</label>
 			    <input type="text" name="name_guide" >
 			    <br>
+            <b-input v-model="name" placeholder="name" size="is-small"></b-input>
 
           <label for="hero_Select">Select Hero</label>
 			    <input type="text" name="hero_Select" >
