@@ -23,7 +23,7 @@ export default {
     }
   },
   firebase:  {
-    itemss: itemDB
+    items: itemDB
   }
 }
 </script>

@@ -15,14 +15,16 @@
         <input type="number" name="itemcost" v-model.number="Item.price">
         <br>
         <label for="itemdescription">Description</label>
-        <input type="text" name="itemdescription" v-model="Item.lore">
+        <!-- <input type="text" name="itemdescription" v-model="Item.lore"> -->
+        <textarea name="itemdescription" id="" cols="100" rows="5" v-model="Item.lore"></textarea>
         <br>
         <br>
         <br>
         <button v-on:click="addRecipe()">+ recipe</button>
-        <div v-for="(recipes, re) in Item.recipes" v-bind:key="re">
-        <label for="recipes">Recipes</label>
-        <input type="text" name="recipes" v-model="Item.recipes">
+        <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
+        <label for="recipe">Recipe {{re+1}}</label>
+        <input type="text" name="recipe" v-model="Item.recipe[re]">
+        <button v-on:click="removeRecipe(re)">Remove</button>
         </div>
 
         <br>
@@ -37,10 +39,11 @@
         <button v-on:click="addStat()">+ stat</button>
 
         <div v-for="(stat, si) in Item.stats" v-bind:key="si">
-          <label for="statname">Stat Name</label>
+          <label for="statname">Stat Name {{si+1}}</label>
           <input type="text" name="statname" v-model="stat.name">
           <label for="itemstatvalue">Value</label>
           <input type="text" name="itemstatvalue" v-model="stat.value">
+          <button v-on:click="removeStat(si)">Remove</button>
         </div>
         <br>
         <br>
@@ -49,20 +52,34 @@
         <button v-on:click="addAbility()">+ ability</button>
 
         <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
-          <label for="abilityname">Ability Name</label>
+          <h4>Ability {{ai+1}}</h4> <button v-on:click="removeAbility(ai)">Remove Ability</button>
+          <br>
+          <label for="abilityname">Name</label>
           <input type="text" name="abilityname" v-model="ability.name">
           <br>
+          Type
+          <br>
+          <input type="radio" name="abilitytype" value="active" v-model="ability.abilityType">
+          <label for="abilitytype">Active</label>
+          <input type="radio" name="abilitytype" value="passive" v-model="ability.abilityType">
+          <label for="abilitytype">Passive</label>
+          <input type="radio" name="abilitytype" value="toggle" v-model="ability.abilityType">
+          <label for="abilitytype">Toggle</label>
+          <input type="radio" name="abilitytype" value="use" v-model="ability.abilityType">
+          <label for="abilitytype">Use</label>
+          <br>
           <label for="itemabilitydescription">Description</label>
-          <input type="text" name="itemabilitydescription" v-model="ability.description">
+          <textarea name="itemdabilityescription" id="" cols="100" rows="5" v-model="ability.description"></textarea>
           <br>
 
-          Attributes:
           <button v-on:click="addAbilityAttribute(ai)">+ attribute</button>
           <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
-            <label for="attributename">Attribute Name</label>
+            Attribute {{ati+1}} : 
+            <label for="attributename">Name</label>
             <input type="text" name="attributename" v-model="attr.name">
             <label for="attributevalue">Value</label>
             <input type="text" name="attributevalue" v-model="attr.value">
+            <button v-on:click="removeAbilityAttribute(ati)">Remove</button>
             <br>
           </div>
           
@@ -92,7 +109,7 @@ export default {
         category: '',
         price: null,
         recipePrice: null,
-        recipes: [],
+        recipe: [],
         lore: '',
         stats: [],
         abilities: [],
@@ -104,7 +121,7 @@ export default {
       itemdb.child(this.Item.name.replace(' ','_').toLowerCase()).set(this.Item)
     },
     addRecipe: function() {
-      this.Item.recipes.push('')
+      this.Item.recipe.push('')
     },
     addStat: function() {
       this.Item.stats.push({
@@ -115,6 +132,7 @@ export default {
     addAbility: function() {
       this.Item.abilities.push({
         name: '',
+        abilityType: '',
         description: '',
         attributes: [],
       })
@@ -124,7 +142,19 @@ export default {
         name: '',
         value: '',
       })
-    }
+    },
+    removeRecipe: function(re) {
+      this.Item.recipe.splice(re,1)
+    },
+    removeStat: function(si) {
+      this.Item.stats.splice(si,1)
+    },
+    removeAbility: function(ai) {
+      this.Item.abilities.splice(ai,1)
+    },
+    removeAbilityAttribute: function(ati,ai) {
+      this.Item.abilities[ai].attributes.splice(ati,1)
+    },
   }
 }
 </script>
