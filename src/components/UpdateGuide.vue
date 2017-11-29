@@ -8,8 +8,7 @@
       </b-field>
 
       <b-field label="Hero">
-        <b-autocomplete v-model="guide.heroName" :data="heroList" @select="option => selected = option">
-        </b-autocomplete>
+        <b-autocomplete v-model="heroSearch" :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.heroKey = option ? option['.key'] : null"></b-autocomplete>
       </b-field>
 
       {{guide}}
@@ -30,8 +29,9 @@ export default {
     return {
      guide: {
        name: '',
-       heroName: '',
-     }
+       heroKey: '',
+     },
+     heroSearch: ''
     }
   },
 
@@ -40,8 +40,10 @@ export default {
   },
 
   computed: {
-    heroList() {
-      return this.heroes.map(h => h.name)
+    filterdHeroList() {
+      return this.heroes.filter((hero) => {
+        return hero.name.toLowerCase().indexOf(this.heroSearch.toLowerCase()) >= 0
+      })
     }
   }
 }
