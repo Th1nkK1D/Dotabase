@@ -20,11 +20,17 @@
             <b-field>
               <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
             </b-field>
+            <div class="columns is-multiline">
+              <div class="column">
+                <img :src="item.icon"  v-for="item in cat.items" :key="item.name">
+              </div>
+            </div>
+            <b-field label="Item">
+              <b-autocomplete v-model="itemSearch" :data="filterdItemList" field="name" :keep-first="true" @select="option => option ? cat.items.push(option) : null"></b-autocomplete>
+            </b-field>
           </div>
         </div>
       </div><!-- End of PurchaseCategory List -->
-
-      {{guide}}
     </div>
 
     <div class="column is-2"></div>
@@ -34,6 +40,7 @@
 <script>
 import Firebase from 'firebase'
 var heroDB = Firebase.database().ref('/Heroes')
+var itemDB = Firebase.database().ref('/Items')
 
 export default {
   name: 'UpdateGuide',
@@ -45,18 +52,25 @@ export default {
        heroKey: '',
        purchaseCategory: []
      },
-     heroSearch: ''
+     heroSearch: '',
+     itemSearch: ''
     }
   },
 
   firebase:  {
-    heroes: heroDB // Read
+    heroes: heroDB,
+    items: itemDB
   },
 
   computed: {
     filterdHeroList() {
       return this.heroes.filter((hero) => {
         return hero.name.toLowerCase().indexOf(this.heroSearch.toLowerCase()) >= 0
+      })
+    },
+    filterdItemList() {
+      return this.items.filter((item) => {
+        return item.name.toLowerCase().indexOf(this.itemSearch.toLowerCase()) >= 0
       })
     }
   },
