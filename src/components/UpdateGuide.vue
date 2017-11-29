@@ -8,25 +8,25 @@
       </b-field>
 
       <b-field label="Hero">
-        <b-autocomplete v-model="heroSearch" :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.heroKey = option ? option['.key'] : null"></b-autocomplete>
+        <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.heroKey = option ? option['.key'] : null"></b-autocomplete>
       </b-field>
 
       <button class="button" @click="addPC()">+ PurchaseCategory</button>
 
       <!-- PurchaseCategory List -->
       <div class="columns is-multiline">
-        <div class="column is-12" v-for="(cat,c) in guide.purchaseCategory" :key="c">
+        <div class="column" v-for="(cat,c) in guide.purchaseCategory" :key="c">
           <div class="box">
             <b-field>
               <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
             </b-field>
             <div class="columns is-multiline">
               <div class="column">
-                <img :src="item.icon"  v-for="item in cat.items" :key="item.name">
+                <img :src="item.icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
               </div>
             </div>
-            <b-field label="Item">
-              <b-autocomplete v-model="itemSearch" :data="filterdItemList" field="name" :keep-first="true" @select="option => option ? cat.items.push(option) : null"></b-autocomplete>
+            <b-field>
+              <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(option) : null"></b-autocomplete>
             </b-field>
           </div>
         </div>
@@ -81,6 +81,9 @@ export default {
         name: '',
         items: []
       })
+    },
+    removeItem(c,i) {
+      this.guide.purchaseCategory[c].items.splice(i,1)
     }
   }
 }
