@@ -7,6 +7,9 @@
     <router-link to = "hero">
       <button>Heroes List</button>
     </router-link>
+    <router-link to = "guide">
+      <button>Guides List</button>
+    </router-link>
     <router-link to = "item">
       <button>Items List</button>
     </router-link>
