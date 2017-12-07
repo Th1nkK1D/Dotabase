@@ -31,8 +31,10 @@
 <script>
 import Firebase from 'firebase'
 var teamdb = Firebase.database().ref('/Teams')
+
 export default {
   name: 'UpdateTeam',
+  props: ['teamKey'],
   data () {
     return {
       Team : {
@@ -44,6 +46,16 @@ export default {
   methods: {
     submit: function() {
       teamdb.child(this.Team.name).set(this.Team)
+    }
+  },
+  mounted() {
+		// Check admin permission
+		if(!this.$store.state.user || !this.$store.state.user.admin) {
+			this.$router.push('/')
+		} else {
+			if(this.teamKey) {
+				this.$bindAsObject('Team',teamdb.child(this.teamKey))
+			}
     }
   }
 }

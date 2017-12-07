@@ -79,6 +79,7 @@ var teamDB = Firebase.database().ref('/Teams')
 
 export default {
   name: 'UpdatePlayer',
+  props: ['playerKey'],
   data () {
     return {
       heroSearch: '',
@@ -118,6 +119,16 @@ export default {
     removeHero: function(hi) {
       this.Player.heroRanks.splice(hi,1)
     },
+  },
+  mounted() {
+		// Check admin permission
+		if(!this.$store.state.user || !this.$store.state.user.admin) {
+			this.$router.push('/')
+		} else {
+			if(this.playerKey) {
+				this.$bindAsObject('Player',playerdb.child(this.playerKey))
+			}
+    }
   }
 }
 </script>

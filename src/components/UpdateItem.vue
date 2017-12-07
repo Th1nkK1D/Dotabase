@@ -164,9 +164,7 @@ export default {
 			this.$router.push('/')
 		} else {
 			if(this.itemKey) {
-				this.$bindAsObject('Item',itemdb.child(this.itemKey),null,function() {
-          console.log(this.Item)
-        })
+				this.$bindAsObject('Item',itemdb.child(this.itemKey))
 			}
     }
   }
