@@ -8,6 +8,10 @@
         </li>
     </ul>
 
+    <br>
+    <br>
+    <h3>Most Used Items</h3>
+    <br>
   </div>
 </template>
 

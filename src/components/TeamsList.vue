@@ -8,6 +8,10 @@
         </li>
     </ul>
 
+    <br>
+    <br>
+    <h3>Highest Average MMR Teams</h3>
+    <br>
   </div>
 </template>
 

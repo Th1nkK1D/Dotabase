@@ -8,6 +8,12 @@
         </li>
     </ul>
 
+    <br>
+    <br>
+    <h3>Highest Rating Guides</h3>
+    <br>
+
+
   </div>
 </template>
 

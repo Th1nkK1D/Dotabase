@@ -35,6 +35,12 @@
         <td v-for="talent in talentEachLvl" :key="talent">{{talent}}</td>
       </tr>
     </table>
+    <br>
+    <br>
+    <h3>Best Score For Sven</h3>
+    <br>
+
+
   </div>
 </template>
 

@@ -20,8 +20,6 @@
       <button>Teams List</button>
     </router-link>
     <br>
-    <br>
-    <br>
     <router-link to = "login">
       <button>Login</button>
     </router-link>
@@ -31,8 +29,6 @@
     <router-link to = "guidecomment">
       <button>GuideComment</button>
     </router-link>
-    <br>
-    <br>
     <br>
     <router-link to = "updateguide">
       <button>UpdateGuide</button>
@@ -49,17 +45,42 @@
     <router-link to = "updateteam">
       <button>UpdateTeam</button>
     </router-link>
+  <br>
+  <br>
+  <h3>Most Active Member</h3>
+  <br>
+  <h3>Heroes With Highest Guide Number</h3>
+  <br> 
+
+
+   
+
+
+
+
+
 
   </div>
 </template>
 
 <script>
+
+import Firebase from 'firebase'
+var heroDB = Firebase.database().ref('/Heroes')
+var playerDB = Firebase.database().ref('/Players')
+var itemDB = Firebase.database().ref('/Items')
+var MemberDB = Firebase.database().ref('/Members')
+var teamDB = Firebase.database().ref('/Teams')
+
 export default {
   name: 'MainPage',
   data () {
     return {
       // Add data here
     }
+  },
+  firebase:  {
+    players: playerDB
   }
 }
 </script>

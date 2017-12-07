@@ -170,10 +170,14 @@
 				<input type="text" name="attname" v-model="attr.name">
 				<label for="attvalue">Value</label>
 				<input type="text" name="attvalue" v-model="attr.value">
-				<button v-on:click="removeSkillAttribute(ati)">Remove</button>
+				<button v-on:click="removeSkillAttribute(ati,si)">Remove</button>
 				<br>
-          	</div>		
-					
+          	</div>
+		<br>
+		<button v-on:click="removeSkill(si)">RemoveSkill</button>
+		<br>
+		<br>
+		<br>			
 		</div>
 			
 		<div>
