@@ -10,6 +10,7 @@ import UpdateItem from '@/components/UpdateItem'
 import UpdatePlayer from '@/components/UpdatePlayer'
 import UpdateTeam from '@/components/UpdateTeam'
 import HeroesList from '@/components/HeroesList'
+import GuidesList from '@/components/GuidesList'
 import Hero from '@/components/Hero'
 import ItemsList from '@/components/ItemsList'
 import Item from '@/components/Item'
@@ -72,6 +73,11 @@ export default new Router({
       path: '/hero',
       name: 'HeroesList',
       component: HeroesList
+    },
+    {
+      path: '/guide',
+      name: 'GuidesList',
+      component: GuidesList
     },
     {
       path: '/hero/:heroKey',
