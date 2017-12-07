@@ -80,9 +80,6 @@
           
           <br>
         </div>
-        
-        <br>
-        {{Item}}
 
         <br>
         <button v-on:click="submit()">Submit</button>
@@ -102,8 +99,10 @@
 <script>
 import Firebase from 'firebase'
 var itemdb = Firebase.database().ref('/Items')
+
 export default {
   name: 'UpdateItem',
+  props: ['itemKey'],
   data () {
     return {
       Item: {
@@ -158,6 +157,18 @@ export default {
     removeAbilityAttribute: function(ati,ai) {
       this.Item.abilities[ai].attributes.splice(ati,1)
     },
+  },
+  mounted() {
+		// Check admin permission
+		if(!this.$store.state.user || !this.$store.state.user.admin) {
+			this.$router.push('/')
+		} else {
+			if(this.itemKey) {
+				this.$bindAsObject('Item',itemdb.child(this.itemKey),null,function() {
+          console.log(this.Item)
+        })
+			}
+    }
   }
 }
 </script>
