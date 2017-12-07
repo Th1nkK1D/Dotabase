@@ -11,6 +11,8 @@
     <br>
     <h1>Welcome to Dotabase!</h1>
     <br>
+    What is Dotabase?<br>
+    It is the website for Dota2 Player to learn and share the guide with others user.
     
     
 
