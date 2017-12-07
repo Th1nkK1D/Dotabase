@@ -1,7 +1,10 @@
 <template>
     
     <div>
-        <h1>Update Player</h1>
+      <h1>Update Player</h1>
+<div class="columns">
+  <div class="column">
+    
         <br>
         <label for="name">Player Name</label>
         <input type="text" name="name" v-model="Player.name">
@@ -24,10 +27,9 @@
         <label for="matchplayed">Match Played</label>
         <input type="number" name="matchplayed" v-model.number="Player.matchPlayed">
         <br>
-        <br>
-        <br>
-
-        <h2>Hero Rank:</h2>
+  </div>
+  <div class="column">
+    <h2>Hero Rank:</h2>
         <button v-on:click="addHero()">+ hero</button>
         <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">
           <label for="heroname">Hero Name {{hi+1}}</label>
@@ -42,6 +44,12 @@
         <br>
         <br>
         {{Player}}
+  </div>
+</div>
+
+
+
+
     </div>
 
 
