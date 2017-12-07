@@ -1,6 +1,16 @@
 <template>
   <div>
-    <h1 class="title is-1">Teams</h1>
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">Teams</h1>
+      </div>
+      <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
+        <router-link to="/updateteam">
+          <button class="button">+ Team</button>
+        </router-link>
+      </div>
+    </div>
+
     <div class="columns">
       <div class="column">
         <ul>

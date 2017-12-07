@@ -1,141 +1,183 @@
 <template>
     <div>
         <h1 class="title is-1">Update Item</h1>
+        <br>
 <div class="columns">
   <div class="column">
-    <b-field label="Item Name">
-      <b-input type="text" placeholder="Name" v-model="Item.name" maxlength="30"></b-input>
-    </b-field>
-    <b-field label="Item Icon">
-      <b-input type="text" placeholder="Icon" v-model="Item.icon"></b-input>
-    </b-field>
-    <b-field label="Type">
-      <b-input type="text" placeholder="Type" v-model="Item.category" maxlength="30"></b-input>
-    </b-field>
-    <b-field label="Cost">
-      <b-input type="number" placeholder="Item Cost" v-model.number="Item.price"></b-input>
-    </b-field>
-    <b-field label="Description">
-      <textarea class="textarea" placeholder="Description" v-model.number="Item.lore"></textarea>
-    </b-field>
+        <b-field for="itemname" label="Item Name">
+            <b-input type="text"
+                name="itemname"
+                v-model="Item.name">
+            </b-input>
+        </b-field>
 
-    <button class="button" @click="addRecipe()">+ recipe</button>
-      <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
-      
-    <div class="columns">
-      <div class="column">
-        Recipe {{re+1}}
-      </div>
-      <div class="column">
-        <b-input type="text" placeholder="Recipe.." v-model.number="Item.recipe[re]"></b-input>
-      </div>
-      <div class="column">
-        <button class="button" @click="removeRecipe(re)">Remove</button>
-      </div>
-      <div class="column">
-        
-      </div>
-    </div>
-      
-      </div>
-      <b-field label="Recipe Price">
-      <b-input type="number" placeholder="recipe price" v-model="Item.recipePrice"></b-input>
-      </b-field>
+    <!-- <label for="itemname">Item Name</label> -->
+      <!-- <input type="text" name="itemname" v-model="Item.name"> -->
+        <b-field for="itemicon" label="Item Icon">
+            <b-input type="text"
+                name="itemicon"
+                v-model="Item.icon">
+            </b-input>
+        </b-field>
+        <!-- <label for="itemicon">Item Icon</label> -->
+        <!-- <input type="text" name="itemicon" v-model="Item.icon"> -->
+        <b-field for="type" label="Type">
+            <b-input type="text"
+                name="type"
+                v-model="Item.category">
+            </b-input>
+        </b-field>
+        <!-- <label for="type">Type</label> -->
+        <!-- <input type="text" name="type" v-model="Item.category"> -->
+        <b-field for="itemcost" label="Cost">
+            <b-input type="number"
+                name="itemcost"
+                v-model.number="Item.price">
+            </b-input>
+        </b-field>
+        <!-- <label for="itemcost">Cost</label> -->
+        <!-- <input type="number" name="itemcost" v-model.number="Item.price"> -->
+        <b-field for="itemdescription" label="Description">
+            <b-input maxlength="200" type="textarea"></b-input>
+        </b-field>
+
+        <!-- <label for="itemdescription">Description</label> -->
+        <!-- <input type="text" name="itemdescription" v-model="Item.lore"> -->
+        <!-- <textarea name="itemdescription" id="" cols="100" rows="5" v-model="Item.lore"></textarea> -->
+        <br>
+        <button class="button is-black" v-on:click="addRecipe()">+ recipe</button>
+        <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
+        <b-field v-bind:label="'Recipe '+re">
+            <b-input type="text"
+                name="recipe"
+                v-model="Item.recipe[re]">
+            </b-input>
+        </b-field>
+        <!-- <label for="recipe">Recipe {{re+1}}</label> -->
+        <!-- <input type="text" name="recipe" v-model="Item.recipe[re]"> -->
+        <button class="button is-black"v-on:click="removeRecipe(re)">Remove</button>
+        </div>
+        <b-field for="recipeprice" label="Recipe Price">
+            <b-input type="number"
+                name="recipeprice"
+                v-model.number="Item.recipePrice">
+            </b-input>
+        </b-field>
+        <!-- <label for="recipeprice">Recipe Price</label> -->
+        <!-- <input type="number" name="recipeprice" v-model.number="Item.recipePrice"> -->
+        <br>
         <br>
 
-        <h2>Stats</h2>
-        <button class="button" @click="addStat()">+ stat</button>
+        <h2 class="title is-1">Stats</h2>
+        <button class="button is-black" v-on:click="addStat()">+ stat</button>
+
         <div v-for="(stat, si) in Item.stats" v-bind:key="si">
-
-
-        <div class="columns">
-          <div class="column">
-            Stat Name {{si+1}}
-          </div>
-          <div class="column">
-            <b-input type="text" placeholder="stat" v-model.number="stat.name"></b-input>
-          </div>
-          <div class="column">
-            Value
-          </div>
-          <div class="column">
-            <b-input type="text" placeholder="stat" v-model.number="stat.value"></b-input>
-          </div>
-          <div class="column">
-            <button class="button" @click="removeStat(si)">Remove</button>
-          </div>
-        </div>
+          <b-field v-bind:label="'Stat Name '+si+1">
+              <b-input type="text"
+                  name="statname"
+                  v-model="stat.name">
+              </b-input>
+          </b-field>
+          <!-- <label for="statname">Stat Name {{si+1}}</label> -->
+          <!-- <input type="text" name="statname" v-model="stat.name"> -->
+          <b-field label="Value">
+              <b-input type="text"
+                  name="itemstatvalue"
+                  v-model="stat.value">
+              </b-input>
+          </b-field>
+          <!-- <label for="itemstatvalue">Value</label> -->
+          <!-- <input type="text" name="itemstatvalue" v-model="stat.value"> -->
+          <button class="button is-black"v-on:click="removeStat(si)">Remove</button>
         </div>
   </div>
+  <div class="column">
+        <h2 class="title is-1">Abilities</h2>
+        <button class="button is-black"v-on:click="addAbility()">+ ability</button>
 
   <div class="column">
         <h3 class="title is-3">Abilities</h3>
         <button class="button" @click="addAbility()">+ ability</button>
         <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
-      <div class="columns">
-        <div class="column">
-          <h5 class="title is-5">Ability {{ai+1}}</h5>
-        </div>
-        <div class="column">
-          <button class="button" @click="removeAbility(ai)">Remove ability {{ai+1}}</button>
-        </div>
-
-    </div>
-          
-          
-<div class="columns">
-  <div class="column">
-    <b-field label="Name">
-        <b-input type="text" placeholder="ability name" v-model="ability.name"></b-input>
-    </b-field>
-  </div>
-  <div class="column">
-    <b-field label="Type">
-    <input type="radio" name="abilitytype" value="active" v-model="ability.abilityType">
-          <label for="abilitytype">Active</label>
-          <input type="radio" name="abilitytype" value="passive" v-model="ability.abilityType">
-          <label for="abilitytype">Passive</label>
-          <input type="radio" name="abilitytype" value="toggle" v-model="ability.abilityType">
-          <label for="abilitytype">Toggle</label>
-          <input type="radio" name="abilitytype" value="use" v-model="ability.abilityType">
-          <label for="abilitytype">Use</label>
+          <h4 class="title is-3">Ability {{ai+1}}</h4> <button class="button is-black"v-on:click="removeAbility(ai)">Remove Ability</button>
           <br>
-    </b-field>
-  </div>
+          <b-field label="Name">
+              <b-input type="text"
+                  name="abilityname"
+                  v-model="ability.name">
+              </b-input>
+          </b-field>
+          <!-- <label for="abilityname">Name</label> -->
+          <!-- <input type="text" name="abilityname" v-model="ability.name"> -->
+          <br>
+          <h4 class="title is-5">Type</h4>
+          <b-radio v-model="ability.abilityType"
+                name="abilitytype"
+                native-value="active">
+                Active
+            </b-radio>
+            <b-radio v-model="ability.abilityType"
+                name="abilitytype"
+                native-value="passive">
+                Passive
+            </b-radio>
+            <b-radio v-model="ability.abilityType"
+                name="abilitytype"
+                native-value="toggle">
+                Toggle
+            </b-radio>
+            <b-radio v-model="ability.abilityType"
+                name="abilitytype"
+                native-value="use">
+                Use
+            </b-radio>
+          <!-- <input type="radio" name="abilitytype" value="active" v-model="ability.abilityType"> -->
+          <!-- <label for="abilitytype">Active</label> -->
+          <!-- <input type="radio" name="abilitytype" value="passive" v-model="ability.abilityType"> -->
+          <!-- <label for="abilitytype">Passive</label> -->
+          <!-- <input type="radio" name="abilitytype" value="toggle" v-model="ability.abilityType"> -->
+          <!-- <label for="abilitytype">Toggle</label> -->
+          <!-- <input type="radio" name="abilitytype" value="use" v-model="ability.abilityType"> -->
+          <!-- <label for="abilitytype">Use</label> -->
+          <br>
+          <b-field for="itemabilitydescription" label="Description">
+              <b-input maxlength="200" type="textarea" v-model="ability.description"></b-input>
+          </b-field>
+          <!-- <label for="itemabilitydescription">Description</label> -->
+          <!-- <textarea name="itemdabilityescription" id="" cols="100" rows="5" v-model="ability.description"></textarea> -->
+          <br>
 
-</div>
-    <b-field label="Description">
-      <textarea class="textarea" placeholder="Description" v-model.number="ability.description"></textarea>
-    </b-field>
-    <button class="button" @click="addAbilityAttribute(ai)">+ attribute</button>
-          
+          <button class="button is-black"v-on:click="addAbilityAttribute(ai)">+ attribute</button>
           <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
-            
-            
-            <h6 class="title is-6">Attribute {{ati+1}} :</h6>
-            <div class="columns">
-              <div class="column">
-                Name
-              </div>
-              <div class="column">
-                <b-input type="text" placeholder="Name" v-model="attr.name"></b-input>
-              </div>
-              <div class="column">
-                Value
-              </div>
-              <div class="column">
-                <b-input type="text" placeholder="Value" v-model="attr.value"></b-input>
-              </div>
-              <div class="column">
-                <button class="button" @click="removeAbilityAttribute(ati,ai)">Remove</button>
-              </div>
-            </div>
+            Attribute {{ati+1}} :
+            <b-field label="Name">
+                <b-input type="text"
+                    name="attributename"
+                    v-model="attr.name">
+                </b-input>
+            </b-field>
+            <!-- <label for="attributename">Name</label> -->
+            <!-- <input type="text" name="attributename" v-model="attr.name"> -->
+            <b-field label="Value">
+                <b-input type="text"
+                    name="attributevalue"
+                    v-model="attr.value">
+                </b-input>
+            </b-field>
+            <!-- <label for="attributevalue">Value</label> -->
+            <!-- <input type="text" name="attributevalue" v-model="attr.value"> -->
+            <button class="button is-black"v-on:click="removeAbilityAttribute(ati)">Remove</button>
             <br>
           </div>
+
           <br>
         </div>
+
+        <br
+
         <br>
-        <button class="button is-primary" @click="submit()">Submit</button>
+        <br>
+        <button class="button is-primary"v-on:click="submit()">Submit</button>
   </div>
 
 </div>
@@ -217,9 +259,7 @@ export default {
 			this.$router.push('/')
 		} else {
 			if(this.itemKey) {
-				this.$bindAsObject('Item',itemdb.child(this.itemKey),null,function() {
-          console.log(this.Item)
-        })
+				this.$bindAsObject('Item',itemdb.child(this.itemKey))
 			}
     }
   }

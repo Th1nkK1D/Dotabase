@@ -46,23 +46,6 @@
         </router-link>
       </a>
 
-    
-    <router-link to = "updateguide">
-      <button>UpdateGuide</button>
-    </router-link>
-    <router-link to = "updateitem">
-      <button>UpdateItem</button>
-    </router-link>
-    <router-link to = "updateplayer">
-      <button>UpdatePlayer</button>
-    </router-link>
-    <router-link to = "updateteam">
-      <button>UpdateTeam</button>
-    </router-link>
-
-
-
-
       <!-- <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           Docs
@@ -116,7 +99,9 @@
     </div>
   </div>
 </nav>
-<router-view/>
+<div class="wrapper">
+  <router-view/>
+</div>
 </div>
 </template>
 
@@ -151,7 +136,7 @@ export default {
 </script>
 
 <style scoped>
-  #app {
-    margin-top: 20px;
+  .wrapper {
+    margin: 20px;
   }
 </style>

@@ -17,7 +17,7 @@
         <br>
         <b-field for="password" label="Password">
             <b-input type="password"
-                vname="password"
+                name="password"
                 v-model="Member.password"
                 password-reveal>
             </b-input>

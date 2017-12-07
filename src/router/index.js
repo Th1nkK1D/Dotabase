@@ -46,9 +46,10 @@ export default new Router({
       component: Register
     },
     {
-      path: '/updateguide',
+      path: '/updateguide/:guideKey?',
       name: 'UpdateGuide',
-      component: UpdateGuide
+      component: UpdateGuide,
+      props: true
     },
     {
       path: '/updatehero/:heroKey?',
@@ -63,14 +64,16 @@ export default new Router({
       props: true
     },
     {
-      path: '/updateplayer',
+      path: '/updateplayer/:playerKey?',
       name: 'UpdatePlayer',
-      component: UpdatePlayer
+      component: UpdatePlayer,
+      props: true
     },
     {
-      path: '/updateteam',
+      path: '/updateteam/:teamKey?',
       name: 'UpdateTeam',
-      component: UpdateTeam
+      component: UpdateTeam,
+      props: true
     },
     {
       path: '/hero',
