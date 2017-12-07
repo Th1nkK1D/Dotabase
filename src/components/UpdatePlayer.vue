@@ -1,47 +1,62 @@
 <template>
     
     <div>
-      <h1>Update Player</h1>
+      <h1 class="title is-1">Update Player</h1>
 <div class="columns">
   <div class="column">
-    
-        <br>
-        <label for="name">Player Name</label>
-        <input type="text" name="name" v-model="Player.name">
-        <br>
-        <label for="playeravatar">Avatar</label>
-        <input type="text" name="playeravatar" v-model="Player.avatar">
-        <br>
-        <label for="teamname">Team Name</label>
-        <input type="text" name="teamname" v-model="Player.teamName">
-        <br>
-        <label for="playerrole">Role</label>
-        <input type="text" name="playerrole" v-model="Player.role">
-        <br>
-        <label for="solommr">MMR Solo</label>
-        <input type="number" name="solommr" v-model.number="Player.mmrSolo">
-        <br>
-        <label for="partymmr">MMR Party</label>
-        <input type="number" name="partymmr" v-model.number="Player.mmrParty">
-        <br>
-        <label for="matchplayed">Match Played</label>
-        <input type="number" name="matchplayed" v-model.number="Player.matchPlayed">
-        <br>
+    <b-field label="Player Name">
+      <b-input type="text" placeholder="Name" v-model="Player.name" maxlength="30"></b-input>
+    </b-field>
+    <b-field label="Avatar">
+      <b-input type="text" placeholder="Icon" v-model="Player.avatar"></b-input>
+    </b-field>
+    <b-field label="Team Name">
+      <b-autocomplete v-model="teamSearch" placeholder="Search team..." :data="filterdTeamList" field="name" :keep-first="true" @select="option => Player.teamName = option ? option.name : null"></b-autocomplete>
+    </b-field>
+    <b-field label="Role">
+      <b-input type="text" placeholder="Role" v-model="Player.role"></b-input>
+    </b-field>
+    <b-field label="MMR Solo">
+      <b-input type="number" placeholder="Solo MMR" v-model.number="Player.mmrSolo"></b-input>
+    </b-field>
+    <b-field label="MMR Party">
+      <b-input type="number" placeholder="Party MMR" v-model.number="Player.mmrParty"></b-input>
+    </b-field>
+    <b-field label="Match Played">
+      <b-input type="number" placeholder="Number Of Match Played" v-model.number="Player.matchPlayed"></b-input>
+    </b-field>
+        
+        
   </div>
   <div class="column">
     <h2>Hero Rank:</h2>
-        <button v-on:click="addHero()">+ hero</button>
-        <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">
-          <label for="heroname">Hero Name {{hi+1}}</label>
-          <input type="text" name="heroname" v-model="heroRank.heroName">
-          <label for="heroscore">Hero Score</label>
-          <input type="number" name="heroscore" v-model.number="heroRank.score">
-          <button v-on:click="removeHero(hi)">Remove</button>
-        </div>
+      <button class="button" @click="addHero()">+ hero</button>
+        <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">    
+          
+          
+
+
+<div class="columns">
+  <div class="column">
+    <label for="heroname">Hero Name {{hi+1}}</label>
+  </div>
+  <div class="column">
+    <b-input type="text" placeholder="Hero" v-model="heroRank.heroName"></b-input>
+    </div>
+  <div class="column">
+          <label for="heroscore">Score</label>
+  </div>
+  <div class="column">
+    
+          <b-input type="number" placeholder="Score" v-model.number="heroRank.score"></b-input>
+  </div>
+  <div class="column">
+    <button class="button" @click="removeHero(hi)">Remove</button>
+    </div>
+</div>
+</div>
         <br>
-        <br>
-        <button v-on:click="submit()">Submit</button>
-        <br>
+        <button class="button is-primary" @click="submit()">Submit</button>
         <br>
         {{Player}}
   </div>
@@ -59,10 +74,15 @@
 <script>
 import Firebase from 'firebase'
 var playerdb = Firebase.database().ref('/Players')
+var teamDB = Firebase.database().ref('/Teams')
+
+
 export default {
   name: 'UpdatePlayer',
   data () {
     return {
+      heroSearch: '',
+      teamSearch: '',
       Player: {
         name: '',
         avatar: '',
@@ -74,6 +94,16 @@ export default {
         heroRanks: [],
       }
     }
+  },
+  firebase:  {
+    teams: teamDB
+  },
+  computed: {
+    filterdTeamList() {
+      return this.teams.filter((team) => {
+        return team.name.toLowerCase().indexOf(this.teamSearch.toLowerCase()) >= 0
+      })
+    },
   },
   methods: {
     submit: function() {

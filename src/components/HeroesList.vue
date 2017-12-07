@@ -1,11 +1,15 @@
 <template>
   <div>
-    <h1>Heroes</h1>
+  <h1>Heroes</h1>
+  <router-link to="updatehero">
+    <button class="button">+ Hero</button>
+  </router-link>
+
   <div class="columns">
     <div class="column">
       <ul>
         <li v-for="(hero,key) in heroes" v-bind:key="key">
-            <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+          <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
         </li>
     </ul>
     </div>

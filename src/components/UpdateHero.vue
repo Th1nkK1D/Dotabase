@@ -67,23 +67,23 @@
 		<label for="attackspeed">Attack Speed : </label>
 		<input type="number" name="attackspeed" v-model.number="Hero.attackSpeed">
 		<br>
-	<div>
+	<div v-if="Hero.talents">
 		<h3>Talent Tree</h3>
-		<input type="text" name="talent3_0" v-model="Hero.talent[3][0]">
+		<input type="text" name="talent3_0" v-model="Hero.talents[3][0]">
 		25
-		<input type="text" name="talent3_1" v-model="Hero.talent[3][1]">
+		<input type="text" name="talent3_1" v-model="Hero.talents[3][1]">
 		<br>
-		<input type="text" name="talent2_0" v-model="Hero.talent[2][0]">
+		<input type="text" name="talent2_0" v-model="Hero.talents[2][0]">
 		20
-		<input type="text" name="talent2_1" v-model="Hero.talent[2][1]">
+		<input type="text" name="talent2_1" v-model="Hero.talents[2][1]">
 		<br>
-		<input type="text" name="talent1_0" v-model="Hero.talent[1][0]">
+		<input type="text" name="talent1_0" v-model="Hero.talents[1][0]">
 		15
-		<input type="text" name="talent1_1" v-model="Hero.talent[1][1]">
+		<input type="text" name="talent1_1" v-model="Hero.talents[1][1]">
 		<br>
-		<input type="text" name="talent0_0" v-model="Hero.talent[0][0]">
+		<input type="text" name="talent0_0" v-model="Hero.talents[0][0]">
 		10
-		<input type="text" name="talent0_1" v-model="Hero.talent[0][1]">
+		<input type="text" name="talent0_1" v-model="Hero.talents[0][1]">
 		<br>
 		<br>	
 	</div>
@@ -137,46 +137,48 @@
 <script>
 import Firebase from 'firebase'
 var herodb = Firebase.database().ref('/Heroes')
+
 export default {
-  name: 'UpdateHero',
+	name: 'UpdateHero',
+	props: ['heroKey'],
   data () {
     return {
       Hero: {
-		  name: '',
-		  avatar: '',
-		  attribute: '',
-		  roles: [],
-		  lore: '',
-		  strBase: null,
-		  agiBase: null,
-		  intBase: null,
-		  strGain: null,
-		  agiGain: null,
-		  intGain: null,
-		  hp: null,
-		  mana: null,
-		  hpRegen: null,
-		  manaRegen: null,
-		  damageMin: null,
-		  damageMax: null,
-		  armor: null,
-		  magicResistance: null,
-		  moveSpeed: null,
-		  attackRange: null,
-		  attackSpeed: null,
-		  skills:[],
-		  talent:[[null,null],[null,null],[null,null],[null,null]],
-	  }
+				name: '',
+				avatar: '',
+				attribute: '',
+				roles: [],
+				lore: '',
+				strBase: null,
+				agiBase: null,
+				intBase: null,
+				strGain: null,
+				agiGain: null,
+				intGain: null,
+				hp: null,
+				mana: null,
+				hpRegen: null,
+				manaRegen: null,
+				damageMin: null,
+				damageMax: null,
+				armor: null,
+				magicResistance: null,
+				moveSpeed: null,
+				attackRange: null,
+				attackSpeed: null,
+				skills:[],
+				talents:[[null,null],[null,null],[null,null],[null,null]],
+			}
     }
   },
 	methods: {
     submit: function() {
       herodb.child(this.Hero.name.replace(' ','_').toLowerCase()).set(this.Hero)
     },
-	addRole: function() {
+		addRole: function() {
       this.Hero.roles.push('')
     },
-	addSkill: function() {
+		addSkill: function() {
       this.Hero.skills.push({
         name: '',
         icon: '',
@@ -186,21 +188,31 @@ export default {
         attributes: [],
       })
     },
-	addSkillAttribute: function(si) {
+		addSkillAttribute: function(si) {
       this.Hero.skills[si].attributes.push({
         name: '',
         value: '',
       })
     },
-	removeRole: function(ri) {
+		removeRole: function(ri) {
       this.Hero.roles.splice(ri,1)
     },
-	removeSkill: function(si) {
+		removeSkill: function(si) {
       this.Hero.skills.splice(si,1)
     },
-	removeSkillAttribute: function(ati,si) {
+		removeSkillAttribute: function(ati,si) {
       this.Hero.skills[si].attributes.splice(ati,1)
     },
+	},
+	mounted() {
+		// Check admin permission
+		if(!this.$store.state.user || !this.$store.state.user.admin) {
+			this.$router.push('/')
+		} else {
+			if(this.heroKey) {
+				this.$bindAsObject('Hero',herodb.child(this.heroKey))
+			}
+		}
 	}
 }
 </script>
