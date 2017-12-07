@@ -40,12 +40,8 @@ export default {
   },
   methods : {
     login() {
-      console.log(this.username)
-      console.log(this.password)
-// check มีข้อมูลป่าว ถ้ามี password ตรงป่าว
-// หาไม่เจอ password ไม่ตรง สำเร็จ
       this.$bindAsObject('member',MemberDB.child(this.username),null,function(){
-        if (!this.member.password) 
+        if (!this.member.password)
           console.log("Can not find this user.")
         else {
           if (this.member.password != this.password)
