@@ -14,8 +14,6 @@
         <b-input type="text" name="username" v-model="username" maxlength="30"></b-input>
         </b-field>
 
-        <!-- <label for="username">Username</label> -->
-        <!-- <input type="text" name="username" v-model="username"> -->
         <br>
         <b-field label="Password">
             <b-input type="password"
@@ -75,6 +73,8 @@ export default {
           else
             console.log("Complete!")
             this.$store.commit('login',this.member)
+
+            this.$router.push('/')
         }
       })
     }

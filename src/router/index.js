@@ -56,6 +56,12 @@ export default new Router({
       component: UpdateHero
     },
     {
+      path: '/updatehero/:heroKey',
+      name: 'UpdateHero',
+      component: UpdateHero,
+      props: true
+    },
+    {
       path: '/updateitem',
       name: 'UpdateItem',
       component: UpdateItem
