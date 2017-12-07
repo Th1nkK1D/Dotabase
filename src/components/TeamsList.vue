@@ -1,17 +1,22 @@
 <template>
   <div>
     <h1>Teams</h1>
+    <div class="columns">
+      <div class="column">
+        <ul>
+          <li v-for="(team,key) in teams" v-bind:key="key">
+              <router-link v-bind:to="'team/'+team['.key']">{{team.name}}</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>Highest Average MMR Teams</h3>
+        <br>
+      </div>
+    </div>
 
-    <ul>
-        <li v-for="(team,key) in teams" v-bind:key="key">
-            <router-link v-bind:to="'team/'+team['.key']">{{team.name}}</router-link>
-        </li>
-    </ul>
 
-    <br>
-    <br>
-    <h3>Highest Average MMR Teams</h3>
-    <br>
+
   </div>
 </template>
 

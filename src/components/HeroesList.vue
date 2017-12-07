@@ -1,17 +1,19 @@
 <template>
   <div>
     <h1>Heroes</h1>
-
-    <ul>
+  <div class="columns">
+    <div class="column">
+      <ul>
         <li v-for="(hero,key) in heroes" v-bind:key="key">
             <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
         </li>
     </ul>
-    <br>
-    <br>
-    <h3>Popular Heroes</h3>
-    <br>
-
+    </div>
+    <div class="column">
+      <h3>Popular Heroes</h3>
+      <br>
+    </div>
+  </div>
 
   </div>
 </template>

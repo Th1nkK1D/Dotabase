@@ -2,14 +2,23 @@
   <div>
     <h1>Players</h1>
 
-    <ul>
-        <li v-for="(player,key) in players" v-bind:key="key">
-            <router-link v-bind:to="'player/'+player['.key']">{{player.name}}</router-link>
-        </li>
-    </ul>
+    
     <br>
     <br>
-    <h3>Player With Highest Solo MMR</h3>
+    
+
+
+
+    <div class="columns">
+      <div class="column">
+        <ul>
+          <li v-for="(player,key) in players" v-bind:key="key">
+              <router-link v-bind:to="'player/'+player['.key']">{{player.name}}</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>Player With Highest Solo MMR</h3>
       <br>
         <ul>
           <li v-for="(player,key) in players" v-bind:key="key">
@@ -36,6 +45,8 @@
           </li>
         </ul>
       <br>
+      </div>
+    </div>
 
 
 
