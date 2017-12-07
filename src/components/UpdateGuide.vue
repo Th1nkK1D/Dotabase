@@ -65,7 +65,7 @@
             {{hero.talents[3-tl][1]}}
           </div>
         </div>
-        {{talentTree}}
+        
       </div><!-- End of Talent Tree -->
     </div>
 
@@ -77,8 +77,11 @@
 
 <script>
 import Firebase from 'firebase'
+import Moment from 'moment'
+
 var heroDB = Firebase.database().ref('/Heroes')
 var itemDB = Firebase.database().ref('/Items')
+var guideDB = Firebase.database().ref('/Guides')
 
 export default {
   name: 'UpdateGuide',
@@ -126,8 +129,12 @@ export default {
     save() {
       let guide = {}
 
+      guide.memberID = 'testuser'
+
       guide.name = this.name
       guide.hero = this.hero['.key']
+
+      guide.dateCreated = new Moment().format()
 
       guide.purchaseCategory = []
       
@@ -141,10 +148,9 @@ export default {
       guide.learnOrder = this.learnOrder
       guide.talentTree = [].concat(this.talentTree).reverse()
 
-      guide.memberID = 'testuser'
-      guide.dateCreated = new Date()
-
       console.log(guide)
+
+      guideDB.push(guide)
     }
   }
 }

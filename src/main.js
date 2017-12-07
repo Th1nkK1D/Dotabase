@@ -6,12 +6,14 @@ import router from './router'
 
 import VueFire from 'vuefire'
 import Firebase from 'firebase'
-
 import Buefy from 'buefy'
+import VueMoment from 'vue-moment'
+
 import 'buefy/lib/buefy.css'
 
 Vue.use(VueFire)
 Vue.use(Buefy)
+Vue.use(VueMoment)
 
 Vue.config.productionTip = false
 

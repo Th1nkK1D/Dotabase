@@ -113,7 +113,6 @@ type ItemAbility {
 }
 
 type Guide {
-  id: String,
   memberID: String,
   name: String,
   hero: String,
