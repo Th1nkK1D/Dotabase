@@ -14,8 +14,6 @@
         <b-input type="text" name="username" v-model="username" maxlength="30"></b-input>
         </b-field>
 
-        <!-- <label for="username">Username</label> -->
-        <!-- <input type="text" name="username" v-model="username"> -->
         <br>
         <label for="password">Password</label>
         <input type="password" name="password" v-model="password">
@@ -25,7 +23,6 @@
         <br>
         Don't have an account?
         <br>
-        {{member}}
         <router-link to = "register">
           <button>Create Account</button>
         </router-link>
@@ -68,6 +65,8 @@ export default {
           else
             console.log("Complete!")
             this.$store.commit('login',this.member)
+
+            this.$router.push('/')
         }
       })
     }

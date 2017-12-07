@@ -1,6 +1,14 @@
 <template>
   <div id="app" class="container">
-    user: {{user}} (<a @click="logout()">Logout</a>)
+    <div>
+      <span v-if="!user">
+        <router-link to = "login">Login</router-link>
+      </span>
+      <span v-else>
+        Hi, {{user.username}} <a @click="logout()">(Logout)</a>
+      </span>
+    </div>
+
     <router-view/>
   </div>
 </template>
