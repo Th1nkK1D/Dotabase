@@ -1,5 +1,5 @@
 <template>
-    
+
     <div>
       <h1 class="title is-1">Update Player</h1>
 <div class="columns">
@@ -25,15 +25,15 @@
     <b-field label="Match Played">
       <b-input type="number" placeholder="Number Of Match Played" v-model.number="Player.matchPlayed"></b-input>
     </b-field>
-        
-        
+
+
   </div>
   <div class="column">
     <h2>Hero Rank:</h2>
       <button class="button" @click="addHero()">+ hero</button>
-        <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">    
-          
-          
+        <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">
+
+
 
 
 <div class="columns">
@@ -47,7 +47,7 @@
           <label for="heroscore">Score</label>
   </div>
   <div class="column">
-    
+
           <b-input type="number" placeholder="Score" v-model.number="heroRank.score"></b-input>
   </div>
   <div class="column">
@@ -58,7 +58,6 @@
         <br>
         <button class="button is-primary" @click="submit()">Submit</button>
         <br>
-        {{Player}}
   </div>
 </div>
 
