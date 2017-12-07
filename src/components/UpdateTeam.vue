@@ -1,17 +1,27 @@
 <template>
-    
     <div>
-        <h1>Update Team</h1>
-        <br>
-        <label for="teamname">Team Name</label>
-        <input type="text" name="teamname" v-model="Team.name">
-        <br>
-        <label for="teamregion">Team Region</label>
-        <input type="text" name="teamregion" v-model="Team.region">
-        <br>
-        <button v-on:click="submit()">Submit</button>
-        <br>
-        {{Team}}
+      <div class="columns">
+        <div class="column">
+
+        </div>
+        <div class="column">
+          <h1 class="title is-1">Update Team</h1>
+          <br>
+          <b-field label="Team Name">
+          <b-input type="text" placeholder="Name" v-model="Team.name" maxlength="30"></b-input>
+          </b-field>
+          <b-field label="Team Region">
+          <b-input type="text" placeholder="Region" v-model="Team.region" maxlength="30"></b-input>
+          </b-field>
+          <button class="button is-primary" @click="submit()">Submit</button>
+          <br>
+          {{Team}}
+        </div>
+        <div class="column">
+
+        </div>
+      </div>
+        
     </div>
   
 
