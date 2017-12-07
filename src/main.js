@@ -8,12 +8,14 @@ import VueFire from 'vuefire'
 import Firebase from 'firebase'
 import Buefy from 'buefy'
 import VueMoment from 'vue-moment'
+import Vuex from 'vuex'
 
 import 'buefy/lib/buefy.css'
 
 Vue.use(VueFire)
 Vue.use(Buefy)
 Vue.use(VueMoment)
+Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
@@ -23,4 +25,19 @@ new Vue({
   router,
   template: '<App/>',
   components: { App }
+})
+
+// Vuex
+const store = new Vuex.Store({
+  state: {
+    user: null
+  },
+  mutations: {
+    login(state, user) {
+      state.user = user
+    },
+    logout(state) {
+      state.user = null
+    }
+  }
 })
