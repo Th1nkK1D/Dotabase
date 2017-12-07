@@ -1,7 +1,14 @@
 <template>
 
     <div>
-        <h1>Login</h1>
+        
+
+  <div class="columns">
+    <div class="column">
+      
+    </div>
+    <div class="column">
+      <h1>Login</h1>
         <br>
         <b-field label="Username">
         <b-input type="text" name="username" v-model="username" maxlength="30"></b-input>
@@ -22,6 +29,14 @@
         <router-link to = "register">
           <button>Create Account</button>
         </router-link>
+    </div>
+    <div class="column">
+      
+    </div>
+
+  </div>
+
+
     </div>
 
 
