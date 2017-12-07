@@ -2,7 +2,9 @@
     <div>
         <h1>Update Item</h1>
         <br>
-        <label for="itemname">Item Name</label>
+<div class="columns">
+  <div class="column">
+    <label for="itemname">Item Name</label>
         <input type="text" name="itemname" v-model="Item.name">
         <br>
         <label for="itemicon">Item Icon</label>
@@ -18,20 +20,14 @@
         <!-- <input type="text" name="itemdescription" v-model="Item.lore"> -->
         <textarea name="itemdescription" id="" cols="100" rows="5" v-model="Item.lore"></textarea>
         <br>
-        <br>
-        <br>
         <button v-on:click="addRecipe()">+ recipe</button>
         <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
         <label for="recipe">Recipe {{re+1}}</label>
         <input type="text" name="recipe" v-model="Item.recipe[re]">
         <button v-on:click="removeRecipe(re)">Remove</button>
         </div>
-
-        <br>
         <label for="recipeprice">Recipe Price</label>
         <input type="number" name="recipeprice" v-model.number="Item.recipePrice">
-        <br>
-        
         <br>
         <br>
 
@@ -45,9 +41,8 @@
           <input type="text" name="itemstatvalue" v-model="stat.value">
           <button v-on:click="removeStat(si)">Remove</button>
         </div>
-        <br>
-        <br>
-
+  </div>
+  <div class="column">
         <h2>Abilities</h2>
         <button v-on:click="addAbility()">+ ability</button>
 
@@ -91,8 +86,16 @@
 
         <br>
         <button v-on:click="submit()">Submit</button>
-    
-  
+  </div>
+
+</div>
+
+
+
+
+
+
+
 </div>
 </template>
 
