@@ -48,6 +48,7 @@ export default {
             console.log("No matching password.")
           else
             console.log("Complete!")
+            this.$store.commit('login',this.member)
         }
       })
     }
