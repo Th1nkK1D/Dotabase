@@ -1,5 +1,14 @@
 <template>
   <div id="app" class="container">
+    <div>
+      <span v-if="!user">
+        <router-link to = "login">Login</router-link>
+      </span>
+      <span v-else>
+        Hi, {{user.username}} <a @click="logout()">(Logout)</a>
+      </span>
+    </div>
+
     <router-view/>
   </div>
 </template>
@@ -20,7 +29,17 @@ var config = {
 Firebase.initializeApp(config)
 
 export default {
-  name: 'app'
+  name: 'app',
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('logout')
+    }
+  }
 }
 </script>
 

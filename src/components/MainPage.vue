@@ -20,16 +20,6 @@
       <button>Teams List</button>
     </router-link>
     <br>
-    <router-link to = "login">
-      <button>Login</button>
-    </router-link>
-    <router-link to = "register">
-      <button>Register</button>
-    </router-link>
-    <router-link to = "guidecomment">
-      <button>GuideComment</button>
-    </router-link>
-    <br>
     <router-link to = "updateguide">
       <button>UpdateGuide</button>
     </router-link>

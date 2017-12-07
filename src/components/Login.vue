@@ -1,23 +1,47 @@
 <template>
 
     <div>
-        <h1>Login</h1>
+
+
+  <div class="columns">
+    <div class="column">
+
+    </div>
+    <div class="column">
+      <h1 class="title is-1">Login</h1>
         <br>
-        <label for="username">Username</label>
-        <input type="text" name="username" v-model="username">
+        <b-field label="Username">
+        <b-input type="text" name="username" v-model="username" maxlength="30"></b-input>
+        </b-field>
+
         <br>
-        <label for="password">Password</label>
-        <input type="password" name="password" v-model="password">
+        <b-field label="Password">
+            <b-input type="password"
+                vname="password"
+                v-model="password"
+                password-reveal>
+            </b-input>
+        </b-field>
+        <!-- <label for="password">Password</label> -->
+        <!-- <input type="password" name="password" v-model="password"> -->
         <br>
-        <button v-on:click ="login()">Login</button>
+        <!-- <a class="button">Button</a> -->
+        <button class="button is-black" v-on:click ="login()">Login</button>
         <br>
         <br>
         Don't have an account?
         <br>
-        {{member}}
         <router-link to = "register">
-          <button>Create Account</button>
+          <button class="button is-black" >Create Account</button>
         </router-link>
+    </div>
+    <div class="column">
+
+    </div>
+
+  </div>
+
+
     </div>
 
 
@@ -48,6 +72,9 @@ export default {
             console.log("No matching password.")
           else
             console.log("Complete!")
+            this.$store.commit('login',this.member)
+
+            this.$router.push('/')
         }
       })
     }

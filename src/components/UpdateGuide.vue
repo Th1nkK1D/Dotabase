@@ -65,7 +65,7 @@
             {{hero.talents[3-tl][1]}}
           </div>
         </div>
-        
+
       </div><!-- End of Talent Tree -->
     </div>
 
@@ -93,7 +93,7 @@ export default {
       name: '',
       hero: '',
       purchaseCategory: [],
-      learnOrder: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null], 
+      learnOrder: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
       talentTree: [null,null,null,null],
     }
   },
@@ -137,7 +137,7 @@ export default {
       guide.dateCreated = new Moment().format()
 
       guide.purchaseCategory = []
-      
+
       for (let c = 0; c < this.purchaseCategory.length; c++) {
         guide.purchaseCategory.push({
           name: this.purchaseCategory[c].name,

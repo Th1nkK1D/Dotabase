@@ -1,17 +1,21 @@
 <template>
   <div>
     <h1>Items</h1>
+    <div class="columns">
+      <div class="column">
+        <ul>
+          <li v-for="(item,key) in items" v-bind:key="key">
+              <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>Most Used Items</h3>
+        <br>
+      </div>
+    </div>
 
-    <ul>
-        <li v-for="(item,key) in items" v-bind:key="key">
-            <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
-        </li>
-    </ul>
 
-    <br>
-    <br>
-    <h3>Most Used Items</h3>
-    <br>
   </div>
 </template>
 

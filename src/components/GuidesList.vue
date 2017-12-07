@@ -1,18 +1,19 @@
 <template>
   <div>
     <h1>Guides</h1>
-
-    <ul>
-        <li v-for="(guide,key) in guides" v-bind:key="key">
+    <div class="columns">
+      <div class="column">
+        <ul>
+          <li v-for="(guide,key) in guides" v-bind:key="key">
             <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
-        </li>
-    </ul>
-
-    <br>
-    <br>
-    <h3>Highest Rating Guides</h3>
-    <br>
-
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>Highest Rating Guides</h3>
+        <br>
+      </div>
+    </div>
 
   </div>
 </template>
