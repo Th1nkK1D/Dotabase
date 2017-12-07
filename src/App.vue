@@ -1,30 +1,29 @@
 <template>
 
 <div>
-<nav class="navbar is-transparent">
+<nav class="navbar is-light">
   <div class="navbar-brand">
     <a class="navbar-item">
-      <router-link to = "MainPage">
+      <router-link to = "/">
       <span class="icon">
         <img src="https://steamuserimages-a.akamaihd.net/ugc/559884055410135065/429CE099233669AB4C0322F6F211053A0B589094/">
       </span>
-      <h6>DOTABASE</h6>
       
       </router-link>
     </a>
-    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+    <!-- <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
       <span></span>
       <span></span>
       <span></span>
-    </div>
+    </div> -->
   </div>
 
   <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item">
-        <router-link to = "hero">
-          Heroes
-        </router-link>
+          <router-link to = "hero">
+            Heroes
+          </router-link>
       </a>
       <a class="navbar-item">
         <router-link to = "guide">
@@ -47,11 +46,9 @@
         </router-link>
       </a>
 
+    
     <router-link to = "updateguide">
       <button>UpdateGuide</button>
-    </router-link>
-    <router-link to = "updatehero">
-      <button>UpdateHero</button>
     </router-link>
     <router-link to = "updateitem">
       <button>UpdateItem</button>
@@ -66,7 +63,7 @@
 
 
 
-      <div class="navbar-item has-dropdown is-hoverable">
+      <!-- <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           Docs
         </a>
@@ -94,27 +91,18 @@
             Components
           </a>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="field is-grouped">
+          <a class="button is-info is-outlined" href="https://www.facebook.com/Th1nkK1D">
+            Contract Us
+          </a>
+          
           <p class="control">
-            <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
-              <span class="icon">
-                <i class="fa fa-twitter"></i>
-              </span>
-              <span>
-                Contract Us
-              </span>
-            </a>
-          </p>
-          <p class="control">
-            <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
-              <span class="icon">
-                <i class="fa fa-download"></i>
-              </span>
+            <a class="button is-success is-outlined">
               <span v-if="!user">
                 <router-link to = "login">Login</router-link>
                 </span>
