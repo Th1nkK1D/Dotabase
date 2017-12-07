@@ -118,7 +118,7 @@ type Guide {
   hero: String,
   dateCreated: String,
   talentTree: Number[],
-  learnOrder: LearnOrder[],
+  learnOrder: Any,
   purchaseCategory: PurchaseCategory[]
 }
 

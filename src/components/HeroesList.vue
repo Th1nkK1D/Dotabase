@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1>Heroes</h1>
+  <h1 class="title is-1">Heroes</h1>
   <router-link to="updatehero">
     <button class="button">+ Hero</button>
   </router-link>

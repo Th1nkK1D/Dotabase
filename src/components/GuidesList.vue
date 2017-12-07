@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Guides</h1>
+    <h1 class="title is-1">Guides</h1>
     <div class="columns">
       <div class="column">
         <ul>
