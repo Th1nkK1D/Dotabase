@@ -7,6 +7,11 @@
             <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
         </li>
     </ul>
+    <br>
+    <br>
+    <h3>Popular Heroes</h3>
+    <br>
+
 
   </div>
 </template>
