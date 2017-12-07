@@ -10,12 +10,12 @@
     <div class="column">
       <h1 class="title is-1">Login</h1>
         <br>
-        <b-field label="Username">
+        <b-field for="username" label="Username" v-bind:type="invalidUsername ? '' : 'is-danger'" v-bind:message="invalidUsername ? '' : 'Invalid username'">
         <b-input type="text" name="username" v-model="username" maxlength="30"></b-input>
         </b-field>
 
         <br>
-        <b-field label="Password">
+        <b-field for="password" label="Password" v-bind:type="wrongPassword ? '' : 'is-warning'" v-bind:message="wrongPassword ? '' : 'Wrong password'">
             <b-input type="password"
                 vname="password"
                 v-model="password"
@@ -59,22 +59,29 @@ export default {
     return {
       username: "",
       password: "",
-      member: ""
+      member: "",
+      invalidUsername: true,
+      wrongPassword: true
     }
   },
   methods : {
     login() {
       this.$bindAsObject('member',MemberDB.child(this.username),null,function(){
-        if (!this.member.password)
+        if (!this.member.password) {
           console.log("Can not find this user.")
+          this.invalidUsername = false
+        }
         else {
-          if (this.member.password != this.password)
+          if (this.member.password != this.password) {
             console.log("No matching password.")
-          else
+            this.wrongPassword = false
+          }
+          else {
             console.log("Complete!")
             this.$store.commit('login',this.member)
 
             this.$router.push('/')
+          }
         }
       })
     }
