@@ -1,40 +1,20 @@
 <template>
   <div>
-    <img src="../assets/dota2.png">
+
+
+    
+
+
+
+
+    
     <br>
     <h1>Welcome to Dotabase!</h1>
     <br>
-    <router-link to = "hero">
-      <button>Heroes List</button>
-    </router-link>
-    <router-link to = "guide">
-      <button>Guides List</button>
-    </router-link>
-    <router-link to = "item">
-      <button>Items List</button>
-    </router-link>
-    <router-link to = "player">
-      <button>Players List</button>
-    </router-link>
-    <router-link to = "team">
-      <button>Teams List</button>
-    </router-link>
-    <br>
-    <router-link to = "updateguide">
-      <button>UpdateGuide</button>
-    </router-link>
-    <router-link to = "updatehero">
-      <button>UpdateHero</button>
-    </router-link>
-    <router-link to = "updateitem">
-      <button>UpdateItem</button>
-    </router-link>
-    <router-link to = "updateplayer">
-      <button>UpdatePlayer</button>
-    </router-link>
-    <router-link to = "updateteam">
-      <button>UpdateTeam</button>
-    </router-link>
+    
+    
+
+    
   <br>
   <br>
   <h3>Most Active Member</h3>
@@ -76,5 +56,8 @@ export default {
 </script>
 
 <style scoped>
-
+  /* .icon {
+    height:100px;
+    width:100px ;
+  } */
 </style>
