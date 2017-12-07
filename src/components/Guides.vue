@@ -12,10 +12,11 @@
         </div>
         <br>
       </div>
+
       <div v-for="(skill,Sindex) in hero.skills" :key="skill.name">
           {{skill.name}}
-          <div v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="Sindex == learn.slot">
-            Yo
+          <div v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn">
+            {{learn.slot}}
           </div>         
       </div> 
       <br>
