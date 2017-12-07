@@ -13,12 +13,33 @@
         <br>
       </div>
 
-      <div v-for="(skill,Sindex) in hero.skills" :key="skill.name">
-          {{skill.name}}
-          <div v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn">
-            {{learn.slot}}
-          </div>         
-      </div> 
+      <table>
+        <tr v-for="(skill,Sindex) in hero.skills" :key="skill.name">
+          <div>{{skill.name}}</div><br>
+          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn">
+            <div v-if="Sindex == learn.slot">
+              1
+            </div>
+            <div v-if="Sindex != learn.slot">
+              0
+            </div>
+          </td>
+        </tr>
+        <tr>
+          talents
+          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn">
+            <div v-if="learn.isSkill">
+              0
+            </div>
+            <div v-if="!learn.isSkill">
+              1
+            </div>
+          </td>
+        </tr>
+      </table>
+
+
+
       <br>
       
       <h2>Talents</h2>
