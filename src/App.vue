@@ -21,27 +21,27 @@
   <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item">
-          <router-link to = "hero">
+          <router-link to = "/hero">
             Heroes
           </router-link>
       </a>
       <a class="navbar-item">
-        <router-link to = "guide">
+        <router-link to = "/guide">
           Guides
          </router-link>
       </a>
       <a class="navbar-item">
-        <router-link to = "item">
+        <router-link to = "/item">
           Items
         </router-link>
       </a>
       <a class="navbar-item">
-        <router-link to = "player">
+        <router-link to = "/player">
           Players
         </router-link>
       </a>
       <a class="navbar-item">
-        <router-link to = "team">
+        <router-link to = "/team">
           Teams
         </router-link>
       </a>
