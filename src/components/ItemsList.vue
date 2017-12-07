@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h1 class="title is-1">Items</h1>
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">Items</h1>
+      </div>
+      <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
+        <router-link to="/updateitem">
+          <button class="button">+ Item</button>
+        </router-link>
+      </div>
+    </div>
     <div class="columns">
       <div class="column">
         <ul>
