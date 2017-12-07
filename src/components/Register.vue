@@ -53,7 +53,7 @@ export default
 methods:{
    submit: function() {
         // Add/Update
-    this.member.admin = false  
+    this.Member.admin = false  
     MemberDB.child(this.Member.username).set(this.Member)
   }
         }

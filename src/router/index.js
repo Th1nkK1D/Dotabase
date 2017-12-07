@@ -18,6 +18,7 @@ import PlayersList from '@/components/PlayersList'
 import Player from '@/components/Player'
 import TeamsList from '@/components/TeamsList'
 import Team from '@/components/Team'
+import Guide from '@/components/Guides'
 
 Vue.use(Router)
 
@@ -116,6 +117,12 @@ export default new Router({
       path: '/team/:teamKey',
       name: 'Team',
       component: Team,
+      props: true
+    },
+    {
+      path: '/guide/:guideKey',
+      name: 'Guide',
+      component: Guide,
       props: true
     },
   ]

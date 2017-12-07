@@ -3,8 +3,12 @@
     <div>
         <h1>Login</h1>
         <br>
-        <label for="username">Username</label>
-        <input type="text" name="username" v-model="username">
+        <b-field label="Username">
+        <b-input type="text" name="username" v-model="username" maxlength="30"></b-input>
+        </b-field>
+
+        <!-- <label for="username">Username</label> -->
+        <!-- <input type="text" name="username" v-model="username"> -->
         <br>
         <label for="password">Password</label>
         <input type="password" name="password" v-model="password">
