@@ -140,7 +140,7 @@
 
 		<h2>Skills</h2>
 			<button v-on:click="addSkill()">+ skill</button>
-		<div v-for="(skill, si) in Hero,skills" v-bind:key="si">
+		<div v-for="(skill, si) in Hero.skills" v-bind:key="si">
 			<h4>Skill {{si+1}}</h4>
 			<label for="skillname">Skill Name : </label>
 			<input type="text" name="skillname" v-model="skill.name">
