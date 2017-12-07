@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="container">
+    user: {{user}} (<a @click="logout()">Logout</a>)
     <router-view/>
   </div>
 </template>
@@ -20,7 +21,17 @@ var config = {
 Firebase.initializeApp(config)
 
 export default {
-  name: 'app'
+  name: 'app',
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('logout')
+    }
+  }
 }
 </script>
 
