@@ -150,7 +150,8 @@ type Member {
   username: String,
   password: String,
   email: String,
-  heroAvatar: String
+  heroAvatar: String,
+  admin: Boolean
 }
 
 type Team {

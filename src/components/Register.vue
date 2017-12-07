@@ -31,9 +31,9 @@
 
 import Firebase from 'firebase'
 
-var MemberDB = Firebase.database().ref('/Members') 
+var MemberDB = Firebase.database().ref('/Members')
 
-export default 
+export default
 {
   firebase:  {
     nummember: MemberDB
@@ -53,8 +53,9 @@ export default
 methods:{
    submit: function() {
         // Add/Update
-        MemberDB.child(this.Member.username).set(this.Member) 
-                      }
+    this.member.admin = false  
+    MemberDB.child(this.Member.username).set(this.Member)
+  }
         }
 }
 </script>
