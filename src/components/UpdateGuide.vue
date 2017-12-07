@@ -93,7 +93,7 @@ export default {
       name: '',
       hero: '',
       purchaseCategory: [],
-      learnOrder: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      learnOrder: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       talentTree: [null,null,null,null],
     }
   },
