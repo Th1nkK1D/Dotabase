@@ -33,7 +33,8 @@
             </div>
           </div>
         </div>
-      </div><!-- End of PurchaseCategory -->
+      </div>
+      <!-- End of PurchaseCategory -->
 
       <h1 class="title">Learn Order</h1>
       <!-- Learn Order -->
@@ -42,14 +43,17 @@
         <div class="column is-12" v-for="(skill,s) in hero.skills" :key="s">
           <img :src="skill.icon" alt="">
           <b-radio v-for="(learn,l) in learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="learnOrder[l]" size="is-small"></b-radio>
-        </div><!-- End of Skills -->
+        </div>
+        <!-- End of Skills -->
 
         <!-- Talents -->
         <div class="column is-12">
           Talent
           <b-radio v-for="(learn,l) in learnOrder" :key="l" :native-value="{isSkill: false}" v-model="learnOrder[l]" size="is-small"></b-radio>
-        </div><!-- End of Talents -->
-      </div><!-- End of Learn Order -->
+        </div>
+        <!-- End of Talents -->
+      </div>
+      <!-- End of Learn Order -->
 
       <h1 class="title">Talent Tree</h1>
       <!-- Talent Tree -->
@@ -66,7 +70,8 @@
           </div>
         </div>
 
-      </div><!-- End of Talent Tree -->
+      </div>
+      <!-- End of Talent Tree -->
     </div>
 
     <button class="button is-primary" @click="save()">Save</button>
@@ -86,34 +91,64 @@ var guideDB = Firebase.database().ref('/Guides')
 export default {
   name: 'UpdateGuide',
 
-  data () {
+  data() {
     return {
       heroSearch: '',
       itemSearch: '',
       name: '',
       hero: '',
       purchaseCategory: [],
-      learnOrder: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      talentTree: [null,null,null,null],
+      learnOrder: [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      talentTree: [null, null, null, null]
     }
   },
 
-  firebase:  {
+  firebase: {
     heroes: heroDB,
     items: itemDB
   },
 
   computed: {
     filterdHeroList() {
-      return this.heroes.filter((hero) => {
-        return hero.name.toLowerCase().indexOf(this.heroSearch.toLowerCase()) >= 0
+      return this.heroes.filter(hero => {
+        return (
+          hero.name.toLowerCase().indexOf(this.heroSearch.toLowerCase()) >= 0
+        )
       })
     },
     filterdItemList() {
-      return this.items.filter((item) => {
-        return item.name.toLowerCase().indexOf(this.itemSearch.toLowerCase()) >= 0
+      return this.items.filter(item => {
+        return (
+          item.name.toLowerCase().indexOf(this.itemSearch.toLowerCase()) >= 0
+        )
       })
-    },
+    }
   },
 
   methods: {
@@ -123,8 +158,8 @@ export default {
         items: []
       })
     },
-    removeItem(c,i) {
-      this.purchaseCategory[c].items.splice(i,1)
+    removeItem(c, i) {
+      this.purchaseCategory[c].items.splice(i, 1)
     },
     save() {
       let guide = {}

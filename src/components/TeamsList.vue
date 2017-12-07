@@ -15,7 +15,7 @@
       <div class="column">
         <ul>
           <li v-for="(team,key) in teams" v-bind:key="key">
-              <router-link v-bind:to="'team/'+team['.key']">{{team.name}}</router-link>
+            <router-link v-bind:to="'team/'+team['.key']">{{team.name}}</router-link>
           </li>
         </ul>
       </div>
@@ -24,8 +24,6 @@
         <br>
       </div>
     </div>
-
-
 
   </div>
 </template>
@@ -37,11 +35,9 @@ var teamDB = Firebase.database().ref('/Teams')
 export default {
   name: 'TeamsList',
   data() {
-    return {
-
-    }
+    return {}
   },
-  firebase:  {
+  firebase: {
     teams: teamDB
   }
 }

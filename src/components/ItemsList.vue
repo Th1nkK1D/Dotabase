@@ -14,7 +14,7 @@
       <div class="column">
         <ul>
           <li v-for="(item,key) in items" v-bind:key="key">
-              <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
+            <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
           </li>
         </ul>
       </div>
@@ -23,7 +23,6 @@
         <br>
       </div>
     </div>
-
 
   </div>
 </template>
@@ -35,11 +34,9 @@ var itemDB = Firebase.database().ref('/Items')
 export default {
   name: 'ItemsList',
   data() {
-    return {
-
-    }
+    return {}
   },
-  firebase:  {
+  firebase: {
     items: itemDB
   }
 }

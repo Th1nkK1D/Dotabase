@@ -1,55 +1,51 @@
 <template>
   <div>
-      <h1>Guide</h1> <br>
-      <p>{{guide.name}}</p>
-      <img :src="hero.avatar" :alt="hero.name">
-      <p>{{guide.hero}}</p><br>
-      <div v-for="purchase in guide.purchaseCategory" :key="purchase.slot">
-        {{purchase.name}}
-        <div v-for="item in purchase.items" :key="item">
-          <img :src="items[item].icon" :alt="item">
-          {{item}}
-        </div>
-        <br>
+    <h1>Guide</h1> <br>
+    <p>{{guide.name}}</p>
+    <img :src="hero.avatar" :alt="hero.name">
+    <p>{{guide.hero}}</p><br>
+    <div v-for="purchase in guide.purchaseCategory" :key="purchase.slot">
+      {{purchase.name}}
+      <div v-for="item in purchase.items" :key="item">
+        <img :src="items[item].icon" :alt="item"> {{item}}
       </div>
-
-
-      <table>
-        <tr v-for="(skill,Sindex) in hero.skills" :key="skill.name">
-          <div>{{skill.name}}</div><br>
-          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined">
-            <div v-if="learn != 0 && Sindex == learn.slot">
-              1
-            </div>
-            <div v-if="learn != 0 && Sindex != learn.slot">
-              0
-            </div>
-            <div v-if="learn == 0">
-              0
-            </div>
-          </td>
-        </tr>
-        <tr>
-          talents
-          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined">
-            <div v-if="learn != 0 && learn.isSkill">
-              0
-            </div>
-            <div v-if="learn != 0 && !learn.isSkill">
-              1
-            </div>
-            <div v-if="learn == 0">
-              0
-            </div>
-          </td>
-        </tr>
-      </table>
-
-
-
       <br>
-      
-      <h2>Talents</h2>
+    </div>
+
+    <table>
+      <tr v-for="(skill,Sindex) in hero.skills" :key="skill.name">
+        <div>{{skill.name}}</div><br>
+        <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined">
+          <div v-if="learn != 0 && Sindex == learn.slot">
+            1
+          </div>
+          <div v-if="learn != 0 && Sindex != learn.slot">
+            0
+          </div>
+          <div v-if="learn == 0">
+            0
+          </div>
+        </td>
+      </tr>
+      <tr>
+        talents
+        <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined">
+          <div v-if="learn != 0 && learn.isSkill">
+            0
+          </div>
+          <div v-if="learn != 0 && !learn.isSkill">
+            1
+          </div>
+          <div v-if="learn == 0">
+            0
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <br>
+
+    <h2>Talents</h2>
     <table>
       <tr v-for="(talentEachLvl,index) in sortedTalent" :key="talentEachLvl[0]">
         <td>{{talentEachLvl[0]}}</td>
@@ -59,12 +55,10 @@
       </tr>
     </table>
 
-
-
-      <div v-for="talent in guide.talentTree" :key="talent">
-        {{talent}}
-      </div>  
-      <br>  
+    <div v-for="talent in guide.talentTree" :key="talent">
+      {{talent}}
+    </div>
+    <br>
   </div>
 </template>
 
@@ -80,34 +74,32 @@ export default {
   props: ['guideKey'],
   mounted() {
     // Firebase bind
-    this.$bindAsObject('guide',guideDB.child(this.guideKey),null,function() {
-      this.$bindAsObject('hero',heroDB.child(this.guide.hero))
-    },
-    
-    )
+    this.$bindAsObject('guide', guideDB.child(this.guideKey), null, function() {
+      this.$bindAsObject('hero', heroDB.child(this.guide.hero))
+    })
   },
-  data () {
+  data() {
     return {
       guide: {},
       hero: {}
     }
   },
-  firebase:  {
+  firebase: {
     items: {
       source: itemDB,
       // optionally bind as an object
-      asObject: true,
+      asObject: true
     }
   },
   computed: {
     sortedTalent() {
-      if(this.hero !== undefined && this.hero.talents !== undefined) {
+      if (this.hero !== undefined && this.hero.talents !== undefined) {
         return this.hero.talents.reverse()
       } else {
         return null
       }
     }
-  },
+  }
 }
 </script>
 

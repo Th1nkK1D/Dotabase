@@ -129,6 +129,6 @@ export default new Router({
       name: 'Guide',
       component: Guide,
       props: true
-    },
+    }
   ]
 })

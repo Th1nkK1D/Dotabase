@@ -4,7 +4,6 @@
     <p>Team Name: {{team.name}}</p>
     <p>Region: {{team.region}}</p>
 
-    
   </div>
 </template>
 
@@ -17,14 +16,13 @@ export default {
   props: ['teamKey'],
   mounted() {
     // Firebase bind
-    this.$bindAsObject('team',teamDB.child(this.teamKey))
+    this.$bindAsObject('team', teamDB.child(this.teamKey))
   },
-  data () {
+  data() {
     return {
       team: {}
     }
   }
-
 }
 </script>
 
