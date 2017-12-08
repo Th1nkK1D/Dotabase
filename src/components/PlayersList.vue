@@ -14,16 +14,22 @@
     <table class="table is-fullwidth is-striped">
       <thead>
         <tr>
-          <th>Rank</th>
+          <th>#</th>
           <th>Player Name</th>
-          <th>Solo MMR</th>
-          <th>Party MMR</th>
-          <th>Match Played</th>
+          <th>
+            <a @click="sortKey = 'mmrSolo'">Solo MMR</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'mmrParty'">Party MMR</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'matchPlayed'">Match Played</a>
+          </th>
         </tr>
       </thead>
       <tbody>
 
-        <tr v-for="(player,key) in players" v-bind:key="key">
+        <tr v-for="(player,key) in sortedPlayers" v-bind:key="key">
           <td>
             {{key+1}}
           </td>
@@ -55,10 +61,22 @@ var playerDB = Firebase.database().ref('/Players')
 export default {
   name: 'PlayersList',
   data() {
-    return {}
+    return {
+      sortKey: null
+    }
   },
   firebase: {
     players: playerDB
+  },
+  computed: {
+    sortedPlayers() {
+      if (!this.sortKey) {
+        return this.players
+      } else {
+        console.log(this.sortKey)
+        return this.players.sort((a, b) => b[this.sortKey] - a[this.sortKey])
+      }
+    }
   }
 }
 </script>
