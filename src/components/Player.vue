@@ -12,7 +12,6 @@
       </div>
     </div>
 
-    <h1>{{player.name}}</h1>
     <img :src="player.avatar" :alt="player.name">
     <p>Team Name: {{player.teamName}}</p>
     <p>Role: {{player.role}}</p>
