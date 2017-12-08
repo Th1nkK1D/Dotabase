@@ -220,7 +220,7 @@ export default {
           }
         }
 
-        return rank.sort((a, b) => a.count - b.count).slice(0, 5)
+        return rank.sort((a, b) => b.count - a.count).slice(0, 5)
       } else {
         return null
       }
