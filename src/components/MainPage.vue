@@ -110,8 +110,41 @@
         <section class="hero is-danger is-bold">
           <div class="hero-body">
             <div class="container">
+
               <h3 class="title is-3">Heroes With Highest Guide Number</h3>
-              {{guideRank}}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Hero Name</th>
+                    <th>Guide Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr li v-for="(hero,key) in heroes" v-bind:key="key">
+                    <td>
+                      <!-- <ul>
+                        <li v-for="(hero,key) in heroes" v-bind:key="key"> -->
+                      <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+                      <!-- </li>
+                      </ul> -->
+                    </td>
+                    <td>
+                      num
+                    </td>
+
+                  </tr>
+                </tbody>
+
+              </table>
+
+              <ul>
+                <li v-for="(hero,key) in heroes" v-bind:key="key">
+                  <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+                  Guides :
+                </li>
+              </ul>
+
+              <br>
             </div>
           </div>
         </section>
