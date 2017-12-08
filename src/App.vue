@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <nav class="navbar is-light">
+    <nav class="navbar is-dark is-bold">
       <div class="navbar-brand">
         <a class="navbar-item">
           <router-link to="/">
