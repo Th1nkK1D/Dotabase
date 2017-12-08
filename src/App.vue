@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <nav class="navbar is-light">
+    <nav class="navbar is-dark is-bold">
       <div class="navbar-brand">
         <a class="navbar-item">
           <router-link to="/">
@@ -90,8 +90,8 @@
                     <router-link to="login">Login</router-link>
                   </span>
                   <span v-else>
-                    Hi, {{user.username}}
-                    <a @click="logout()">(Logout)</a>
+
+                    <a @click="logout()">Hi, {{user.username}} (Logout)</a>
                   </span>
                 </a>
               </p>

@@ -1,6 +1,17 @@
 <template>
   <div>
-    <h1 class="title is-1">Guides</h1>
+
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">Guides</h1>
+      </div>
+      <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
+        <router-link to="/updateguide">
+          <button class="button">+ Guide</button>
+        </router-link>
+      </div>
+    </div>
+
     <div class="columns">
       <div class="column">
         <ul>
