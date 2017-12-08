@@ -70,8 +70,8 @@ type Hero {
   moveSpeed: Number,
   attackRange: Number,
   attackSpeed: Number,
-  skills: Skill[],
-  talents: TalentOnLevel[]
+  skills: Any[],
+  talents: Any[]
 }
 
 type Skill {

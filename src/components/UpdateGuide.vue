@@ -182,9 +182,6 @@ export default {
       }
 
       if (this.guideKey) {
-        // Update guide
-        delete this.guide['.key']
-
         guideDB.child(this.guideKey).set(this.guide)
       } else {
         // New guide
@@ -193,12 +190,24 @@ export default {
     }
   },
   mounted() {
-    // Check admin permission
-    if (!this.$store.state.user || !this.$store.state.user.admin) {
+    // Check permission
+    if (!this.$store.state.user) {
       this.$router.push('/')
     } else {
       if (this.guideKey) {
-        this.$bindAsObject('guide', guideDB.child(this.guideKey))
+        this.$bindAsObject(
+          'guide',
+          guideDB.child(this.guideKey),
+          null,
+          function() {
+            // CheckOwner
+            if (this.$store.state.user.username != this.guide.memberID) {
+              this.$router.push('/guide/' + this.guideKey)
+            }
+
+            delete this.guide['.key']
+          }
+        )
       }
     }
   }

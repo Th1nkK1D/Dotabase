@@ -3,38 +3,48 @@
 		<h1 class="title is-1">Update Hero</h1>
 <div class="columns">
   <div class="column">
+		<div class="columns">
+		  <div class="column">
 		<b-field label="Hero Name">
       <b-input type="text" name="heroname" v-model="Hero.name" ></b-input>
     </b-field>
+	</div>
     <!-- <label for="heroname">Hero Name</label>
 		<input type="text" name="heroname" v-model="Hero.name"> -->
+		<div class="column">
+		<b-field label="Attribute">
+      <b-input type="text" name="heroattribute" v-model="Hero.attribute"></b-input>
+    </b-field>
+	</div>
+</div>
+		<!-- <label for="heroattribute">Attribute</label>
+		<input type="text" name="heroattribute" v-model="Hero.attribute"> -->
 		<b-field label="Avatar">
       <b-input type="text" name="heroavatar" v-model="Hero.avatar"></b-input>
     </b-field>
 		<!-- <label for="heroavatar">Avatar</label>
 		<input type="text" name="heroavatar" v-model="Hero.avatar"> -->
-		<b-field label="Attribute">
-      <b-input type="text" name="heroattribute" v-model="Hero.attribute"></b-input>
-    </b-field>
-		<!-- <label for="heroattribute">Attribute</label>
-		<input type="text" name="heroattribute" v-model="Hero.attribute"> -->
 		<b-field label="Lore">
-      <b-input type="text" name="lore" v-model="Hero.lore"></b-input>
+      <b-input maxlength="2000" type="textarea" name="lore" v-model="Hero.lore"></b-input>
     </b-field>
 		<!-- <label for="lore">Lore</label>
 		<input type="text" name="lore" v-model="Hero.lore"> -->
-		<button class="button is-primary"v-on:click="addRole()">+ role</button><br>
-    	<div v-for="(roles, ri) in Hero.roles" v-bind:key="ri">
-			<b-field v-bind:label="'Roles '+(ri+1)">
-				<b-input type="text"
-						name="roles"
-						v-model="Hero.roles[ri]">
-				</b-input>
-			</b-field>
-    	<!-- <label for="roles">Roles {{ri+1}}</label>
-     	<input type="text" name="roles" v-model="Hero.roles[ri]"> -->
-    	<button class="button is-black"v-on:click="removeRole(ri)">Remove</button>
-    	</div>
+		<button class="button is-primary is-focused"v-on:click="addRole()">+ role</button><br>
+		<div v-for="(roles, ri) in Hero.roles" v-bind:key="ri">
+			<div class="columns">
+				<div class="column">
+					<b-field v-bind:label="'Roles '+(ri+1)">
+						<b-input type="text"
+							name="roles"
+							v-model="Hero.roles[ri]">
+						</b-input>
+					</b-field>
+				</div>
+				<div class="column is-narrow">
+    			<button class="button is-primary is-outlined is-focused is-small"v-on:click="removeRole(ri)">Remove</button>
+				</div>
+			</div>
+		</div>
 			<br>
 	<h2 class="title is-5">Hero Stats</h2>
 	<div class="columns">
@@ -44,94 +54,94 @@
 		</b-field>
 		<!-- <label for="str_start">STR : </label>
 		<input type="number" name="str_start" v-model.number="Hero.strBase"> -->
-		<b-field label="STR per level : ">
-			<b-input type="number" name="str_per_lvl" v-model.number="Hero.strGain"></b-input>
-		</b-field>
-		<!-- <label for="str_per_lvl">STR per level : </label>
+						<b-field label="STR per level : ">
+							<b-input type="number" name="str_per_lvl" v-model.number="Hero.strGain"></b-input>
+						</b-field>
+						<!-- <label for="str_per_lvl">STR per level : </label>
 		<input type="number" name="str_per_lvl" v-model.number="Hero.strGain"> -->
-		<b-field label="AGI : ">
-			<b-input type="number" name="agi_start" v-model.number="Hero.agiBase"></b-input>
-		</b-field>
-		<!-- <label for="agi_start">AGI : </label>
+						<b-field label="AGI : ">
+							<b-input type="number" name="agi_start" v-model.number="Hero.agiBase"></b-input>
+						</b-field>
+						<!-- <label for="agi_start">AGI : </label>
 		<input type="number" name="agi_start" v-model.number="Hero.agiBase"> -->
-		<b-field label="AGI per level : ">
-			<b-input type="number" name="agi_per_lvl" v-model.number="Hero.agiGain"></b-input>
-		</b-field>
-		<!-- <label for="agi_per_lvl">AGI per level : </label>
+						<b-field label="AGI per level : ">
+							<b-input type="number" name="agi_per_lvl" v-model.number="Hero.agiGain"></b-input>
+						</b-field>
+						<!-- <label for="agi_per_lvl">AGI per level : </label>
 		<input type="number" name="agi_per_lvl" v-model.number="Hero.agiGain"> -->
-		<b-field label="INT : ">
-			<b-input type="number" name="int_start" v-model.number="Hero.intBase"></b-input>
-		</b-field>
-		<!-- <label for="int_start">INT : </label>
+						<b-field label="INT : ">
+							<b-input type="number" name="int_start" v-model.number="Hero.intBase"></b-input>
+						</b-field>
+						<!-- <label for="int_start">INT : </label>
 		<input type="number" name="int_start" v-model.number="Hero.intBase"> -->
-		<b-field label="INT per level : ">
-			<b-input type="number" name="int_per_lvl" v-model.number="Hero.intGain"></b-input>
-		</b-field>
-		<!-- <label for="int_per_lvl">INT per level : </label>
+						<b-field label="INT per level : ">
+							<b-input type="number" name="int_per_lvl" v-model.number="Hero.intGain"></b-input>
+						</b-field>
+						<!-- <label for="int_per_lvl">INT per level : </label>
 		<input type="number" name="int_per_lvl" v-model.number="Hero.intGain"> -->
-		<b-field label="Health : ">
-			<b-input type="number" name="health" v-model.number="Hero.hp"></b-input>
-		</b-field>
-		<!-- <label for="health">Health : </label>
+						<b-field label="Health : ">
+							<b-input type="number" name="health" v-model.number="Hero.hp"></b-input>
+						</b-field>
+						<!-- <label for="health">Health : </label>
 		<input type="number" name="health" v-model.number="Hero.hp"> -->
-		<b-field label="Mana : ">
-			<b-input type="number" name="mana" v-model.number="Hero.mana"></b-input>
-		</b-field>
-		<!-- <label for="mana">Mana : </label>
+						<b-field label="Mana : ">
+							<b-input type="number" name="mana" v-model.number="Hero.mana"></b-input>
+						</b-field>
+						<!-- <label for="mana">Mana : </label>
 		<input type="number" name="mana" v-model.number="Hero.mana"> -->
-		<br>
-	</div>
-	<div class="column">
-		<b-field label="Health Regeneration : ">
-			<b-input type="number" name="healthregen" v-model.number="Hero.hpRegen"></b-input>
-		</b-field>
-		<!-- <label for="healthregen">Health Regeneration : </label>
+						<br>
+					</div>
+					<div class="column">
+						<b-field label="Health Regeneration : ">
+							<b-input type="number" name="healthregen" v-model.number="Hero.hpRegen"></b-input>
+						</b-field>
+						<!-- <label for="healthregen">Health Regeneration : </label>
 		<input type="number" name="healthregen" v-model.number="Hero.hpRegen"> -->
-		<b-field label="Mana Regeneration : ">
-			<b-input type="number" name="manaregen" v-model.number="Hero.manaRegen"></b-input>
-		</b-field>
-		<!-- <label for="manaregen">Mana Regeneration : </label>
+						<b-field label="Mana Regeneration : ">
+							<b-input type="number" name="manaregen" v-model.number="Hero.manaRegen"></b-input>
+						</b-field>
+						<!-- <label for="manaregen">Mana Regeneration : </label>
 		<input type="number" name="manaregen" v-model.number="Hero.manaRegen"> -->
-		<div class="columns">
-			<div class="column">
-		<b-field label="Damage (Min): ">
-			<b-input type="number" name="damage" v-model.number="Hero.damageMin"></b-input>
-		</b-field>
-	</div>
-	<div class="column">
-		<!-- <label for="damagemin">Damage : </label>
+						<div class="columns">
+							<div class="column">
+								<b-field label="Damage (Min): ">
+									<b-input type="number" name="damage" v-model.number="Hero.damageMin"></b-input>
+								</b-field>
+							</div>
+							<div class="column">
+								<!-- <label for="damagemin">Damage : </label>
 		<input type="number" name="damage" v-model.number="Hero.damageMin"> -->
-		<b-field label="Damage (Max): ">
-			<b-input type="number" name="damage" v-model.number="Hero.damageMax"></b-input>
-		</b-field>
-	</div>
-	</div>
-		<!-- <label for="damagemax"> - </label>
+								<b-field label="Damage (Max): ">
+									<b-input type="number" name="damage" v-model.number="Hero.damageMax"></b-input>
+								</b-field>
+							</div>
+						</div>
+						<!-- <label for="damagemax"> - </label>
 		<input type="number" name="damage" v-model.number="Hero.damageMax"> -->
-		<b-field label="Armor : ">
-			<b-input type="number" name="armor" v-model.number="Hero.armor"></b-input>
-		</b-field>
-		<!-- <label for="armor">Armor : </label>
+						<b-field label="Armor : ">
+							<b-input type="number" name="armor" v-model.number="Hero.armor"></b-input>
+						</b-field>
+						<!-- <label for="armor">Armor : </label>
 		<input type="number" name="armor" v-model.number="Hero.armor"> -->
-		<b-field label="Magic Resistance : ">
-			<b-input type="number" name="magicresistance" v-model.number="Hero.magicResistance"></b-input>
-		</b-field>
-		<!-- <label for="magicresistance">Magic Resistance : </label>
+						<b-field label="Magic Resistance : ">
+							<b-input type="number" name="magicresistance" v-model.number="Hero.magicResistance"></b-input>
+						</b-field>
+						<!-- <label for="magicresistance">Magic Resistance : </label>
 		<input type="number" name="magicresistance" v-model.number="Hero.magicResistance"> -->
-		<b-field label="Movement Speed : ">
-			<b-input type="number" name="movespeed" v-model.number="Hero.moveSpeed"></b-input>
-		</b-field>
-		<!-- <label for="movespeed">Movement Speed : </label>
+						<b-field label="Movement Speed : ">
+							<b-input type="number" name="movespeed" v-model.number="Hero.moveSpeed"></b-input>
+						</b-field>
+						<!-- <label for="movespeed">Movement Speed : </label>
 		<input type="number" name="movespeed" v-model.number="Hero.moveSpeed"> -->
-		<b-field label="Attack Range : ">
-			<b-input type="number" name="attackrange" v-model.number="Hero.attackRange"></b-input>
-		</b-field>
-		<!-- <label for="attackrange">Attack Range : </label>
+						<b-field label="Attack Range : ">
+							<b-input type="number" name="attackrange" v-model.number="Hero.attackRange"></b-input>
+						</b-field>
+						<!-- <label for="attackrange">Attack Range : </label>
 		<input type="number" name="attackrange" v-model.number="Hero.attackRange"> -->
-		<b-field label="Attack Speed : ">
-			<b-input type="number" name="attackspeed" v-model.number="Hero.attackSpeed"></b-input>
-		</b-field>
-		<!-- <label for="attackspeed">Attack Speed : </label>
+						<b-field label="Attack Speed : ">
+							<b-input type="number" name="attackspeed" v-model.number="Hero.attackSpeed"></b-input>
+						</b-field>
+						<!-- <label for="attackspeed">Attack Speed : </label>
 		<input type="number" name="attackspeed" v-model.number="Hero.attackSpeed"> -->
 		<br>
 	</div>
@@ -159,7 +169,7 @@
   </div>
   <div class="column">
     <h2 class="title is-5">Skills</h2>
-			<button class="button is-primary"v-on:click="addSkill()">+ skill</button>
+			<button class="button is-primary is-focused"v-on:click="addSkill()">+ skill</button>
 		<div v-for="(skill, si) in Hero.skills" v-bind:key="si">
 			<br>
 			<h4 class="title is-6">Skill {{si+1}}</h4>
@@ -168,35 +178,36 @@
 			</b-field>
 			<!-- <label for="skillname">Skill Name : </label>
 			<input type="text" name="skillname" v-model="skill.name"> -->
-			<div class="columns">
-				<div class="column">
-			<b-field label="Icon : ">
-				<b-input type="text" name="skillicon" v-model="skill.icon"></b-input>
-			</b-field>
-		</div>
-		<div class="column">
-			<!-- <label for="skillicon">Icon : </label>
+					<div class="columns">
+						<div class="column">
+							<b-field label="Icon : ">
+								<b-input type="text" name="skillicon" v-model="skill.icon"></b-input>
+							</b-field>
+						</div>
+						<div class="column">
+							<!-- <label for="skillicon">Icon : </label>
 			<input type="text" name="skillicon" v-model="skill.icon"> -->
-			<b-field label="Max Upgrade : ">
-				<b-input type="number" name="maxupgrade" v-model.number="skill.maxUpgrade"></b-input>
-			</b-field>
-			<!-- <label for="maxupgrade">Max Upgrade : </label>
+							<b-field label="Max Upgrade : ">
+								<b-input type="number" name="maxupgrade" v-model.number="skill.maxUpgrade"></b-input>
+							</b-field>
+							<!-- <label for="maxupgrade">Max Upgrade : </label>
 			<input type="number" name="maxupgrade" v-model.number="skill.maxUpgrade"> -->
-		</div>
-		</div>
-		<b-field label="Description : ">
-		<b-input maxlength="1000" type="textarea" v-model="skill.description"></b-input>
-		</b-field>
+						</div>
+					</div>
+					<b-field label="Description : ">
+						<b-input maxlength="1000" type="textarea" v-model="skill.description"></b-input>
+					</b-field>
 
-			<!-- <label for="skilldescription">Description : </label>
+					<!-- <label for="skilldescription">Description : </label>
 			<input type="text" name="skilldescription" v-model="skill.description"> -->
+					<br>
+
+					<br>
+
 			<br>
 
-
-			<br>
-
-			<button class="button is-primary"v-on:click="addSkillAttribute(si)">+ attribute</button>
-          	<div v-for="(attr, ati) in skill.attributes" v-bind:key="ati">
+			<button class="button is-primary is-focused "v-on:click="addSkillAttribute(si)">+ attribute</button>
+          	<div v-for="(attr, ati) in skill.attributes" v-bind:key="ati"><br>
 							<b-field v-bind:label="'Attribute : '+(ati+1)"></b-field>
 				<!-- Attribute {{ati+1}} : -->
 				<div class="columns">
@@ -212,14 +223,17 @@
 				<b-input type="text" name="attvalue" v-model="attr.value"></b-input>
 				</b-field>
 			</div>
-		</div>
+
 				<!-- <label for="attvalue">Value</label>
 				<input type="text" name="attvalue" v-model="attr.value"> -->
-				<button class="button is-black"v-on:click="removeSkillAttribute(ati,si)">Remove</button>
+				<div class="column is-narrow">
+				<button class="button is-black is-outlined is-focused is-small"v-on:click="removeSkillAttribute(ati,si)">Remove</button>
 				<br>
+				</div>
+				</div>
           	</div>
 		<br>
-		<button class="button is-black"v-on:click="removeSkill(si)">RemoveSkill</button>
+		<button class="button is-primary is-outlined is-focused"v-on:click="removeSkill(si)">RemoveSkill</button>
 		<br>
 		<br>
 		<br>
@@ -227,7 +241,7 @@
 		<br>
 		<br>
 		<br>
-		<button class="button is-primary"v-on:click="submit()">Submit</button>
+		<button class="button is-primary is-focused is-medium"v-on:click="submit()">Submit</button>
 	</div>
 </div>
 
@@ -312,7 +326,14 @@ export default {
       this.$router.push('/')
     } else {
       if (this.heroKey) {
-        this.$bindAsObject('Hero', herodb.child(this.heroKey))
+        this.$bindAsObject(
+          'Hero',
+          herodb.child(this.heroKey),
+          null,
+          function() {
+            delete this.Hero['.key']
+          }
+        )
       }
     }
   }

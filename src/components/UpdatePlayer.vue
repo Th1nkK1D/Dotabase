@@ -117,7 +117,14 @@ export default {
       this.$router.push('/')
     } else {
       if (this.playerKey) {
-        this.$bindAsObject('Player', playerdb.child(this.playerKey))
+        this.$bindAsObject(
+          'Player',
+          playerdb.child(this.playerKey),
+          null,
+          function() {
+            delete this.Player['.key']
+          }
+        )
       }
     }
   }

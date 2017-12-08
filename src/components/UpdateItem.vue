@@ -196,7 +196,14 @@ export default {
       this.$router.push('/')
     } else {
       if (this.itemKey) {
-        this.$bindAsObject('Item', itemdb.child(this.itemKey))
+        this.$bindAsObject(
+          'Item',
+          itemdb.child(this.itemKey),
+          null,
+          function() {
+            delete this.Item['.key']
+          }
+        )
       }
     }
   }
