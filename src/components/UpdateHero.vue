@@ -137,12 +137,15 @@
 
 				<!-- Tree -->
 				<h3 class="title is-5">Talent Tree</h3>
-				<table class="table" v-if="Hero.talents">
+				<div class="columns">
+					<div class="column"></div>
+					<div class="column is-narrow">
+						<table class="table" v-if="Hero.talents">
 					<thead>
 						<tr>
-							<th>Talent 1</th>
-							<th>Level</th>
-							<th>Talent 2</th>
+							<th class="subtitle">Talent 1</th>
+							<th class="subtitle">Level</th>
+							<th class="subtitle">Talent 2</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -160,10 +163,14 @@
 					</tbody>
 
 				</table>
+			</div>
+			<div class="column">
+			</div>
+			</div>
 
-				<!-- 
+				<!--
 				<div >
-					
+
 					<input type="text" name="talent3_0" v-model="Hero.talents[3][0]"> 25
 					<input type="text" name="talent3_1" v-model="Hero.talents[3][1]">
 					<br>
