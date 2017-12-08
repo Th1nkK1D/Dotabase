@@ -1,78 +1,106 @@
 <template>
   <div>
-    <h1 class="title is-1">Create Guide</h1>
-    <b-field>
-      <b-input type="text" placeholder="Guidename" v-model="guide.name"></b-input>
-    </b-field>
+    <section class="section">
+      <h1 class="title is-1">Create Guide</h1>
 
-    <b-field label="Hero" v-if="heroes">
-      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.hero = option ? heroes[heroes.indexOf(option)]['.key'] : null"></b-autocomplete>
-    </b-field>
+      <b-field label="Name">
+        <b-input type="text" placeholder="Guidename" v-model="guide.name"></b-input>
+      </b-field>
 
-    <div v-if="selectedHero">
+      <b-field label="Hero" v-if="heroes">
+        <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.hero = option ? heroes[heroes.indexOf(option)]['.key'] : null"></b-autocomplete>
+      </b-field>
+    </section>
+
+    <section class="section" v-if="selectedHero">
 
       <h1 class="title">Purchase Category</h1>
       <!-- PurchaseCategory -->
-      <div>
-        <button class="button" @click="addPC()">+ PurchaseCategory</button>
+      <button class="button" @click="addPC()">+ Purchase Category</button>
 
-        <div class="columns is-multiline">
-          <div class="column" v-for="(cat,c) in guide.purchaseCategory" :key="c">
-            <div class="box">
-              <b-field>
-                <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
-              </b-field>
-              <div class="columns is-multiline">
-                <div class="column">
-                  <img :src="items.find(it => it['.key'] == item).icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
-                </div>
+      <div>
+        <div v-for="(cat,c) in guide.purchaseCategory" :key="c">
+          <div class="box">
+            <b-field>
+              <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
+            </b-field>
+            <div class="columns is-multiline">
+              <div class="column">
+                <img :src="items.find(it => it['.key'] == item).icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
               </div>
-              <b-field>
-                <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(items[items.indexOf(option)]['.key']) : null"></b-autocomplete>
-              </b-field>
             </div>
+            <b-field>
+              <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(items[items.indexOf(option)]['.key']) : null"></b-autocomplete>
+            </b-field>
           </div>
         </div>
       </div>
-      <!-- End of PurchaseCategory -->
+    </section>
+    <!-- End of PurchaseCategory -->
+
+    <section class="section" v-if="selectedHero">
       <h1 class="title">Learn Order</h1>
       <!-- Learn Order -->
-      <div class="columns is-multiline">
-        <!-- Skills -->
-        <div class="column is-12" v-for="(skill,s) in selectedHero.skills" :key="s">
-          <img :src="skill.icon" alt="">
-          <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
-        </div>
-        <!-- End of Skills -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th v-for="lvl in 25" :key="lvl">{{lvl}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Skills -->
+          <tr v-for="(skill,s) in selectedHero.skills" :key="s">
+            <td><img :src="skill.icon" width="50px" height="auto"></td>
+            <td v-for="(learn,l) in guide.learnOrder" :key="l">
+              <b-radio :native-value="{isSkill: true, slot: s}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
+            </td>
+          </tr>
+          <!-- End of Skills -->
 
-        <!-- Talents -->
-        <div class="column is-12">
-          Talent
-          <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: false}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
-        </div>
-        <!-- End of Talents -->
-      </div>
+          <!-- Talents -->
+          <tr>
+            <td><img src="../assets/talent.png" width="50px" height="auto"></td>
+            <td v-for="(learn,l) in guide.learnOrder" :key="l">
+              <b-radio :native-value="{isSkill: false}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
+            </td>
+          </tr>
+          <!-- End of Talents -->
+        </tbody>
+      </table>
       <!-- End of Learn Order -->
+    </section>
 
+    <section class="section" v-if="selectedHero">
       <h1 class="title">Talent Tree</h1>
       <!-- Talent Tree -->
-      <div>
-        <div class="columns" v-for="tl in 4" :key="tl">
-          <div class="column">
-            <b-radio v-model="guide.talentTree[4-tl]" :native-value="0"></b-radio>
-            {{selectedHero.talents[4-tl][0]}}
-          </div>
-          <div class="column is-narrow">{{25 - tl*5}}</div>
-          <div class="column">
-            <b-radio v-model="guide.talentTree[4-tl]" :native-value="1"></b-radio>
-            {{selectedHero.talents[4-tl][1]}}
-          </div>
-        </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Talent 1</th>
+            <th>Level</th>
+            <th>Talent 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="tl in 4" :key="tl">
+            <td>
+              <b-radio v-model="guide.talentTree[4-tl]" :native-value="0"></b-radio>
+              {{selectedHero.talents[4-tl][0]}}
+            </td>
+            <td>
+              <strong>{{25 - tl*5}}</strong>
+            </td>
+            <td>
+              <b-radio v-model="guide.talentTree[4-tl]" :native-value="1"></b-radio>
+              {{selectedHero.talents[4-tl][1]}}
+            </td>
+          </tr>
+        </tbody>
 
-      </div>
+      </table>
       <!-- End of Talent Tree -->
-
-    </div>
+    </section>
 
     <button class="button is-primary" @click="save()">Save</button>
 
@@ -215,5 +243,7 @@ export default {
 </script>
 
 <style scoped>
-
+.box {
+  margin: 10px;
+}
 </style>
