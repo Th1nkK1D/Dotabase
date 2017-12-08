@@ -29,7 +29,7 @@
     </section>
     <br>
 
-    <div class="columns">
+    <!-- <div class="columns">
       <div class="column is-2">
         <router-link to="/hero">
           <section class="hero is-dark is-bold">
@@ -102,7 +102,7 @@
         </router-link>
       </div>
 
-    </div>
+    </div> -->
 
     <div class="columns">
 
