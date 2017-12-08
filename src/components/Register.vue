@@ -36,12 +36,13 @@
         <!-- <input type="text" name="heroAvatar" v-model="Member.heroAvatar"> -->
         <br>
         <br>
-        <button class="button is-black" v-on:click="submit()">submit</button>
+        <button class="button is-primary is-outlined is-focused" v-on:click="submit()">submit</button>
         <br>
         <br> Already have an account?
         <br>
         <router-link to="login">
-          <button class="button is-black">To Login Page</button>
+          <br>
+          <button class="button is-black is-outlined is-focused is-samll">To Login Page</button>
         </router-link>
       </div>
       <div class="column">
