@@ -10,9 +10,11 @@
 
     <h2>Hero Ranks</h2>
     <ul>
-      <li v-for="heroRanks in player.heroRanks" :key="heroRanks.name">{{heroRanks.heroName}}: <i>{{heroRanks.score}}</i></li>
+      <li v-for="heroRanks in player.heroRanks" :key="heroRanks.name">{{heroRanks.heroName}}:
+        <i>{{heroRanks.score}}</i>
+      </li>
     </ul>
-    
+
   </div>
 </template>
 
@@ -25,14 +27,13 @@ export default {
   props: ['playerKey'],
   mounted() {
     // Firebase bind
-    this.$bindAsObject('player',playerDB.child(this.playerKey))
+    this.$bindAsObject('player', playerDB.child(this.playerKey))
   },
-  data () {
+  data() {
     return {
       player: {}
     }
   }
-
 }
 </script>
 

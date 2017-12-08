@@ -15,43 +15,40 @@
       <div class="column">
         <ul>
           <li v-for="(player,key) in players" v-bind:key="key">
-              <router-link v-bind:to="'player/'+player['.key']">{{player.name}}</router-link>
+            <router-link v-bind:to="'player/'+player['.key']">{{player.name}}</router-link>
           </li>
         </ul>
       </div>
       <div class="column">
         <h3>Player With Highest Solo MMR</h3>
-      <br>
+        <br>
         <ul>
           <li v-for="(player,key) in players" v-bind:key="key">
-                <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-                Solo MMR: {{player.mmrSolo}}
+            <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
+            Solo MMR: {{player.mmrSolo}}
           </li>
         </ul>
-      <br>
-      <h3>Player With Highest Party MMR</h3>
-      <br>
+        <br>
+        <h3>Player With Highest Party MMR</h3>
+        <br>
         <ul>
           <li v-for="(player,key) in players" v-bind:key="key">
-                <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-                Party MMR: {{player.mmrParty}}
+            <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
+            Party MMR: {{player.mmrParty}}
           </li>
         </ul>
-      <br>
-      <h3>Player With Highest Match Played</h3>
-      <br>
+        <br>
+        <h3>Player With Highest Match Played</h3>
+        <br>
         <ul>
           <li v-for="(player,key) in players" v-bind:key="key">
-                <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-                Match Played: {{player.matchPlayed}}
+            <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
+            Match Played: {{player.matchPlayed}}
           </li>
         </ul>
-      <br>
+        <br>
       </div>
     </div>
-
-
-
 
   </div>
 </template>
@@ -63,11 +60,9 @@ var playerDB = Firebase.database().ref('/Players')
 export default {
   name: 'PlayersList',
   data() {
-    return {
-
-    }
+    return {}
   },
-  firebase:  {
+  firebase: {
     players: playerDB
   }
 }

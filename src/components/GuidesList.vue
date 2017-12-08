@@ -25,11 +25,9 @@ var guideDB = Firebase.database().ref('/Guides')
 export default {
   name: 'GuidesList',
   data() {
-    return {
-
-    }
+    return {}
   },
-  firebase:  {
+  firebase: {
     guides: guideDB
   }
 }

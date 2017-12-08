@@ -3,7 +3,9 @@
     <h1>{{hero.name}}</h1>
     <img :src="hero.avatar" :alt="hero.name">
     <p>Attribute: {{hero.attribute}}</p>
-    <p>Role: <span v-for="role in hero.roles" :key="role">{{role}} </span></p>
+    <p>Role:
+      <span v-for="role in hero.roles" :key="role">{{role}} </span>
+    </p>
     <p>{{hero.lore}}</p>
 
     <h2>Stat</h2>
@@ -25,7 +27,9 @@
       <img :src="skill.icon" :alt="skill.name">
       <p>{{skill.description}}</p>
       <ul>
-        <li v-for="attr in skill.attributes" :key="attr.name">{{attr.name}}: <i>{{attr.value}}</i></li>
+        <li v-for="attr in skill.attributes" :key="attr.name">{{attr.name}}:
+          <i>{{attr.value}}</i>
+        </li>
       </ul>
     </div>
 
@@ -40,7 +44,6 @@
     <h3>Best Score For Sven</h3>
     <br>
 
-
   </div>
 </template>
 
@@ -54,22 +57,22 @@ export default {
   props: ['heroKey'],
   mounted() {
     // Firebase bind
-    this.$bindAsObject('hero',heroDB.child(this.heroKey))
+    this.$bindAsObject('hero', heroDB.child(this.heroKey))
   },
-  data () {
+  data() {
     return {
       hero: {}
     }
   },
   computed: {
     sortedTalent() {
-      if(this.hero !== undefined && this.hero.talents !== undefined) {
+      if (this.hero !== undefined && this.hero.talents !== undefined) {
         return this.hero.talents.reverse()
       } else {
         return null
       }
     }
-  },
+  }
 }
 </script>
 

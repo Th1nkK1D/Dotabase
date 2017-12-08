@@ -10,20 +10,20 @@
         </router-link>
       </div>
     </div>
-  
-  <div class="columns">
-    <div class="column">
-      <ul>
-        <li v-for="(hero,key) in heroes" v-bind:key="key">
-          <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-        </li>
-    </ul>
+
+    <div class="columns">
+      <div class="column">
+        <ul>
+          <li v-for="(hero,key) in heroes" v-bind:key="key">
+            <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>Popular Heroes</h3>
+        <br>
+      </div>
     </div>
-    <div class="column">
-      <h3>Popular Heroes</h3>
-      <br>
-    </div>
-  </div>
 
   </div>
 </template>
@@ -35,11 +35,9 @@ var heroDB = Firebase.database().ref('/Heroes')
 export default {
   name: 'HeroesList',
   data() {
-    return {
-
-    }
+    return {}
   },
-  firebase:  {
+  firebase: {
     heroes: heroDB
   }
 }
