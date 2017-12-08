@@ -51,7 +51,14 @@ export default {
       this.$router.push('/')
     } else {
       if (this.teamKey) {
-        this.$bindAsObject('Team', teamdb.child(this.teamKey))
+        this.$bindAsObject(
+          'Team',
+          teamdb.child(this.teamKey),
+          null,
+          function() {
+            delete this.Team['.key']
+          }
+        )
       }
     }
   }
