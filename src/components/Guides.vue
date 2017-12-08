@@ -70,7 +70,6 @@
         </div>
       </tr>
     </table>
-
     <br>
     <h5 class="title is-5">
       <center>
