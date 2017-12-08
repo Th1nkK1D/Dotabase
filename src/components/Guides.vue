@@ -12,8 +12,8 @@
       </div>
     </div>
 
-    <h5 class="title is-5">
-      <p>Hero : {{guide.hero}}</p>
+    <h5 class="title is-5" v-if="hero && guide.name">
+      <p>Hero : {{hero.name}}</p>
     </h5>
     <img :src="hero.avatar" :alt="hero.name">
     <div class="columns">
@@ -70,7 +70,6 @@
         </div>
       </tr>
     </table>
-
     <br>
     <h5 class="title is-5">
       <center>
@@ -105,10 +104,12 @@
       </b-field>
       <button class="button is-primary" @click="save()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
       <div v-for="(Scomment,index) in showCom" :key="index" v-if="Scomment != undefined">
-        <div class="title is-4">Comment {{index+1}} </div>
-        {{Scomment.comment}}
-        <br><br> by {{Scomment.memberID}} at {{Scomment.dateCreated}}
-        <br><br> ----------------------------------------------------------------------------------------------------------------
+        <div v-if="Scomment.guideID == guideKey">
+          <div class="title is-4">Comment {{index+1}} </div>
+          {{Scomment.comment}}
+          <br><br> by {{Scomment.memberID}} at {{Scomment.dateCreated}}
+          <br><br> ----------------------------------------------------------------------------------------------------------------
+        </div>
       </div>
     </div>
   </div>
@@ -131,6 +132,10 @@ export default {
     // Firebase bind
     this.$bindAsObject('guide', guideDB.child(this.guideKey), null, function() {
       this.$bindAsObject('hero', heroDB.child(this.guide.hero))
+      this.$bindAsArray(
+        'showCom',
+        commentDB.orderByChild('guideID').equalTo(this.guideKey)
+      )
     })
   },
   data() {
@@ -157,8 +162,7 @@ export default {
       source: itemDB,
       // optionally bind as an object
       asObject: true
-    },
-    showCom: commentDB
+    }
   },
   computed: {
     sortedTalent() {
@@ -171,6 +175,9 @@ export default {
   },
   methods: {
     save() {
+      if (!this.Commentt.guideID) {
+        this.Commentt.guideID = this.guideKey
+      }
       if (!this.Commentt.dateCreated) {
         this.Commentt.dateCreated = new Moment().format()
       }
