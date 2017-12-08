@@ -7,7 +7,7 @@
 
           <div class="columns">
             <div class="column is-3">
-              <img src="http://fc00.deviantart.net/fs71/f/2012/355/9/d/dota_2_icon_for_windows_7_by_excharny-d5ook5y.png">
+              <img src="../assets/Mainlogo.png">
             </div>
             <div class="column">
               <h1 class="title">
@@ -20,7 +20,7 @@
               It is the website for Dota2 Player to learn and share the guide with others user.
             </div>
             <div class="column is-3">
-              <img src="http://fc00.deviantart.net/fs71/f/2012/355/9/d/dota_2_icon_for_windows_7_by_excharny-d5ook5y.png">
+              <img src="../assets/Mainlogo.png">
             </div>
           </div>
 

@@ -89,7 +89,19 @@
     <div>
       <h3 class="title is-3">Comment</h3>
       <b-field>
-        <b-input type="text" placeholder="Comment" v-model="Commentt.comment"></b-input>
+        <b-radio-button v-model="ratingg.rating" :native-value="1" type="is-success">
+          <div @click="clickk()">
+            <span>Like</span>
+          </div>
+        </b-radio-button>
+        <b-radio-button v-model="ratingg.rating" :native-value="-1" type="is-danger">
+          <div @click="clickk()">
+            <span>Dislike</span>
+          </div>
+        </b-radio-button>
+      </b-field>
+      <b-field>
+        <b-input type="text" placeholder="Comment" v-model="Commentt.comment"></b-input><br>
       </b-field>
       <button class="button is-primary" @click="save()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
       <div v-for="(Scomment,index) in showCom" :key="index" v-if="Scomment != undefined">
@@ -110,6 +122,7 @@ var guideDB = Firebase.database().ref('/Guides')
 var heroDB = Firebase.database().ref('/Heroes')
 var itemDB = Firebase.database().ref('/Items')
 var commentDB = Firebase.database().ref('/Comments')
+var rateDB = Firebase.database().ref('/Rating')
 
 export default {
   name: 'Guide',
@@ -130,6 +143,12 @@ export default {
         memberID: '',
         comment: '',
         dateCreated: null
+      },
+      ratingg: {
+        guideID: '',
+        memberID: '',
+        rating: '',
+        dateCreated: ''
       }
     }
   },
@@ -161,6 +180,16 @@ export default {
       }
       // New guide
       commentDB.push(this.Commentt)
+    },
+    clickk() {
+      if (!this.ratingg.dateCreated) {
+        this.ratingg.dateCreated = new Moment().format()
+      }
+
+      if (!this.ratingg.memberID) {
+        this.ratingg.memberID = this.$store.state.user.username
+      }
+      rateDB.push(this.ratingg)
     }
   }
 }

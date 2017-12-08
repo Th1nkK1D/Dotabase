@@ -22,12 +22,13 @@
         <!-- <input type="password" name="password" v-model="password"> -->
         <br>
         <!-- <a class="button">Button</a> -->
-        <button class="button is-black" v-on:click="login()">Login</button>
+        <button class="button is-primary is-outlined is-focused" v-on:click="login()">Login</button>
         <br>
         <br> Don't have an account?
         <br>
         <router-link to="register">
-          <button class="button is-black">Create Account</button>
+          <br>
+          <button class="button is-black is-outlined is-focused is-small">Create Account</button>
         </router-link>
       </div>
       <div class="column">
