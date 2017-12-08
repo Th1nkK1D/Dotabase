@@ -3,38 +3,48 @@
 		<h1 class="title is-1">Update Hero</h1>
 <div class="columns">
   <div class="column">
+		<div class="columns">
+		  <div class="column">
 		<b-field label="Hero Name">
       <b-input type="text" name="heroname" v-model="Hero.name" ></b-input>
     </b-field>
+	</div>
     <!-- <label for="heroname">Hero Name</label>
 		<input type="text" name="heroname" v-model="Hero.name"> -->
+		<div class="column">
+		<b-field label="Attribute">
+      <b-input type="text" name="heroattribute" v-model="Hero.attribute"></b-input>
+    </b-field>
+	</div>
+</div>
+		<!-- <label for="heroattribute">Attribute</label>
+		<input type="text" name="heroattribute" v-model="Hero.attribute"> -->
 		<b-field label="Avatar">
       <b-input type="text" name="heroavatar" v-model="Hero.avatar"></b-input>
     </b-field>
 		<!-- <label for="heroavatar">Avatar</label>
 		<input type="text" name="heroavatar" v-model="Hero.avatar"> -->
-		<b-field label="Attribute">
-      <b-input type="text" name="heroattribute" v-model="Hero.attribute"></b-input>
-    </b-field>
-		<!-- <label for="heroattribute">Attribute</label>
-		<input type="text" name="heroattribute" v-model="Hero.attribute"> -->
 		<b-field label="Lore">
-      <b-input type="text" name="lore" v-model="Hero.lore"></b-input>
+      <b-input maxlength="2000" type="textarea" name="lore" v-model="Hero.lore"></b-input>
     </b-field>
 		<!-- <label for="lore">Lore</label>
 		<input type="text" name="lore" v-model="Hero.lore"> -->
-		<button class="button is-primary"v-on:click="addRole()">+ role</button><br>
-    	<div v-for="(roles, ri) in Hero.roles" v-bind:key="ri">
-			<b-field v-bind:label="'Roles '+(ri+1)">
-				<b-input type="text"
-						name="roles"
-						v-model="Hero.roles[ri]">
-				</b-input>
-			</b-field>
-    	<!-- <label for="roles">Roles {{ri+1}}</label>
-     	<input type="text" name="roles" v-model="Hero.roles[ri]"> -->
-    	<button class="button is-black"v-on:click="removeRole(ri)">Remove</button>
-    	</div>
+		<button class="button is-primary is-focused"v-on:click="addRole()">+ role</button><br>
+		<div v-for="(roles, ri) in Hero.roles" v-bind:key="ri">
+			<div class="columns">
+				<div class="column">
+					<b-field v-bind:label="'Roles '+(ri+1)">
+						<b-input type="text"
+							name="roles"
+							v-model="Hero.roles[ri]">
+						</b-input>
+					</b-field>
+				</div>
+				<div class="column is-narrow">
+    			<button class="button is-primary is-outlined is-focused is-small"v-on:click="removeRole(ri)">Remove</button>
+				</div>
+			</div>
+		</div>
 			<br>
 	<h2 class="title is-5">Hero Stats</h2>
 	<div class="columns">
@@ -159,7 +169,7 @@
   </div>
   <div class="column">
     <h2 class="title is-5">Skills</h2>
-			<button class="button is-primary"v-on:click="addSkill()">+ skill</button>
+			<button class="button is-primary is-focused"v-on:click="addSkill()">+ skill</button>
 		<div v-for="(skill, si) in Hero.skills" v-bind:key="si">
 			<br>
 			<h4 class="title is-6">Skill {{si+1}}</h4>
@@ -195,8 +205,8 @@
 
 			<br>
 
-			<button class="button is-primary"v-on:click="addSkillAttribute(si)">+ attribute</button>
-          	<div v-for="(attr, ati) in skill.attributes" v-bind:key="ati">
+			<button class="button is-primary is-focused "v-on:click="addSkillAttribute(si)">+ attribute</button>
+          	<div v-for="(attr, ati) in skill.attributes" v-bind:key="ati"><br>
 							<b-field v-bind:label="'Attribute : '+(ati+1)"></b-field>
 				<!-- Attribute {{ati+1}} : -->
 				<div class="columns">
@@ -212,14 +222,17 @@
 				<b-input type="text" name="attvalue" v-model="attr.value"></b-input>
 				</b-field>
 			</div>
-		</div>
+
 				<!-- <label for="attvalue">Value</label>
 				<input type="text" name="attvalue" v-model="attr.value"> -->
-				<button class="button is-black"v-on:click="removeSkillAttribute(ati,si)">Remove</button>
+				<div class="column is-narrow">
+				<button class="button is-black is-outlined is-focused is-small"v-on:click="removeSkillAttribute(ati,si)">Remove</button>
 				<br>
+				</div>
+				</div>
           	</div>
 		<br>
-		<button class="button is-black"v-on:click="removeSkill(si)">RemoveSkill</button>
+		<button class="button is-primary is-outlined is-focused"v-on:click="removeSkill(si)">RemoveSkill</button>
 		<br>
 		<br>
 		<br>
@@ -227,7 +240,7 @@
 		<br>
 		<br>
 		<br>
-		<button class="button is-primary"v-on:click="submit()">Submit</button>
+		<button class="button is-primary is-focused is-medium"v-on:click="submit()">Submit</button>
 	</div>
 </div>
 
