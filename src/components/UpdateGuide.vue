@@ -2,11 +2,11 @@
   <div>
     <h1 class="title is-1">Create Guide</h1>
     <b-field>
-      <b-input type="text" placeholder="Guidename" v-model="name"></b-input>
+      <b-input type="text" placeholder="Guidename" v-model="guide.name"></b-input>
     </b-field>
 
-    <b-field label="Hero">
-      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => hero = option ? option : null"></b-autocomplete>
+    <b-field label="Hero" v-if="heroes">
+      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.hero = option ? heroes[heroes.indexOf(option)]['.key'] : null"></b-autocomplete>
     </b-field>
 
     <div v-if="hero">
@@ -17,7 +17,7 @@
         <button class="button" @click="addPC()">+ PurchaseCategory</button>
 
         <div class="columns is-multiline">
-          <div class="column" v-for="(cat,c) in purchaseCategory" :key="c">
+          <div class="column" v-for="(cat,c) in guide.purchaseCategory" :key="c">
             <div class="box">
               <b-field>
                 <b-input type="text" placeholder="Category Name" size="is-small" v-model="cat.name"></b-input>
@@ -74,6 +74,8 @@
       <!-- End of Talent Tree -->
     </div>
 
+    {{guide}}
+
     <button class="button is-primary" @click="save()">Save</button>
 
   </div>
@@ -93,39 +95,45 @@ export default {
 
   data() {
     return {
+      heroes: null,
+      items: null,
       heroSearch: '',
       itemSearch: '',
-      name: '',
-      hero: '',
-      purchaseCategory: [],
-      learnOrder: [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      talentTree: [null, null, null, null]
+      guide: {
+        memberID: '',
+        name: '',
+        hero: '',
+        dateCreated: null,
+        talentTree: [null, null, null, null],
+        learnOrder: [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        purchaseCategory: []
+      }
     }
   },
 
