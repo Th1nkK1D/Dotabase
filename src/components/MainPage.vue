@@ -115,6 +115,7 @@
               <table class="table">
                 <thead>
                   <tr>
+                    <th>Rank</th>
                     <th>Hero Name</th>
                     <th>Guide Number</th>
                   </tr>
@@ -122,11 +123,10 @@
                 <tbody>
                   <tr li v-for="(hero,key) in heroes" v-bind:key="key">
                     <td>
-                      <!-- <ul>
-                        <li v-for="(hero,key) in heroes" v-bind:key="key"> -->
+                      {{key+1}}
+                    </td>
+                    <td>
                       <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-                      <!-- </li>
-                      </ul> -->
                     </td>
                     <td>
                       num
@@ -136,13 +136,6 @@
                 </tbody>
 
               </table>
-
-              <ul>
-                <li v-for="(hero,key) in heroes" v-bind:key="key">
-                  <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-                  Guides :
-                </li>
-              </ul>
 
               <br>
             </div>
@@ -154,12 +147,28 @@
           <div class="hero-body">
             <div class="container">
               <h3 class="title is-3">Most Active Member</h3>
-              <ul>
-                <li v-for="(member,key) in members" v-bind:key="key">
-                  <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
-                  Score :
-                </li>
-              </ul>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Active score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(member,key) in members" v-bind:key="key">
+                    <td>
+                      {{key+1}}
+                    </td>
+                    <td>
+                      <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
+                    </td>
+                    <td>
+                      num
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
               <br>
             </div>
           </div>
