@@ -9,7 +9,7 @@
       <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" :keep-first="true" @select="option => guide.hero = option ? heroes[heroes.indexOf(option)]['.key'] : null"></b-autocomplete>
     </b-field>
 
-    <div v-if="hero">
+    <div v-if="selectedHero">
 
       <h1 class="title">Purchase Category</h1>
       <!-- PurchaseCategory -->
@@ -24,32 +24,31 @@
               </b-field>
               <div class="columns is-multiline">
                 <div class="column">
-                  <img :src="item.icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
+                  <img :src="items.find(it => it['.key'] == item).icon" v-for="(item,i) in cat.items" :key="i" @click="removeItem(c,i)">
                 </div>
               </div>
               <b-field>
-                <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(option) : null"></b-autocomplete>
+                <b-autocomplete v-model="itemSearch" placeholder="Search item..." :data="filterdItemList" field="name" size="is-small" :keep-first="true" @select="option => option ? cat.items.push(items[items.indexOf(option)]['.key']) : null"></b-autocomplete>
               </b-field>
             </div>
           </div>
         </div>
       </div>
       <!-- End of PurchaseCategory -->
-
       <h1 class="title">Learn Order</h1>
       <!-- Learn Order -->
       <div class="columns is-multiline">
         <!-- Skills -->
-        <div class="column is-12" v-for="(skill,s) in hero.skills" :key="s">
+        <div class="column is-12" v-for="(skill,s) in selectedHero.skills" :key="s">
           <img :src="skill.icon" alt="">
-          <b-radio v-for="(learn,l) in learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="learnOrder[l]" size="is-small"></b-radio>
+          <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: true, slot: s}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
         </div>
         <!-- End of Skills -->
 
         <!-- Talents -->
         <div class="column is-12">
           Talent
-          <b-radio v-for="(learn,l) in learnOrder" :key="l" :native-value="{isSkill: false}" v-model="learnOrder[l]" size="is-small"></b-radio>
+          <b-radio v-for="(learn,l) in guide.learnOrder" :key="l" :native-value="{isSkill: false}" v-model="guide.learnOrder[l]" size="is-small"></b-radio>
         </div>
         <!-- End of Talents -->
       </div>
@@ -58,23 +57,22 @@
       <h1 class="title">Talent Tree</h1>
       <!-- Talent Tree -->
       <div>
-        <div class="columns" v-for="(talentLvl,tl) in talentTree" :key="tl">
+        <div class="columns" v-for="tl in 4" :key="tl">
           <div class="column">
-            <b-radio v-model="talentTree[tl]" :native-value="0"></b-radio>
-            {{hero.talents[3-tl][0]}}
+            <b-radio v-model="guide.talentTree[4-tl]" :native-value="0"></b-radio>
+            {{selectedHero.talents[4-tl][0]}}
           </div>
           <div class="column is-narrow">{{25 - tl*5}}</div>
           <div class="column">
-            <b-radio v-model="talentTree[tl]" :native-value="1"></b-radio>
-            {{hero.talents[3-tl][1]}}
+            <b-radio v-model="guide.talentTree[4-tl]" :native-value="1"></b-radio>
+            {{selectedHero.talents[4-tl][1]}}
           </div>
         </div>
 
       </div>
       <!-- End of Talent Tree -->
-    </div>
 
-    {{guide}}
+    </div>
 
     <button class="button is-primary" @click="save()">Save</button>
 
@@ -95,6 +93,7 @@ export default {
 
   data() {
     return {
+      condition: true,
       heroes: null,
       items: null,
       heroSearch: '',
@@ -156,44 +155,38 @@ export default {
           item.name.toLowerCase().indexOf(this.itemSearch.toLowerCase()) >= 0
         )
       })
+    },
+    selectedHero() {
+      return this.heroes.find(hero => hero['.key'] === this.guide.hero)
     }
   },
 
   methods: {
     addPC() {
-      this.purchaseCategory.push({
+      this.guide.purchaseCategory.push({
         name: '',
         items: []
       })
     },
     removeItem(c, i) {
-      this.purchaseCategory[c].items.splice(i, 1)
+      this.guide.purchaseCategory[c].items.splice(i, 1)
     },
     save() {
-      let guide = {}
-
-      guide.memberID = 'testuser'
-
-      guide.name = this.name
-      guide.hero = this.hero['.key']
-
-      guide.dateCreated = new Moment().format()
-
-      guide.purchaseCategory = []
-
-      for (let c = 0; c < this.purchaseCategory.length; c++) {
-        guide.purchaseCategory.push({
-          name: this.purchaseCategory[c].name,
-          items: this.purchaseCategory[c].items.map(i => i['.key'])
-        })
+      if (!this.guide.dateCreated) {
+        this.guide.dateCreated = new Moment().format()
       }
 
-      guide.learnOrder = this.learnOrder
-      guide.talentTree = [].concat(this.talentTree).reverse()
+      if (!this.guide.memberID) {
+        this.guide.memberID = this.$store.state.user.username
+      }
 
-      console.log(guide)
-
-      guideDB.push(guide)
+      if (this.guide['.key']) {
+        // Update guide
+        guideDB.child(this.guide['.key']).set(this.guide)
+      } else {
+        // New guide
+        guideDB.push(this.guide)
+      }
     }
   }
 }
