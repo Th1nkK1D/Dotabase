@@ -20,6 +20,12 @@
       </div>
       <div class="column">
         <h3>Most Used Items</h3>
+        <ul>
+          <li v-for="(item,key) in items" v-bind:key="key">
+            <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
+            Time used:
+          </li>
+        </ul>
         <br>
       </div>
     </div>

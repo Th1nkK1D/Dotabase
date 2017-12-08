@@ -11,6 +11,12 @@
       </div>
       <div class="column">
         <h3>Highest Rating Guides</h3>
+        <ul>
+          <li v-for="(guide,key) in guides" v-bind:key="key">
+            <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
+            Rating:
+          </li>
+        </ul>
         <br>
       </div>
     </div>

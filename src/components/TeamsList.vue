@@ -22,6 +22,14 @@
       <div class="column">
         <h3>Highest Average MMR Teams</h3>
         <br>
+
+        <ul>
+          <li v-for="(team,key) in teams" v-bind:key="key">
+            <router-link v-bind:to="'team/'+team['.key']">{{team.name}}</router-link>
+            Average MMR:
+          </li>
+        </ul>
+
       </div>
     </div>
 
