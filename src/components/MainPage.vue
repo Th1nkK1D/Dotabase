@@ -121,15 +121,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr li v-for="(hero,key) in heroes" v-bind:key="key">
+                  <tr li v-for="(hero,key) in guideRank" v-bind:key="key">
                     <td>
                       {{key+1}}
                     </td>
                     <td>
-                      <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+                      <router-link v-bind:to="'hero/'+hero.heroKey">{{hero.heroName}}</router-link>
                     </td>
                     <td>
-                      num
+                      {{hero.count}}
                     </td>
 
                   </tr>

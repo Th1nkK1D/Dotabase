@@ -28,31 +28,55 @@
 
       </div>
       <div class="column">
-        <h2>Hero Rank:</h2>
-        <button class="button" @click="addHero()">+ hero</button>
+        <h2 class="title is-3">Hero Rank:</h2>
+        <button class="button is-primary is-focused" @click="addHero()">+ hero</button>
+        <br>
         <div v-for="(heroRank, hi) in Player.heroRanks" v-bind:key="hi">
 
           <div class="columns">
-            <div class="column">
-              <label for="heroname">Hero Name {{hi+1}}</label>
-            </div>
-            <div class="column">
-              <b-input type="text" placeholder="Hero" v-model="heroRank.heroName"></b-input>
-            </div>
-            <div class="column">
-              <label for="heroscore">Score</label>
-            </div>
+
             <div class="column">
 
-              <b-input type="number" placeholder="Score" v-model.number="heroRank.score"></b-input>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label">Name #{{hi+1}}</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input class="input" type="text" placeholder="Hero name" name="attributename" v-model="heroRank.heroName">
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div class="column">
-              <button class="button" @click="removeHero(hi)">Remove</button>
+
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label">Score</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input class="input" type="number" placeholder="Hero score" name="heroscore" v-model.number="heroRank.score">
+                    </p>
+                  </div>
+                </div>
+              </div>
+
             </div>
+
+            <div class="column is-narrow">
+              <button class="button is-primary is-outlined is-focused" @click="removeHero(hi)">Remove</button>
+            </div>
+
           </div>
+
         </div>
         <br>
-        <button class="button is-primary" @click="submit()">Submit</button>
+        <button class="button is-primary is-focused is-medium" @click="submit()">Submit</button>
         <br>
       </div>
     </div>
