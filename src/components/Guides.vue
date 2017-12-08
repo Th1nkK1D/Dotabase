@@ -89,12 +89,12 @@
       <h3 class="title is-3">Comment</h3>
       <b-field>
         <b-radio-button v-model="ratingg.rating" :native-value="1" type="is-success">
-          <div @click="clickk()">
+          <div @click="rate()">
             <span>Like</span>
           </div>
         </b-radio-button>
         <b-radio-button v-model="ratingg.rating" :native-value="-1" type="is-danger">
-          <div @click="clickk()">
+          <div @click="rate()">
             <span>Dislike</span>
           </div>
         </b-radio-button>
@@ -136,6 +136,21 @@ export default {
         'showCom',
         commentDB.orderByChild('guideID').equalTo(this.guideKey)
       )
+      this.$bindAsArray(
+        'showrating',
+        rateDB.orderByChild('guideID').equalTo(this.guideKey),
+        null,
+        function() {
+          let myRating = this.showrating.find(
+            r => r.memberID == this.$store.state.user.username
+          )
+          console.log(myRating)
+
+          if (myRating) {
+            this.ratingg = myRating
+          }
+        }
+      )
     })
   },
   data() {
@@ -143,6 +158,7 @@ export default {
       guide: {},
       hero: {},
       showCom: {},
+      showrating: {},
       Commentt: {
         guideID: '',
         memberID: '',
@@ -171,6 +187,19 @@ export default {
       } else {
         return null
       }
+    },
+    overallRating() {
+      let sum = 0
+      let count = this.showrating.length
+
+      for (let i = 0; i < count; i++) {
+        sum += this.showrating[i].rating
+      }
+
+      return {
+        sum: sum,
+        count: count
+      }
     }
   },
   methods: {
@@ -188,15 +217,27 @@ export default {
       // New guide
       commentDB.push(this.Commentt)
     },
-    clickk() {
-      if (!this.ratingg.dateCreated) {
-        this.ratingg.dateCreated = new Moment().format()
-      }
+    rate() {
+      this.ratingg.dateCreated = new Moment().format()
+      console.log(this.ratingg)
 
-      if (!this.ratingg.memberID) {
+      if (!this.ratingg.guideID) {
+        // New vote
+        console.log('new vote')
         this.ratingg.memberID = this.$store.state.user.username
+        this.ratingg.guideID = this.guideKey
+
+        rateDB.push(this.ratingg)
+      } else {
+        // Already vote
+        console.log('update vote')
+        let key = this.ratingg['.key']
+        console.log(this.ratingg)
+
+        delete this.ratingg['.key']
+
+        rateDB.child(key).set(this.ratingg)
       }
-      rateDB.push(this.ratingg)
     }
   }
 }
