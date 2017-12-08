@@ -8,8 +8,22 @@
     <br>
     <br>
     <h3>Most Active Member</h3>
+    <ul>
+      <li v-for="(member,key) in members" v-bind:key="key">
+        <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
+        Score :
+      </li>
+    </ul>
+    <br>
     <br>
     <h3>Heroes With Highest Guide Number</h3>
+    <ul>
+      <li v-for="(hero,key) in heroes" v-bind:key="key">
+        <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+        Guides :
+      </li>
+    </ul>
+
     <br>
 
   </div>
@@ -31,7 +45,9 @@ export default {
     }
   },
   firebase: {
-    players: playerDB
+    players: playerDB,
+    members: MemberDB,
+    heroes: heroDB
   }
 }
 </script>
