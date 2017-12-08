@@ -11,95 +11,39 @@
       </div>
     </div>
 
-    <div class="columns">
-      <div class="column">
-        <ul>
-          <li v-for="(player,key) in players" v-bind:key="key">
-            <router-link v-bind:to="'player/'+player['.key']">{{player.name}}</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="column">
-        <h3 class="title is-3">Player With Highest Solo MMR</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player Name</th>
-              <th>Solo MMR</th>
-            </tr>
-          </thead>
-          <tbody>
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player Name</th>
+          <th>Solo MMR</th>
+          <th>Party MMR</th>
+          <th>Match Played</th>
+        </tr>
+      </thead>
+      <tbody>
 
-            <tr v-for="(player,key) in players" v-bind:key="key">
-              <td>
-                {{key+1}}
-              </td>
-              <td>
-                <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-              </td>
-              <td>
-                {{player.mmrSolo}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br>
-        <br>
-        <h3 class="title is-3">Player With Highest Party MMR</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player Name</th>
-              <th>Party MMR</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr v-for="(player,key) in players" v-bind:key="key">
-              <td>
-                {{key+1}}
-              </td>
-              <td>
-                <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-              </td>
-              <td>
-                {{player.mmrParty}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br>
-        <br>
-        <h3 class="title is-3">Player With Highest Match Played</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player Name</th>
-              <th>Match Played</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr v-for="(player,key) in players" v-bind:key="key">
-              <td>
-                {{key+1}}
-              </td>
-              <td>
-                <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-              </td>
-              <td>
-                {{player.matchPlayed}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br>
-        <br>
-      </div>
-    </div>
+        <tr v-for="(player,key) in players" v-bind:key="key">
+          <td>
+            {{key+1}}
+          </td>
+          <td>
+            <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
+          </td>
+          <td>
+            {{player.mmrSolo}}
+          </td>
+          <td>
+            {{player.mmrParty}}
+          </td>
+          <td>
+            {{player.matchPlayed}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
 
   </div>
 </template>
