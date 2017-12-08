@@ -88,16 +88,28 @@
 
     <div>
       <h3 class="title is-3">Comment</h3>
+      <b-field>
+        <b-input type="text" placeholder="Comment" v-model="Commentt.comment"></b-input>
+      </b-field>
+      <button class="button is-primary" @click="save()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
+      <div v-for="(Scomment,index) in showCom" :key="index" v-if="Scomment != undefined">
+        <div class="title is-4">Comment {{index+1}} </div>
+        {{Scomment.comment}}
+        <br><br> by {{Scomment.memberID}} at {{Scomment.dateCreated}}
+        <br><br> ----------------------------------------------------------------------------------------------------------------
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Firebase from 'firebase'
+import Moment from 'moment'
 
 var guideDB = Firebase.database().ref('/Guides')
 var heroDB = Firebase.database().ref('/Heroes')
 var itemDB = Firebase.database().ref('/Items')
+var commentDB = Firebase.database().ref('/Comments')
 
 export default {
   name: 'Guide',
@@ -111,7 +123,14 @@ export default {
   data() {
     return {
       guide: {},
-      hero: {}
+      hero: {},
+      showCom: {},
+      Commentt: {
+        guideID: '',
+        memberID: '',
+        comment: '',
+        dateCreated: null
+      }
     }
   },
   firebase: {
@@ -119,7 +138,8 @@ export default {
       source: itemDB,
       // optionally bind as an object
       asObject: true
-    }
+    },
+    showCom: commentDB
   },
   computed: {
     sortedTalent() {
@@ -128,6 +148,19 @@ export default {
       } else {
         return null
       }
+    }
+  },
+  methods: {
+    save() {
+      if (!this.Commentt.dateCreated) {
+        this.Commentt.dateCreated = new Moment().format()
+      }
+
+      if (!this.Commentt.memberID) {
+        this.Commentt.memberID = this.$store.state.user.username
+      }
+      // New guide
+      commentDB.push(this.Commentt)
     }
   }
 }
