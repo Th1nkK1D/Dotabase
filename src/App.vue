@@ -26,15 +26,16 @@
             </router-link>
           </a>
           <a class="navbar-item">
-            <router-link to="/guide">
-              Guides
-            </router-link>
-          </a>
-          <a class="navbar-item">
             <router-link to="/item">
               Items
             </router-link>
           </a>
+          <a class="navbar-item">
+            <router-link to="/guide">
+              Guides
+            </router-link>
+          </a>
+
           <a class="navbar-item">
             <router-link to="/player">
               Players

@@ -25,12 +25,16 @@
         <table class="table">
           <thead>
             <tr>
+              <th>Rank</th>
               <th>Guide Name</th>
               <th>Rating</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(guide,key) in guides" v-bind:key="key">
+              <td>
+                {{key+1}}
+              </td>
               <td>
                 <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
               </td>
