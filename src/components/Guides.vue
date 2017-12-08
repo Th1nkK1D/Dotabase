@@ -104,10 +104,12 @@
       </b-field>
       <button class="button is-primary" @click="save()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
       <div v-for="(Scomment,index) in showCom" :key="index" v-if="Scomment != undefined">
-        <div class="title is-4">Comment {{index+1}} </div>
-        {{Scomment.comment}}
-        <br><br> by {{Scomment.memberID}} at {{Scomment.dateCreated}}
-        <br><br> ----------------------------------------------------------------------------------------------------------------
+        <div v-if="Scomment.guideID == guideKey">
+          <div class="title is-4">Comment {{index+1}} </div>
+          {{Scomment.comment}}
+          <br><br> by {{Scomment.memberID}} at {{Scomment.dateCreated}}
+          <br><br> ----------------------------------------------------------------------------------------------------------------
+        </div>
       </div>
     </div>
   </div>
@@ -170,6 +172,9 @@ export default {
   },
   methods: {
     save() {
+      if (!this.Commentt.guideID) {
+        this.Commentt.guideID = this.guideKey
+      }
       if (!this.Commentt.dateCreated) {
         this.Commentt.dateCreated = new Moment().format()
       }
