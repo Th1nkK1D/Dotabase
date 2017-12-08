@@ -74,6 +74,10 @@
       </center>
     </h5>
     <br>
+
+    <div>
+      <h3 class="title is-3">Comment</h3>
+    </div>
   </div>
 </template>
 
