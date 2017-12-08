@@ -37,7 +37,7 @@
             num
           </td>
           <td>
-            date
+            {{guide.dateCreated}}
           </td>
         </tr>
       </tbody>
