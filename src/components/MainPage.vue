@@ -1,9 +1,20 @@
 <template>
   <div>
-
-    <br>
-    <h1>Welcome to Dotabase!</h1>
-    <br> What is Dotabase?<br> It is the website for Dota2 Player to learn and share the guide with others user.
+    <!-- http://fc00.deviantart.net/fs71/f/2012/355/9/d/dota_2_icon_for_windows_7_by_excharny-d5ook5y.png -->
+    <section class="hero is-medium is-dark is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Welcome To Dotabase!
+          </h1>
+          <br>
+          <h2 class="subtitle">
+            What is Dotabase?
+          </h2>
+          It is the website for Dota2 Player to learn and share the guide with others user.
+        </div>
+      </div>
+    </section>
 
     <br>
     <br>

@@ -1,6 +1,16 @@
 <template>
   <div>
-    <h1>{{item.name}}</h1>
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">{{item.name}}</h1>
+      </div>
+      <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
+        <router-link :to="'/updateitem/'+itemKey">
+          <button class="button">Edit</button>
+        </router-link>
+      </div>
+    </div>
+
     <img :src="item.icon" :alt="item.name">
     <p>{{item.lore}}</p>
     <p>Category: {{item.category}}</p>

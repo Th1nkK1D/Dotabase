@@ -1,5 +1,17 @@
 <template>
   <div>
+
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">{{player.name}}</h1>
+      </div>
+      <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
+        <router-link :to="'/updateplayer/'+player.name">
+          <button class="button">Edit</button>
+        </router-link>
+      </div>
+    </div>
+
     <h1>{{player.name}}</h1>
     <img :src="player.avatar" :alt="player.name">
     <p>Team Name: {{player.teamName}}</p>

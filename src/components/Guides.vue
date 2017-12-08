@@ -1,6 +1,17 @@
 <template>
   <div>
-    <h1 class="title is-1">{{guide.name}}</h1> <br>
+
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">{{guide.name}}</h1>
+      </div>
+      <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
+        <router-link :to="'/updateguide/'+guideKey">
+          <button class="button">Edit</button>
+        </router-link>
+      </div>
+    </div>
+
     <h5 class="title is-5">
       <p>Hero : {{guide.hero}}</p>
     </h5>
