@@ -21,6 +21,12 @@
       </div>
       <div class="column">
         <h3>Popular Heroes</h3>
+        <ul>
+          <li v-for="(hero,key) in heroes" v-bind:key="key">
+            <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+            Number Of Player:
+          </li>
+        </ul>
         <br>
       </div>
     </div>
