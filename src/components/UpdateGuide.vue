@@ -90,6 +90,7 @@ var guideDB = Firebase.database().ref('/Guides')
 
 export default {
   name: 'UpdateGuide',
+  props: ['guideKey'],
 
   data() {
     return {
@@ -180,12 +181,24 @@ export default {
         this.guide.memberID = this.$store.state.user.username
       }
 
-      if (this.guide['.key']) {
+      if (this.guideKey) {
         // Update guide
-        guideDB.child(this.guide['.key']).set(this.guide)
+        delete this.guide['.key']
+
+        guideDB.child(this.guideKey).set(this.guide)
       } else {
         // New guide
         guideDB.push(this.guide)
+      }
+    }
+  },
+  mounted() {
+    // Check admin permission
+    if (!this.$store.state.user || !this.$store.state.user.admin) {
+      this.$router.push('/')
+    } else {
+      if (this.guideKey) {
+        this.$bindAsObject('guide', guideDB.child(this.guideKey))
       }
     }
   }
