@@ -19,13 +19,29 @@
         </ul>
       </div>
       <div class="column">
-        <h3>Most Used Items</h3>
-        <ul>
-          <li v-for="(item,key) in items" v-bind:key="key">
-            <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
-            Time used:
-          </li>
-        </ul>
+        <!-- <h3 class="title is-3">Most Used Items</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Item Name</th>
+              <th>Time Used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,key) in items" v-bind:key="key">
+              <td>
+                {{key+1}}
+              </td>
+              <td>
+                <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
+              </td>
+              <td>
+                num
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
         <br>
       </div>
     </div>
