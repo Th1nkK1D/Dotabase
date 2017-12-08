@@ -7,7 +7,7 @@
 
           <div class="columns">
             <div class="column is-3">
-              <img src="http://fc00.deviantart.net/fs71/f/2012/355/9/d/dota_2_icon_for_windows_7_by_excharny-d5ook5y.png">
+              <img src="../assets/Mainlogo.png">
             </div>
             <div class="column">
               <h1 class="title">
@@ -20,7 +20,7 @@
               It is the website for Dota2 Player to learn and share the guide with others user.
             </div>
             <div class="column is-3">
-              <img src="http://fc00.deviantart.net/fs71/f/2012/355/9/d/dota_2_icon_for_windows_7_by_excharny-d5ook5y.png">
+              <img src="../assets/Mainlogo.png">
             </div>
           </div>
 
@@ -110,13 +110,32 @@
         <section class="hero is-danger is-bold">
           <div class="hero-body">
             <div class="container">
+
               <h3 class="title is-3">Heroes With Highest Guide Number</h3>
-              <ul>
-                <li v-for="(hero,key) in heroes" v-bind:key="key">
-                  <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-                  Guides :
-                </li>
-              </ul>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Hero Name</th>
+                    <th>Guide Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr li v-for="(hero,key) in guideRank" v-bind:key="key">
+                    <td>
+                      {{key+1}}
+                    </td>
+                    <td>
+                      <router-link v-bind:to="'hero/'+hero.heroKey">{{hero.heroName}}</router-link>
+                    </td>
+                    <td>
+                      {{hero.count}}
+                    </td>
+
+                  </tr>
+                </tbody>
+
+              </table>
 
               <br>
             </div>
@@ -128,12 +147,28 @@
           <div class="hero-body">
             <div class="container">
               <h3 class="title is-3">Most Active Member</h3>
-              <ul>
-                <li v-for="(member,key) in members" v-bind:key="key">
-                  <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
-                  Score :
-                </li>
-              </ul>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Active score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(member,key) in members" v-bind:key="key">
+                    <td>
+                      {{key+1}}
+                    </td>
+                    <td>
+                      <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
+                    </td>
+                    <td>
+                      num
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
               <br>
             </div>
           </div>
@@ -156,6 +191,7 @@ var playerDB = Firebase.database().ref('/Players')
 var itemDB = Firebase.database().ref('/Items')
 var MemberDB = Firebase.database().ref('/Members')
 var teamDB = Firebase.database().ref('/Teams')
+var guideDB = Firebase.database().ref('/Guides')
 
 export default {
   name: 'MainPage',
@@ -164,10 +200,37 @@ export default {
       // Add data here
     }
   },
+  computed: {
+    guideRank() {
+      if (this.guides) {
+        let rank = []
+
+        for (let i = 0; i < this.guides.length; i++) {
+          let r = rank.findIndex(h => h.heroKey == this.guides[i].hero)
+
+          if (r < 0) {
+            rank.push({
+              heroKey: this.guides[i].hero,
+              heroName: this.heroes.find(h => h['.key'] == this.guides[i].hero)
+                .name,
+              count: 1
+            })
+          } else {
+            rank[r].count++
+          }
+        }
+
+        return rank.sort((a, b) => a.count - b.count).slice(0, 5)
+      } else {
+        return null
+      }
+    }
+  },
   firebase: {
     players: playerDB,
     members: MemberDB,
-    heroes: heroDB
+    heroes: heroDB,
+    guides: guideDB
   }
 }
 </script>

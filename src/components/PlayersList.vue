@@ -11,44 +11,39 @@
       </div>
     </div>
 
-    <div class="columns">
-      <div class="column">
-        <ul>
-          <li v-for="(player,key) in players" v-bind:key="key">
-            <router-link v-bind:to="'player/'+player['.key']">{{player.name}}</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="column">
-        <h3>Player With Highest Solo MMR</h3>
-        <br>
-        <ul>
-          <li v-for="(player,key) in players" v-bind:key="key">
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player Name</th>
+          <th>Solo MMR</th>
+          <th>Party MMR</th>
+          <th>Match Played</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr v-for="(player,key) in players" v-bind:key="key">
+          <td>
+            {{key+1}}
+          </td>
+          <td>
             <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-            Solo MMR: {{player.mmrSolo}}
-          </li>
-        </ul>
-        <br>
-        <h3>Player With Highest Party MMR</h3>
-        <br>
-        <ul>
-          <li v-for="(player,key) in players" v-bind:key="key">
-            <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-            Party MMR: {{player.mmrParty}}
-          </li>
-        </ul>
-        <br>
-        <h3>Player With Highest Match Played</h3>
-        <br>
-        <ul>
-          <li v-for="(player,key) in players" v-bind:key="key">
-            <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
-            Match Played: {{player.matchPlayed}}
-          </li>
-        </ul>
-        <br>
-      </div>
-    </div>
+          </td>
+          <td>
+            {{player.mmrSolo}}
+          </td>
+          <td>
+            {{player.mmrParty}}
+          </td>
+          <td>
+            {{player.matchPlayed}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
 
   </div>
 </template>

@@ -20,13 +20,31 @@
         </ul>
       </div>
       <div class="column">
-        <h3>Popular Heroes</h3>
-        <ul>
-          <li v-for="(hero,key) in heroes" v-bind:key="key">
-            <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-            Number Of Player:
-          </li>
-        </ul>
+        <!-- <h3 class="title is-3">Popular Heroes</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Hero Name</th>
+              <th>Number Of Player</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(hero,key) in heroes" v-bind:key="key">
+              <td>
+                {{key+1}}
+              </td>
+              <td>
+                <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
+              </td>
+              <td>
+                num
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </li>
+        </ul> -->
         <br>
       </div>
     </div>

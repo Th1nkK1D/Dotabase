@@ -12,25 +12,37 @@
       </div>
     </div>
 
-    <div class="columns">
-      <div class="column">
-        <ul>
-          <li v-for="(guide,key) in guides" v-bind:key="key">
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Guide Name</th>
+          <th>Hero Name</th>
+          <th>Rating</th>
+          <th>Date Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(guide,key) in guides" v-bind:key="key">
+          <td>
+            {{key+1}}
+          </td>
+          <td>
             <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="column">
-        <h3>Highest Rating Guides</h3>
-        <ul>
-          <li v-for="(guide,key) in guides" v-bind:key="key">
-            <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
-            Rating:
-          </li>
-        </ul>
-        <br>
-      </div>
-    </div>
+          </td>
+          <td>
+            {{guide.hero}}
+          </td>
+          <td>
+            num
+          </td>
+          <td>
+            {{guide.dateCreated}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
 
   </div>
 </template>
