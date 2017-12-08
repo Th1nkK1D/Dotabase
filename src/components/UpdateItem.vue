@@ -23,13 +23,13 @@
         </b-field>
 
         <b-field for="itemdescription" label="Description">
-          <b-input maxlength="200" type="textarea"></b-input>
+          <b-input maxlength="300" type="textarea"></b-input>
         </b-field>
 
         <br>
         <button class="button is-black" v-on:click="addRecipe()">+ recipe</button>
         <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
-          <b-field v-bind:label="'Recipe '+re">
+          <b-field v-bind:label="'Recipe '+(re+1)">
             <b-input type="text" name="recipe" v-model="Item.recipe[re]">
             </b-input>
           </b-field>
@@ -47,7 +47,7 @@
         <button class="button is-black" v-on:click="addStat()">+ stat</button>
 
         <div v-for="(stat, si) in Item.stats" v-bind:key="si">
-          <b-field v-bind:label="'Stat Name '+si+1">
+          <b-field v-bind:label="'Stat Name '+(si+1)">
             <b-input type="text" name="statname" v-model="stat.name">
             </b-input>
           </b-field>
@@ -60,10 +60,10 @@
           <button class="button is-black" v-on:click="removeStat(si)">Remove</button>
         </div>
       </div>
-      <div class="column">
+      <!-- <div class="column">
         <h2 class="title is-1">Abilities</h2>
         <button class="button is-black" v-on:click="addAbility()">+ ability</button>
-      </div>
+      </div> -->
       <div class="column">
         <h3 class="title is-3">Abilities</h3>
         <button class="button" @click="addAbility()">+ ability</button>
@@ -91,7 +91,7 @@
           </b-radio>
           <br>
           <b-field for="itemabilitydescription" label="Description">
-            <b-input maxlength="200" type="textarea" v-model="ability.description"></b-input>
+            <b-input maxlength="500" type="textarea" v-model="ability.description"></b-input>
           </b-field>
           <br>
 
