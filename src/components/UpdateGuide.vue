@@ -182,9 +182,6 @@ export default {
       }
 
       if (this.guideKey) {
-        // Update guide
-        delete this.guide['.key']
-
         guideDB.child(this.guideKey).set(this.guide)
       } else {
         // New guide
@@ -198,7 +195,14 @@ export default {
       this.$router.push('/')
     } else {
       if (this.guideKey) {
-        this.$bindAsObject('guide', guideDB.child(this.guideKey))
+        this.$bindAsObject(
+          'guide',
+          guideDB.child(this.guideKey),
+          null,
+          function() {
+            delete this.guide['.key']
+          }
+        )
       }
     }
   }
