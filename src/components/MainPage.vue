@@ -111,14 +111,7 @@
           <div class="hero-body">
             <div class="container">
               <h3 class="title is-3">Heroes With Highest Guide Number</h3>
-              <ul>
-                <li v-for="(hero,key) in heroes" v-bind:key="key">
-                  <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-                  Guides :
-                </li>
-              </ul>
-
-              <br>
+              {{guideRank}}
             </div>
           </div>
         </section>
@@ -156,6 +149,7 @@ var playerDB = Firebase.database().ref('/Players')
 var itemDB = Firebase.database().ref('/Items')
 var MemberDB = Firebase.database().ref('/Members')
 var teamDB = Firebase.database().ref('/Teams')
+var guideDB = Firebase.database().ref('/Guides')
 
 export default {
   name: 'MainPage',
@@ -164,10 +158,37 @@ export default {
       // Add data here
     }
   },
+  computed: {
+    guideRank() {
+      if (this.guides) {
+        let rank = []
+
+        for (let i = 0; i < this.guides.length; i++) {
+          let r = rank.findIndex(h => h.heroKey == this.guides[i].hero)
+
+          if (r < 0) {
+            rank.push({
+              heroKey: this.guides[i].hero,
+              heroName: this.heroes.find(h => h['.key'] == this.guides[i].hero)
+                .name,
+              count: 1
+            })
+          } else {
+            rank[r].count++
+          }
+        }
+
+        return rank.sort((a, b) => a.count - b.count).slice(0, 5)
+      } else {
+        return null
+      }
+    }
+  },
   firebase: {
     players: playerDB,
     members: MemberDB,
-    heroes: heroDB
+    heroes: heroDB,
+    guides: guideDB
   }
 }
 </script>
