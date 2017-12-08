@@ -21,13 +21,25 @@
         </ul>
       </div>
       <div class="column">
-        <h3>Highest Rating Guides</h3>
-        <ul>
-          <li v-for="(guide,key) in guides" v-bind:key="key">
-            <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
-            Rating:
-          </li>
-        </ul>
+        <h3 class="title is-3">Highest Rating Guides</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Guide Name</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(guide,key) in guides" v-bind:key="key">
+              <td>
+                <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
+              </td>
+              <td>
+                num
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <br>
       </div>
     </div>
