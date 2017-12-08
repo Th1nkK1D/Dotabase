@@ -12,8 +12,8 @@
       </div>
     </div>
 
-    <h5 class="title is-5">
-      <p>Hero : {{guide.hero}}</p>
+    <h5 class="title is-5" v-if="hero && guide.name">
+      <p>Hero : {{hero.name}}</p>
     </h5>
     <img :src="hero.avatar" :alt="hero.name">
     <div class="columns">
@@ -130,6 +130,10 @@ export default {
     // Firebase bind
     this.$bindAsObject('guide', guideDB.child(this.guideKey), null, function() {
       this.$bindAsObject('hero', heroDB.child(this.guide.hero))
+      this.$bindAsArray(
+        'showCom',
+        commentDB.orderByChild('guideID').equalTo(this.guideKey)
+      )
     })
   },
   data() {
@@ -156,8 +160,7 @@ export default {
       source: itemDB,
       // optionally bind as an object
       asObject: true
-    },
-    showCom: commentDB
+    }
   },
   computed: {
     sortedTalent() {

@@ -73,7 +73,6 @@ export default {
       if (!this.sortKey) {
         return this.players
       } else {
-        console.log(this.sortKey)
         return this.players.sort((a, b) => b[this.sortKey] - a[this.sortKey])
       }
     }
