@@ -27,38 +27,98 @@
         </b-field>
 
         <br>
-        <button class="button is-black" v-on:click="addRecipe()">+ recipe</button>
-        <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
-          <b-field v-bind:label="'Recipe '+(re+1)">
-            <b-input type="text" name="recipe" v-model="Item.recipe[re]">
-            </b-input>
-          </b-field>
 
-          <button class="button is-black" v-on:click="removeRecipe(re)">Remove</button>
+        <button class="button is-primary is-focused" v-on:click="addRecipe()">+ recipe</button>
+
+        <div v-for="(recipe, re) in Item.recipe" v-bind:key="re">
+
+          <div class="columns">
+						<div class="column">
+							<br>
+							<div class="field is-horizontal">
+								<div class="field-label is-normal">
+									<label class="label">Recipe {{re+1}}</label>
+								</div>
+								<div class="field-body">
+									<div class="field">
+										<p class="control">
+											<input class="input" type="text" placeholder="Recipe" name="recipe" v-model="Item.recipe[re]">
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="column is-narrow">
+							<br>
+							<button class="button is-primary is-outlined is-focused" v-on:click="removeRecipe(re)">Remove</button>
+						</div>
+					</div>
+
+
+
         </div>
+
         <b-field for="recipeprice" label="Recipe Price">
-          <b-input type="number" name="recipeprice" v-model.number="Item.recipePrice">
-          </b-input>
+          <b-input type="number" name="recipeprice" v-model.number="Item.recipePrice"></b-input>
         </b-field>
+
         <br>
         <br>
 
         <h2 class="title is-1">Stats</h2>
-        <button class="button is-black" v-on:click="addStat()">+ stat</button>
-
+        <button class="button is-primary is-focused" v-on:click="addStat()">+ stat</button>
         <div v-for="(stat, si) in Item.stats" v-bind:key="si">
-          <b-field v-bind:label="'Stat Name '+(si+1)">
+          <div class="columns">
+          <div class="column">
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Stat {{si+1}}</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input" type="text" placeholder="Stat name" name="statname" v-model="stat.name">
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          <!-- <b-field v-bind:label="'Stat Name '+(si+1)">
             <b-input type="text" name="statname" v-model="stat.name">
             </b-input>
-          </b-field>
+          </b-field> -->
+        </div>
+        <div class="column">
 
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Value</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <p class="control">
+                  <input class="input" type="text" placeholder="Item stat value" name="itemstatvalue" v-model="stat.value">
+                </p>
+              </div>
+            </div>
+          </div>
+          <!--
           <b-field label="Value">
             <b-input type="text" name="itemstatvalue" v-model="stat.value">
             </b-input>
-          </b-field>
+          </b-field> -->
 
-          <button class="button is-black" v-on:click="removeStat(si)">Remove</button>
+
+          </div>
+          <div class="column is-narrow">
+          <button class="button is-primary is-outlined is-focused" v-on:click="removeStat(si)">Remove</button>
+          </div>
         </div>
+      </div>
+
+
+
       </div>
       <!-- <div class="column">
         <h2 class="title is-1">Abilities</h2>
@@ -66,11 +126,12 @@
       </div> -->
       <div class="column">
         <h3 class="title is-3">Abilities</h3>
-        <button class="button" @click="addAbility()">+ ability</button>
+        <button class="button is-primary is-focused" @click="addAbility()">+ ability</button>
         <div v-for="(ability, ai) in Item.abilities" v-bind:key="ai">
-          <h4 class="title is-3">Ability {{ai+1}}</h4>
-          <button class="button is-black" v-on:click="removeAbility(ai)">Remove Ability</button>
           <br>
+          <h4 class="title is-5">Ability {{ai+1}}</h4>
+          <button class="button is-primary is-outlined is-focused" v-on:click="removeAbility(ai)">Remove Ability</button>
+          <br><br>
           <b-field label="Name">
             <b-input type="text" name="abilityname" v-model="ability.name">
             </b-input>
@@ -90,35 +151,77 @@
             Use
           </b-radio>
           <br>
+          <br>
           <b-field for="itemabilitydescription" label="Description">
-            <b-input maxlength="500" type="textarea" v-model="ability.description"></b-input>
+            <b-input maxlength="800" type="textarea" v-model="ability.description"></b-input>
           </b-field>
           <br>
 
           <button class="button is-black" v-on:click="addAbilityAttribute(ai)">+ attribute</button>
           <div v-for="(attr, ati) in ability.attributes" v-bind:key="ati">
-            Attribute {{ati+1}} :
-            <b-field label="Name">
+            <br>
+            <b-field v-bind:label="'Attribute : '+(ati+1)"></b-field>
+            <!-- Attribute {{ati+1}} : -->
+            <div class="columns">
+              <div class="column">
+
+                <div class="field is-horizontal">
+                  <div class="field-label is-normal">
+                    <label class="label">Name</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input class="input" type="text" placeholder="Attribute name" name="attributename" v-model="attr.name">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+            <!-- <b-field label="Name">
               <b-input type="text" name="attributename" v-model="attr.name">
               </b-input>
-            </b-field>
+            </b-field> -->
+          </div>
             <!-- <label for="attributename">Name</label> -->
             <!-- <input type="text" name="attributename" v-model="attr.name"> -->
-            <b-field label="Value">
+
+            <div class="column">
+
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label">Value</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input class="input" type="text" placeholder="Attribute value" name="attributevalue" v-model="attr.value">
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            <!-- <b-field label="Value">
               <b-input type="text" name="attributevalue" v-model="attr.value">
               </b-input>
-            </b-field>
+            </b-field> -->
+            </div>
             <!-- <label for="attributevalue">Value</label> -->
             <!-- <input type="text" name="attributevalue" v-model="attr.value"> -->
-            <button class="button is-black" v-on:click="removeAbilityAttribute(ati,ai)">Remove</button>
+            <div class="column is-narrow">
+            <button class="button is-black is-outlined is-focused" v-on:click="removeAbilityAttribute(ati,ai)">Remove</button>
+            </div>
             <br>
+          </div>
+
+
           </div>
 
           <br>
         </div>
         <br <br>
         <br>
-        <button class="button is-primary" v-on:click="submit()">Submit</button>
+        <button class="button is-primary is-medium" v-on:click="submit()">Submit</button>
       </div>
 
     </div>
