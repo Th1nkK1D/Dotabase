@@ -88,15 +88,11 @@
     <div>
       <h3 class="title is-3">Comment</h3>
       <b-field>
-        <b-radio-button v-model="myRating.rating" :native-value="1" type="is-success">
-          <div @click="rate()">
-            <span>Like</span>
-          </div>
+        <b-radio-button v-model="myRating.rating" :native-value="1" type="is-success" @input="saveRating()">
+          <span>Like</span>
         </b-radio-button>
-        <b-radio-button v-model="myRating.rating" :native-value="-1" type="is-danger">
-          <div @click="rate()">
-            <span>Dislike</span>
-          </div>
+        <b-radio-button v-model="myRating.rating" :native-value="-1" type="is-danger" @input="saveRating()">
+          <span>Dislike</span>
         </b-radio-button>
       </b-field>
       <b-field>
@@ -134,7 +130,24 @@ export default {
     })
 
     this.$bindAsArray('comments', commentDB.child(this.guideKey))
-    this.$bindAsArray('ratings', ratingDB.child(this.guideKey))
+
+    this.$bindAsArray(
+      'ratings',
+      ratingDB.child(this.guideKey),
+      null,
+      function() {
+        // Get current user rating
+
+        let mr = this.ratings.find(
+          r => r.memberID == this.$store.state.user.username
+        )
+
+        if (mr) {
+          delete mr['.key']
+          this.myRating = mr
+        }
+      }
+    )
   },
   data() {
     return {
@@ -143,10 +156,12 @@ export default {
       comments: [],
       ratings: [],
       myComment: {
+        memberID: '',
         comment: '',
         dateCreated: null
       },
       myRating: {
+        memberID: '',
         rating: '',
         dateCreated: ''
       }
@@ -155,7 +170,6 @@ export default {
   firebase: {
     items: {
       source: itemDB,
-      // optionally bind as an object
       asObject: true
     }
   },
@@ -183,37 +197,24 @@ export default {
   },
   methods: {
     saveComment() {
-      console.log(this.myComment)
-
       if (this.$store.state.user) {
         this.myComment.memberID = this.$store.state.user.username
         this.myComment.dateCreated = new Moment().unix()
 
-        console.log(this.myComment)
-
-        // New guide
+        // Push comment
         commentDB.child(this.guideKey).push(this.myComment)
       }
     },
     saveRating() {
-      this.myRating.dateCreated = new Moment().unix()
-      console.log(this.myRating)
-
-      if (!this.myRating.guideID) {
-        // New vote
-        console.log('new vote')
+      if (this.$store.state.user) {
         this.myRating.memberID = this.$store.state.user.username
+        this.myRating.dateCreated = new Moment().unix()
 
-        rateDB.push(this.myRating)
-      } else {
-        // Already vote
-        console.log('update vote')
-        let key = this.myRating['.key']
-        console.log(this.myRating)
-
-        delete this.myRating['.key']
-
-        rateDB.child(key).set(this.myRating)
+        // Update rating
+        ratingDB
+          .child(this.guideKey)
+          .child(this.$store.state.user.username)
+          .set(this.myRating)
       }
     }
   }
