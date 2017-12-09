@@ -88,28 +88,27 @@
     <div>
       <h3 class="title is-3">Comment</h3>
       <b-field>
-        <b-radio-button v-model="ratingg.rating" :native-value="1" type="is-success">
+        <b-radio-button v-model="myRating.rating" :native-value="1" type="is-success">
           <div @click="rate()">
             <span>Like</span>
           </div>
         </b-radio-button>
-        <b-radio-button v-model="ratingg.rating" :native-value="-1" type="is-danger">
+        <b-radio-button v-model="myRating.rating" :native-value="-1" type="is-danger">
           <div @click="rate()">
             <span>Dislike</span>
           </div>
         </b-radio-button>
       </b-field>
       <b-field>
-        <b-input type="text" placeholder="Comment" v-model="Commentt.comment"></b-input><br>
+        <b-input type="text" placeholder="Comment" v-model="myComment.comment"></b-input>
       </b-field>
-      <button class="button is-primary" @click="save()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
-      <div v-for="(Scomment,index) in showCom" :key="index" v-if="Scomment != undefined">
-        <div v-if="Scomment.guideID == guideKey">
-          <div class="title is-4">Comment {{index+1}} </div>
-          {{Scomment.comment}}
-          <br><br> by {{Scomment.memberID}} at {{Scomment.dateCreated}}
-          <br><br> ----------------------------------------------------------------------------------------------------------------
-        </div>
+
+      <button class="button is-primary" @click="saveComment()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
+      <div v-for="(com,index) in comments" :key="index" v-if="com != undefined">
+        <div class="title is-4">Comment {{index+1}} </div>
+        {{com.comment}}
+        <br><br> by {{com.memberID}} at {{com.dateCreated}}
+        <br><br> ----------------------------------------------------------------------------------------------------------------
       </div>
     </div>
   </div>
@@ -123,7 +122,7 @@ var guideDB = Firebase.database().ref('/Guides')
 var heroDB = Firebase.database().ref('/Heroes')
 var itemDB = Firebase.database().ref('/Items')
 var commentDB = Firebase.database().ref('/Comments')
-var rateDB = Firebase.database().ref('/Rating')
+var ratingDB = Firebase.database().ref('/Rating')
 
 export default {
   name: 'Guide',
@@ -132,42 +131,22 @@ export default {
     // Firebase bind
     this.$bindAsObject('guide', guideDB.child(this.guideKey), null, function() {
       this.$bindAsObject('hero', heroDB.child(this.guide.hero))
-      this.$bindAsArray(
-        'showCom',
-        commentDB.orderByChild('guideID').equalTo(this.guideKey)
-      )
-      this.$bindAsArray(
-        'showrating',
-        rateDB.orderByChild('guideID').equalTo(this.guideKey),
-        null,
-        function() {
-          let myRating = this.showrating.find(
-            r => r.memberID == this.$store.state.user.username
-          )
-          console.log(myRating)
-
-          if (myRating) {
-            this.ratingg = myRating
-          }
-        }
-      )
     })
+
+    this.$bindAsArray('comments', commentDB.child(this.guideKey))
+    this.$bindAsArray('ratings', ratingDB.child(this.guideKey))
   },
   data() {
     return {
       guide: {},
       hero: {},
-      showCom: {},
-      showrating: {},
-      Commentt: {
-        guideID: '',
-        memberID: '',
+      comments: [],
+      ratings: [],
+      myComment: {
         comment: '',
         dateCreated: null
       },
-      ratingg: {
-        guideID: '',
-        memberID: '',
+      myRating: {
         rating: '',
         dateCreated: ''
       }
@@ -190,10 +169,10 @@ export default {
     },
     overallRating() {
       let sum = 0
-      let count = this.showrating.length
+      let count = this.ratings.length
 
       for (let i = 0; i < count; i++) {
-        sum += this.showrating[i].rating
+        sum += this.ratings[i].rating
       }
 
       return {
@@ -203,40 +182,38 @@ export default {
     }
   },
   methods: {
-    save() {
-      if (!this.Commentt.guideID) {
-        this.Commentt.guideID = this.guideKey
-      }
-      if (!this.Commentt.dateCreated) {
-        this.Commentt.dateCreated = new Moment().format()
-      }
+    saveComment() {
+      console.log(this.myComment)
 
-      if (!this.Commentt.memberID) {
-        this.Commentt.memberID = this.$store.state.user.username
+      if (this.$store.state.user) {
+        this.myComment.memberID = this.$store.state.user.username
+        this.myComment.dateCreated = new Moment().unix()
+
+        console.log(this.myComment)
+
+        // New guide
+        commentDB.child(this.guideKey).push(this.myComment)
       }
-      // New guide
-      commentDB.push(this.Commentt)
     },
-    rate() {
-      this.ratingg.dateCreated = new Moment().format()
-      console.log(this.ratingg)
+    saveRating() {
+      this.myRating.dateCreated = new Moment().unix()
+      console.log(this.myRating)
 
-      if (!this.ratingg.guideID) {
+      if (!this.myRating.guideID) {
         // New vote
         console.log('new vote')
-        this.ratingg.memberID = this.$store.state.user.username
-        this.ratingg.guideID = this.guideKey
+        this.myRating.memberID = this.$store.state.user.username
 
-        rateDB.push(this.ratingg)
+        rateDB.push(this.myRating)
       } else {
         // Already vote
         console.log('update vote')
-        let key = this.ratingg['.key']
-        console.log(this.ratingg)
+        let key = this.myRating['.key']
+        console.log(this.myRating)
 
-        delete this.ratingg['.key']
+        delete this.myRating['.key']
 
-        rateDB.child(key).set(this.ratingg)
+        rateDB.child(key).set(this.myRating)
       }
     }
   }

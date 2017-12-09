@@ -41,8 +41,8 @@ path /Players {
 path /Heroes/{name} is Hero {}
 path /Items/{name} is Item {}
 path /Guides/{id} is Guide {}
-path /Comments/{id} is Comment {}
-path /Rating/{id} is Rating {}
+path /Comments/{guideId}/{CommentId} is Comment {}
+path /Rating/{guideId}/{userId} is Rating {}
 path /Members/{name} is Member {}
 path /Players/{name} is Player {}
 path /Teams/{name} is Team {}
@@ -133,17 +133,15 @@ type PurchaseCategory {
 }
 
 type Comment {
-  guideID: String,
   memberID: String,
   comment: String,
-  dateCreated: String,
+  dateCreated: Number,
 }
 
 type Rating {
-  guideID: String,
   memberID: String,
   rating: Number,
-  dateCreated: String,
+  dateCreated: Number,
 }
 
 type Member {
