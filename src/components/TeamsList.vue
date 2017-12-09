@@ -15,14 +15,20 @@
     <table class="table is-fullwidth is-striped">
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Team Name</th>
-          <th>Region</th>
-          <th>Average MMR</th>
+          <th>#</th>
+          <th>
+            <a @click="sortKey = 'name'">Team Name</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'region'">Region</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'teamMmr'">Average MMR</a>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(team,key) in teams" v-bind:key="key">
+        <tr v-for="(team,key) in sortedTeams" v-bind:key="key">
           <td>
             {{key+1}}
           </td>
@@ -33,7 +39,7 @@
             {{team.region}}
           </td>
           <td>
-            {{ avgMmr[team.name] ? avgMmr[team.name].sum / avgMmr[team.name].count : '-' }}
+            {{ teamMmr[team.name] ? teamMmr[team.name].sum / teamMmr[team.name].count : '-' }}
           </td>
         </tr>
       </tbody>
@@ -51,14 +57,16 @@ var playerDB = Firebase.database().ref('/Players')
 export default {
   name: 'TeamsList',
   data() {
-    return {}
+    return {
+      sortKey: null
+    }
   },
   firebase: {
     teams: teamDB.orderByChild('name'),
     players: playerDB
   },
   computed: {
-    avgMmr() {
+    teamMmr() {
       let avgList = {}
 
       for (let i = 0; i < this.players.length; i++) {
@@ -74,6 +82,29 @@ export default {
       }
 
       return avgList
+    },
+    sortedTeams() {
+      if (!this.sortKey) {
+        return this.teams
+      } else {
+        if (this.sortKey == 'teamMmr') {
+          // Number compare DESC
+          return this.teams.sort(
+            (a, b) =>
+              (this.teamMmr[b.name]
+                ? this.teamMmr[b.name].sum / this.teamMmr[b.name].count
+                : 0) -
+              (this.teamMmr[a.name]
+                ? this.teamMmr[a.name].sum / this.teamMmr[a.name].count
+                : 0)
+          )
+        } else {
+          // String compare ASC
+          return this.teams.sort((a, b) =>
+            a[this.sortKey].localeCompare(b[this.sortKey])
+          )
+        }
+      }
     }
   }
 }
