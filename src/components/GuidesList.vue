@@ -34,7 +34,8 @@
             {{guide.hero}}
           </td>
           <td>
-            num
+            <span v-if="guideRating[guide['.key']]">{{guideRating[guide['.key']].sum / guideRating[guide['.key']].count}} ({{guideRating[guide['.key']].count}} votes)</span>
+            <span v-else>-</span>
           </td>
           <td>
             {{guide.dateCreated}}
@@ -42,7 +43,7 @@
         </tr>
       </tbody>
     </table>
-    <br>
+    <br> {{guideRating}}
 
   </div>
 </template>
@@ -50,6 +51,7 @@
 <script>
 import Firebase from 'firebase'
 var guideDB = Firebase.database().ref('/Guides')
+var ratingDB = Firebase.database().ref('/Rating')
 
 export default {
   name: 'GuidesList',
@@ -57,7 +59,33 @@ export default {
     return {}
   },
   firebase: {
-    guides: guideDB
+    guides: guideDB,
+    ratings: ratingDB
+  },
+  computed: {
+    guideRating() {
+      let avgList = {}
+
+      for (let g = 0; g < this.ratings.length; g++) {
+        let sum = 0
+        let count = 0
+
+        for (let u in this.ratings[g]) {
+          if (u !== '.key') {
+            console.log(this.ratings[g][u])
+            sum += this.ratings[g][u].rating
+            count++
+          }
+        }
+
+        avgList[this.ratings[g]['.key']] = {
+          sum: sum,
+          count: count
+        }
+      }
+
+      return avgList
+    }
   }
 }
 </script>
