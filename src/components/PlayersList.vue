@@ -14,8 +14,12 @@
     <table class="table is-fullwidth is-striped">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Player Name</th>
+          <th>
+            #
+          </th>
+          <th>
+            <a @click="sortKey = 'name'">Name</a>
+          </th>
           <th>
             <a @click="sortKey = 'mmrSolo'">Solo MMR</a>
           </th>
@@ -66,14 +70,22 @@ export default {
     }
   },
   firebase: {
-    players: playerDB
+    players: playerDB.orderByChild('name')
   },
   computed: {
     sortedPlayers() {
       if (!this.sortKey) {
         return this.players
       } else {
-        return this.players.sort((a, b) => b[this.sortKey] - a[this.sortKey])
+        if (this.sortKey == 'name') {
+          // String compare ASC
+          return this.players.sort((a, b) =>
+            a[this.sortKey].localeCompare(b[this.sortKey])
+          )
+        } else {
+          // Number compare DESC
+          return this.players.sort((a, b) => b[this.sortKey] - a[this.sortKey])
+        }
       }
     }
   }
