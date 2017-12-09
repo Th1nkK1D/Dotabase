@@ -31,7 +31,7 @@
             <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
           </td>
           <td>
-            {{heroes[guide.hero].name}}
+            <span v-if="guide.hero && heroes[guide.hero]">{{heroes[guide.hero].name}}</span>
           </td>
           <td>
             <span v-if="guideRating[guide['.key']]">{{guideRating[guide['.key']].sum / guideRating[guide['.key']].count}} ({{guideRating[guide['.key']].count}} votes)</span>
@@ -43,8 +43,7 @@
         </tr>
       </tbody>
     </table>
-    <br> {{guideRating}}
-
+    <br>
   </div>
 </template>
 
@@ -77,7 +76,6 @@ export default {
 
         for (let u in this.ratings[g]) {
           if (u !== '.key') {
-            console.log(this.ratings[g][u])
             sum += this.ratings[g][u].rating
             count++
           }
