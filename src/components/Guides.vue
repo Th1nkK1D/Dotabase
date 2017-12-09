@@ -95,11 +95,14 @@
           <span>Dislike</span>
         </b-radio-button>
       </b-field>
+
+      Rating: {{ overallRating.sum }} ({{ overallRating.count }} votes)
+
       <b-field>
-        <b-input type="text" placeholder="Comment" v-model="myComment.comment"></b-input>
+        <b-input maxlength="100" type="textarea" placeholder="Comment" v-model="myComment.comment"></b-input>
       </b-field>
 
-      <button class="button is-primary" @click="saveComment()">Sent</button><br> ----------------------------------------------------------------------------------------------------------------
+      <button class="button is-primary" @click="saveComment()">Add Comment</button><br> ----------------------------------------------------------------------------------------------------------------
       <div v-for="(com,index) in comments" :key="index" v-if="com != undefined">
         <div class="title is-4">Comment {{index+1}} </div>
         {{com.comment}}
