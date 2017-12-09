@@ -15,7 +15,7 @@
     <table class="table is-fullwidth is-striped">
       <thead>
         <tr>
-          <th>Rank</th>
+          <th>#</th>
           <th>Guide Name</th>
           <th>Hero Name</th>
           <th>Rating</th>
@@ -31,7 +31,7 @@
             <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
           </td>
           <td>
-            {{guide.hero}}
+            {{heroes[guide.hero].name}}
           </td>
           <td>
             <span v-if="guideRating[guide['.key']]">{{guideRating[guide['.key']].sum / guideRating[guide['.key']].count}} ({{guideRating[guide['.key']].count}} votes)</span>
@@ -51,6 +51,7 @@
 <script>
 import Firebase from 'firebase'
 var guideDB = Firebase.database().ref('/Guides')
+var heroDB = Firebase.database().ref('/Heroes')
 var ratingDB = Firebase.database().ref('/Rating')
 
 export default {
@@ -60,6 +61,10 @@ export default {
   },
   firebase: {
     guides: guideDB,
+    heroes: {
+      source: heroDB,
+      asObject: true
+    },
     ratings: ratingDB
   },
   computed: {
