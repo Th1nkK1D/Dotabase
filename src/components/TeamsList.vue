@@ -33,7 +33,7 @@
             {{team.region}}
           </td>
           <td>
-            num
+            {{ avgMmr[team.name] ? avgMmr[team.name].sum / avgMmr[team.name].count : '-' }}
           </td>
         </tr>
       </tbody>
@@ -46,6 +46,7 @@
 <script>
 import Firebase from 'firebase'
 var teamDB = Firebase.database().ref('/Teams')
+var playerDB = Firebase.database().ref('/Players')
 
 export default {
   name: 'TeamsList',
@@ -53,7 +54,27 @@ export default {
     return {}
   },
   firebase: {
-    teams: teamDB
+    teams: teamDB.orderByChild('name'),
+    players: playerDB
+  },
+  computed: {
+    avgMmr() {
+      let avgList = {}
+
+      for (let i = 0; i < this.players.length; i++) {
+        if (!avgList[this.players[i].teamName]) {
+          avgList[this.players[i].teamName] = {
+            count: 1,
+            sum: this.players[i].mmrSolo
+          }
+        } else {
+          avgList[this.players[i].teamName].count++
+          avgList[this.players[i].teamName].sum += this.players[i].mmrSolo
+        }
+      }
+
+      return avgList
+    }
   }
 }
 </script>
