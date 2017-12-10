@@ -106,7 +106,7 @@
       <div v-for="(com,index) in comments" :key="index" v-if="com != undefined">
         <div class="title is-4">Comment {{index+1}} </div>
         {{com.comment}}
-        <br><br> by {{com.memberID}} at {{com.dateCreated}}
+        <br><br> by {{com.memberID}} at {{com.dateCreated | moment("ddd D MMM YY, HH:mm")}}
         <br><br> ----------------------------------------------------------------------------------------------------------------
       </div>
     </div>

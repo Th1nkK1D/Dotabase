@@ -202,7 +202,7 @@ export default {
     },
     save() {
       if (!this.guide.dateCreated) {
-        this.guide.dateCreated = new Moment().format()
+        this.guide.dateCreated = new Moment().unix()
       }
 
       if (!this.guide.memberID) {

@@ -38,7 +38,7 @@
             <span v-else>-</span>
           </td>
           <td>
-            {{guide.dateCreated}}
+            {{guide.dateCreated | moment("ddd D MMM YY, HH:mm")}}
           </td>
         </tr>
       </tbody>
