@@ -106,7 +106,7 @@
 
     <div class="columns">
 
-      <div class="column is-6">
+      <div class="column is-5">
         <section class="hero is-danger is-bold">
           <div class="hero-body">
             <div class="container">
@@ -134,15 +134,12 @@
 
                   </tr>
                 </tbody>
-
               </table>
-
-              <br>
             </div>
           </div>
         </section>
       </div>
-      <div class="column is-6">
+      <div class="column is-7">
         <section class="hero is-danger is-bold">
           <div class="hero-body">
             <div class="container">
@@ -152,7 +149,7 @@
                   <tr>
                     <th>Rank</th>
                     <th>Username</th>
-                    <th>Guide Wrote</th>
+                    <th>Guides</th>
                     <th>Comments</th>
                     <th>Ratings</th>
                     <th>Active score</th>
@@ -164,29 +161,22 @@
                       {{key+1}}
                     </td>
                     <td>
-                      <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
+                      {{member.username}}
                     </td>
                     <td>{{member.guideCount}}</td>
                     <td>{{member.commentCount}}</td>
                     <td>{{member.ratingCount}}</td>
                     <td>
-                      {{3 * member.guideCount + member.commentCount * member.ratingCount}}
+                      {{3 * member.guideCount + member.commentCount + member.ratingCount}}
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <br>
             </div>
           </div>
         </section>
       </div>
     </div>
-    <br>
-
-    <br>
-
-    <br>
-
   </div>
 </template>
 
@@ -293,9 +283,11 @@ export default {
       return rank.sort(
         (a, b) =>
           3 * b.guideCount +
-          b.commentCount * b.ratingCount -
+          b.commentCount +
+          b.ratingCount -
           3 * a.guideCount +
-          a.commentCount * a.ratingCount
+          a.commentCount +
+          a.ratingCount
       )
     }
   }
