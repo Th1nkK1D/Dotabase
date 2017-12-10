@@ -152,19 +152,25 @@
                   <tr>
                     <th>Rank</th>
                     <th>Username</th>
+                    <th>Guide Wrote</th>
+                    <th>Comments</th>
+                    <th>Ratings</th>
                     <th>Active score</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(member,key) in members" v-bind:key="key">
+                  <tr v-for="(member,key) in memberRank" v-bind:key="key">
                     <td>
                       {{key+1}}
                     </td>
                     <td>
                       <router-link v-bind:to="'member/'+member['.key']">{{member.username}}</router-link>
                     </td>
+                    <td>{{member.guideCount}}</td>
+                    <td>{{member.commentCount}}</td>
+                    <td>{{member.ratingCount}}</td>
                     <td>
-                      num
+                      {{3 * member.guideCount + member.commentCount * member.ratingCount}}
                     </td>
                   </tr>
                 </tbody>
@@ -192,6 +198,8 @@ var itemDB = Firebase.database().ref('/Items')
 var MemberDB = Firebase.database().ref('/Members')
 var teamDB = Firebase.database().ref('/Teams')
 var guideDB = Firebase.database().ref('/Guides')
+var commentDB = Firebase.database().ref('/Comments')
+var ratingDB = Firebase.database().ref('/Rating')
 
 export default {
   name: 'MainPage',
@@ -199,6 +207,14 @@ export default {
     return {
       // Add data here
     }
+  },
+  firebase: {
+    players: playerDB,
+    members: MemberDB,
+    heroes: heroDB,
+    guides: guideDB,
+    comments: commentDB,
+    rating: ratingDB
   },
   computed: {
     guideRank() {
@@ -224,13 +240,64 @@ export default {
       } else {
         return null
       }
+    },
+    memberRank() {
+      let rank = []
+
+      // Init rank array
+      for (let m = 0; m < this.members.length; m++) {
+        rank.push({
+          memberID: this.members[m]['.key'],
+          username: this.members[m].username,
+          guideCount: 0,
+          commentCount: 0,
+          ratingCount: 0
+        })
+      }
+
+      // Count guides
+      for (let g = 0; g < this.guides.length; g++) {
+        let owner = rank.findIndex(m => m.memberID == this.guides[g].memberID)
+
+        if (owner >= 0) {
+          rank[owner].guideCount++
+        }
+      }
+
+      // Count comment
+      for (let c = 0; c < this.comments.length; c++) {
+        for (let member in this.comments[c]) {
+          let owner = rank.findIndex(
+            m => m.memberID == this.comments[c][member].memberID
+          )
+
+          if (owner >= 0) {
+            rank[owner].commentCount++
+          }
+        }
+      }
+
+      // Count rating
+      for (let r = 0; r < this.rating.length; r++) {
+        for (let member in this.rating[r]) {
+          let owner = rank.findIndex(
+            m => m.memberID == this.rating[r][member].memberID
+          )
+
+          if (owner >= 0) {
+            rank[owner].ratingCount++
+          }
+        }
+      }
+
+      return rank.sort(
+        (a, b) =>
+          3 * b.guideCount +
+          b.commentCount * b.ratingCount -
+          3 * a.guideCount +
+          a.commentCount * a.ratingCount
+      )
     }
-  },
-  firebase: {
-    players: playerDB,
-    members: MemberDB,
-    heroes: heroDB,
-    guides: guideDB
   }
 }
 </script>
