@@ -16,14 +16,22 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Guide Name</th>
-          <th>Hero Name</th>
-          <th>Rating</th>
-          <th>Date Created</th>
+          <th>
+            <a @click="sortKey = 'name'">Guide Name</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'hero'">Hero</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'rating'">Rating</a>
+          </th>
+          <th>
+            <a @click="sortKey = 'dateCreated'">Date Created</a>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(guide,key) in guides" v-bind:key="key">
+        <tr v-for="(guide,key) in sortedGuides" v-bind:key="key">
           <td>
             {{key+1}}
           </td>
@@ -56,7 +64,9 @@ var ratingDB = Firebase.database().ref('/Rating')
 export default {
   name: 'GuidesList',
   data() {
-    return {}
+    return {
+      sortKey: 'dateCreated'
+    }
   },
   firebase: {
     guides: guideDB,
@@ -88,6 +98,26 @@ export default {
       }
 
       return avgList
+    },
+    sortedGuides() {
+      if (this.sortKey == 'dateCreated') {
+        // Number compare DESC
+        return this.guides.sort((a, b) => b.dateCreated - a.dateCreated)
+      } else if (this.sortKey == 'rating') {
+        // Number compare DESC
+        return this.guides.sort(
+          (a, b) =>
+            this.guideRating[b['.key']] && this.guideRating[a['.key']]
+              ? this.guideRating[b['.key']].sum -
+                this.guideRating[a['.key']].sum
+              : this.guideRating[b['.key']] ? 1 : -1
+        )
+      } else {
+        // String compare ASC
+        return this.guides.sort((a, b) =>
+          a[this.sortKey].localeCompare(b[this.sortKey])
+        )
+      }
     }
   }
 }
