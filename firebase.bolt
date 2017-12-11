@@ -156,7 +156,6 @@ type Member {
   username: String,
   password: String,
   email: String,
-  heroAvatar: String,
   admin: Boolean
 }
 
