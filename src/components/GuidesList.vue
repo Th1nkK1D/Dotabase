@@ -12,6 +12,10 @@
       </div>
     </div>
 
+    <b-field label="Hero" v-if="heroes">
+      <b-autocomplete v-model="heroSearch" placeholder="Search hero..." :data="filterdHeroList" field="name" @select="option => selectHero(option)"></b-autocomplete>
+    </b-field>
+
     <table class="table is-fullwidth is-striped">
       <thead>
         <tr>
@@ -39,7 +43,7 @@
             <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
           </td>
           <td>
-            <span v-if="guide.hero && heroes[guide.hero]">{{heroes[guide.hero].name}}</span>
+            <span v-if="guide.hero">{{heroes[heroes.findIndex(h => h['.key'] == guide.hero)].name}}</span>
           </td>
           <td>
             <span v-if="guideRating[guide['.key']]">{{guideRating[guide['.key']].sum / guideRating[guide['.key']].count}} ({{guideRating[guide['.key']].count}} votes)</span>
@@ -80,17 +84,23 @@ export default {
       page: 0,
       firstDate: null,
       lastDate: null,
-      pageSize: 5
+      pageSize: 5,
+      heroSearch: '',
+      selectedHero: ''
     }
   },
   firebase: {
-    heroes: {
-      source: heroDB,
-      asObject: true
-    },
+    heroes: heroDB,
     ratings: ratingDB
   },
   computed: {
+    filterdHeroList() {
+      return this.heroes.filter(hero => {
+        return (
+          hero.name.toLowerCase().indexOf(this.heroSearch.toLowerCase()) >= 0
+        )
+      })
+    },
     guideRating() {
       let avgList = {}
 
@@ -135,36 +145,53 @@ export default {
     }
   },
   methods: {
+    selectHero(option) {
+      if (option) {
+        this.selectedHero = option['.key']
+        this.changePage(0)
+      } else if (this.heroSearch.length == 0) {
+        this.selectedHero = ''
+        this.changePage(0)
+      }
+    },
     changePage(direction) {
       let queryTarget
 
-      if (direction > 0) {
-        // Next Page
-        this.page += 1
-
-        queryTarget = guideDB
-          .orderByChild('dateCreated')
-          .endAt(this.lastDate - 1)
-          .limitToLast(this.pageSize)
-      } else if (direction < 0) {
-        // Previous Page
-        this.page -= 1
-
-        queryTarget = guideDB
-          .orderByChild('dateCreated')
-          .startAt(this.firstDate + 1)
-          .limitToLast(this.pageSize)
+      if (this.selectedHero.length > 0) {
+        queryTarget = guideDB.orderByChild('hero').equalTo(this.selectedHero)
       } else {
-        // Init page
-        queryTarget = guideDB
-          .orderByChild('dateCreated')
-          .endAt(new Moment().unix())
-          .limitToLast(this.pageSize)
+        if (direction > 0) {
+          // Next Page
+          this.page += 1
+
+          queryTarget = guideDB
+            .orderByChild('dateCreated')
+            .endAt(this.lastDate - 1)
+            .limitToLast(this.pageSize)
+        } else if (direction < 0) {
+          // Previous Page
+          this.page -= 1
+
+          queryTarget = guideDB
+            .orderByChild('dateCreated')
+            .startAt(this.firstDate + 1)
+            .limitToLast(this.pageSize)
+        } else {
+          // Reset page
+          this.page = 0
+
+          queryTarget = guideDB
+            .orderByChild('dateCreated')
+            .endAt(new Moment().unix())
+            .limitToLast(this.pageSize)
+        }
       }
 
       this.$bindAsArray('guides', queryTarget, null, function() {
-        this.lastDate = this.guides[0].dateCreated
-        this.firstDate = this.guides[this.guides.length - 1].dateCreated
+        if (this.guides.length > 0) {
+          this.lastDate = this.guides[0].dateCreated
+          this.firstDate = this.guides[this.guides.length - 1].dateCreated
+        }
       })
     }
   },

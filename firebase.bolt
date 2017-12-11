@@ -48,7 +48,7 @@ path /Players/{name} is Player {}
 path /Teams/{name} is Team {}
 
 path /Guides {
-  index() = 'dateCreated';
+  index() = ['dateCreated','hero'];
 }
 
 path /Players {
