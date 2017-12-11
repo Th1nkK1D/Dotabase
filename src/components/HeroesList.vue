@@ -11,41 +11,12 @@
       </div>
     </div>
 
-    <div class="columns">
-      <div class="column">
-        <ul>
-          <li v-for="(hero,key) in heroes" v-bind:key="key">
-            <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="column">
-        <!-- <h3 class="title is-3">Popular Heroes</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Hero Name</th>
-              <th>Number Of Player</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(hero,key) in heroes" v-bind:key="key">
-              <td>
-                {{key+1}}
-              </td>
-              <td>
-                <router-link v-bind:to="'hero/'+hero['.key']">{{hero.name}}</router-link>
-              </td>
-              <td>
-                num
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        </li>
-        </ul> -->
-        <br>
+    <div class="columns is-multiline is-gapless">
+      <div class="column is-1" v-for="(hero,key) in heroes" v-bind:key="key">
+        <router-link v-bind:to="'hero/'+hero['.key']" class="heroicon">
+          <img :src="hero.avatar" alt="" width="100%" height="auto">
+          <span>{{hero.name}}</span>
+        </router-link>
       </div>
     </div>
 
@@ -68,5 +39,21 @@ export default {
 </script>
 
 <style scoped>
+.heroicon {
+  position: relative;
+}
 
+.heroicon > span {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  margin: 5px;
+}
+.heroicon > img {
+  filter: brightness(0.5);
+}
+
+.heroicon:hover > img {
+  filter: brightness(1);
+}
 </style>

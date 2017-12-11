@@ -10,7 +10,7 @@
         </router-link>
       </div>
     </div>
-    <div class="columns">
+    <!-- <div class="columns">
       <div class="column">
         <ul>
           <li v-for="(item,key) in items" v-bind:key="key">
@@ -18,31 +18,14 @@
           </li>
         </ul>
       </div>
-      <div class="column">
-        <!-- <h3 class="title is-3">Most Used Items</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Item Name</th>
-              <th>Time Used</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item,key) in items" v-bind:key="key">
-              <td>
-                {{key+1}}
-              </td>
-              <td>
-                <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
-              </td>
-              <td>
-                num
-              </td>
-            </tr>
-          </tbody>
-        </table> -->
-        <br>
+    </div> -->
+
+    <div class="columns is-multiline is-gapless">
+      <div class="column is-1" v-for="(item,key) in items" v-bind:key="key">
+        <router-link v-bind:to="'item/'+item['.key']" class="itemicon">
+          <img :src="item.icon" alt="" width="100%" height="auto">
+          <span>{{item.name}}</span>
+        </router-link>
       </div>
     </div>
 
@@ -65,5 +48,22 @@ export default {
 </script>
 
 <style scoped>
+.itemicon {
+  position: relative;
+}
 
+.itemicon > span {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  margin: 5px;
+}
+.itemicon > img {
+  filter: brightness(0.5);
+  object-fit: cover;
+}
+
+.itemicon:hover > img {
+  filter: brightness(1);
+}
 </style>
