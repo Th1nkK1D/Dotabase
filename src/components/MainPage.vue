@@ -29,81 +29,6 @@
     </section>
     <br>
 
-    <!-- <div class="columns">
-      <div class="column is-2">
-        <router-link to="/hero">
-          <section class="hero is-dark is-bold">
-            <div class="hero-body">
-              <div class="container">
-                <h3 class="title is-3">Heroes</h3>
-              </div>
-            </div>
-          </section>
-        </router-link>
-
-      </div>
-      <div class="column is-2">
-        <router-link to="/guide">
-          <section class="hero is-dark is-bold">
-            <div class="hero-body">
-              <div class="container">
-                <h3 class="title is-3">Guides</h3>
-              </div>
-            </div>
-          </section>
-        </router-link>
-      </div>
-      <div class="column is-2">
-
-        <router-link to="/item">
-          <section class="hero is-dark is-bold">
-            <div class="hero-body">
-              <div class="container">
-                <h3 class="title is-3">Items</h3>
-              </div>
-            </div>
-          </section>
-        </router-link>
-
-      </div>
-      <div class="column is-2">
-        <router-link to="/player">
-          <section class="hero is-dark is-bold">
-            <div class="hero-body">
-              <div class="container">
-                <h3 class="title is-3">Players</h3>
-              </div>
-            </div>
-          </section>
-        </router-link>
-
-      </div>
-      <div class="column is-2">
-        <router-link to="/team">
-          <section class="hero is-dark is-bold">
-            <div class="hero-body">
-              <div class="container">
-                <h3 class="title is-3">Teams</h3>
-              </div>
-            </div>
-          </section>
-        </router-link>
-
-      </div>
-      <div class="column is-2">
-        <router-link to="/login">
-          <section class="hero is-dark is-bold">
-            <div class="hero-body">
-              <div class="container">
-                <h3 class="title is-3">Login\Register</h3>
-              </div>
-            </div>
-          </section>
-        </router-link>
-      </div>
-
-    </div> -->
-
     <div class="columns">
 
       <div class="column is-5">
@@ -111,7 +36,7 @@
           <div class="hero-body">
             <div class="container">
 
-              <h3 class="title is-3">Heroes With Highest Guide Number</h3>
+              <h3 class="title is-3">Heroes With Highest Guide (last 30 days)</h3>
               <table class="table">
                 <thead>
                   <tr>
@@ -143,7 +68,7 @@
         <section class="hero is-danger is-bold">
           <div class="hero-body">
             <div class="container">
-              <h3 class="title is-3">Most Active Member</h3>
+              <h3 class="title is-3">Most Active Member (last 30 days)</h3>
               <table class="table">
                 <thead>
                   <tr>
@@ -182,6 +107,8 @@
 
 <script>
 import Firebase from 'firebase'
+import Moment from 'moment'
+
 var heroDB = Firebase.database().ref('/Heroes')
 var playerDB = Firebase.database().ref('/Players')
 var itemDB = Firebase.database().ref('/Items')
@@ -190,6 +117,8 @@ var teamDB = Firebase.database().ref('/Teams')
 var guideDB = Firebase.database().ref('/Guides')
 var commentDB = Firebase.database().ref('/Comments')
 var ratingDB = Firebase.database().ref('/Rating')
+
+var lastMonthUnix = new Moment().unix() - 60 * 60 * 24 * 30
 
 export default {
   name: 'MainPage',
@@ -202,9 +131,9 @@ export default {
     players: playerDB,
     members: MemberDB,
     heroes: heroDB,
-    guides: guideDB,
-    comments: commentDB,
-    rating: ratingDB
+    guides: guideDB.orderByChild('dateCreated').startAt(lastMonthUnix),
+    comments: commentDB.orderByChild('dateCreated').startAt(lastMonthUnix),
+    rating: ratingDB.orderByChild('dateCreated').startAt(lastMonthUnix)
   },
   computed: {
     guideRank() {
@@ -280,15 +209,17 @@ export default {
         }
       }
 
-      return rank.sort(
-        (a, b) =>
-          3 * b.guideCount +
-          b.commentCount +
-          b.ratingCount -
-          3 * a.guideCount +
-          a.commentCount +
-          a.ratingCount
-      )
+      return rank
+        .sort(
+          (a, b) =>
+            3 * b.guideCount +
+            b.commentCount +
+            b.ratingCount -
+            3 * a.guideCount +
+            a.commentCount +
+            a.ratingCount
+        )
+        .slice(0, 5)
     }
   }
 }

@@ -55,6 +55,14 @@ path /Players {
   index() = 'teamName';
 }
 
+path /Comments {
+  index() = 'dateCreated'
+}
+
+path /Rating {
+  index() = 'dateCreated'
+}
+
 type Hero {
   name: String,
   avatar: String,
