@@ -47,6 +47,10 @@ path /Members/{name} is Member {}
 path /Players/{name} is Player {}
 path /Teams/{name} is Team {}
 
+path /Guides {
+  index() = 'dateCreated';
+}
+
 type Hero {
   name: String,
   avatar: String,

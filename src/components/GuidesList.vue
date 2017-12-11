@@ -33,7 +33,7 @@
       <tbody>
         <tr v-for="(guide,key) in sortedGuides" v-bind:key="key">
           <td>
-            {{key+1}}
+            {{page*pageSize + key + 1}}
           </td>
           <td>
             <router-link v-bind:to="'guide/'+guide['.key']">{{guide.name}}</router-link>
@@ -51,12 +51,22 @@
         </tr>
       </tbody>
     </table>
-    <br>
+    <div class="columns">
+      <div class="column is-narrow" v-if="page > 0">
+        <button class="button" @click="changePage(-1)">&lt;</button>
+      </div>
+      <div class="column"></div>
+      <div class="column is-narrow" v-if="guides.length == pageSize">
+        <button class="button" @click="changePage(1)">&gt;</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Firebase from 'firebase'
+import Moment from 'moment'
+
 var guideDB = Firebase.database().ref('/Guides')
 var heroDB = Firebase.database().ref('/Heroes')
 var ratingDB = Firebase.database().ref('/Rating')
@@ -65,11 +75,15 @@ export default {
   name: 'GuidesList',
   data() {
     return {
-      sortKey: 'dateCreated'
+      sortKey: 'dateCreated',
+      guides: [],
+      page: 0,
+      firstDate: null,
+      lastDate: null,
+      pageSize: 5
     }
   },
   firebase: {
-    guides: guideDB,
     heroes: {
       source: heroDB,
       asObject: true
@@ -119,6 +133,43 @@ export default {
         )
       }
     }
+  },
+  methods: {
+    changePage(direction) {
+      let queryTarget
+
+      if (direction > 0) {
+        // Next Page
+        this.page += 1
+
+        queryTarget = guideDB
+          .orderByChild('dateCreated')
+          .endAt(this.lastDate - 1)
+          .limitToLast(this.pageSize)
+      } else if (direction < 0) {
+        // Previous Page
+        this.page -= 1
+
+        queryTarget = guideDB
+          .orderByChild('dateCreated')
+          .startAt(this.firstDate + 1)
+          .limitToLast(this.pageSize)
+      } else {
+        // Init page
+        queryTarget = guideDB
+          .orderByChild('dateCreated')
+          .endAt(new Moment().unix())
+          .limitToLast(this.pageSize)
+      }
+
+      this.$bindAsArray('guides', queryTarget, null, function() {
+        this.lastDate = this.guides[0].dateCreated
+        this.firstDate = this.guides[this.guides.length - 1].dateCreated
+      })
+    }
+  },
+  mounted() {
+    this.changePage(0)
   }
 }
 </script>
