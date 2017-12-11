@@ -214,6 +214,9 @@ export default {
       } else {
         // New guide
         guideDB.push(this.guide)
+
+        // Redirect
+        this.$router.push('/guide')
       }
     }
   },
