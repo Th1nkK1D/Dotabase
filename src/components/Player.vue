@@ -33,7 +33,7 @@
           <tbody>
             <tr v-for="heroRanks in player.heroRanks" :key="heroRanks.name">
               <td>
-                {{heroRanks.heroName}}
+                <router-link :to="'/hero/'+heroRanks.heroName">{{heroes[heroRanks.heroName].name}}</router-link>
               </td>
               <td>
                 {{heroRanks.score}}
@@ -52,6 +52,7 @@
 <script>
 import Firebase from 'firebase'
 var playerDB = Firebase.database().ref('/Players')
+var heroDB = Firebase.database().ref('/Heroes')
 
 export default {
   name: 'Player',
@@ -63,6 +64,12 @@ export default {
   data() {
     return {
       player: {}
+    }
+  },
+  firebase: {
+    heroes: {
+      source: heroDB,
+      asObject: true
     }
   }
 }
