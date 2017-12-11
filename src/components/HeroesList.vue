@@ -11,8 +11,12 @@
       </div>
     </div>
 
+    <b-field>
+      <b-input type="text" placeholder="Search hero..." v-model="heroSearch"></b-input>
+    </b-field>
+
     <div class="columns is-multiline is-gapless">
-      <div class="column is-1" v-for="(hero,key) in heroes" v-bind:key="key">
+      <div class="column is-1" v-for="(hero,key) in filteredHeroList" v-bind:key="key">
         <router-link v-bind:to="'hero/'+hero['.key']" class="heroicon">
           <img :src="hero.avatar" alt="" width="100%" height="auto">
           <span>{{hero.name}}</span>
@@ -30,10 +34,25 @@ var heroDB = Firebase.database().ref('/Heroes')
 export default {
   name: 'HeroesList',
   data() {
-    return {}
+    return {
+      heroSearch: ''
+    }
   },
   firebase: {
     heroes: heroDB
+  },
+  computed: {
+    filteredHeroList() {
+      if (this.heroSearch.length > 0) {
+        return this.heroes.filter(hero => {
+          return (
+            hero.name.toLowerCase().indexOf(this.heroSearch.toLowerCase()) >= 0
+          )
+        })
+      } else {
+        return this.heroes
+      }
+    }
   }
 }
 </script>
