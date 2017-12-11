@@ -10,18 +10,12 @@
         </router-link>
       </div>
     </div>
-    <!-- <div class="columns">
-      <div class="column">
-        <ul>
-          <li v-for="(item,key) in items" v-bind:key="key">
-            <router-link v-bind:to="'item/'+item['.key']">{{item.name}}</router-link>
-          </li>
-        </ul>
-      </div>
-    </div> -->
+    <b-field>
+      <b-input type="text" placeholder="Search item..." v-model="itemSearch"></b-input>
+    </b-field>
 
     <div class="columns is-multiline is-gapless">
-      <div class="column is-1" v-for="(item,key) in items" v-bind:key="key">
+      <div class="column is-1" v-for="(item,key) in filteredItemList" v-bind:key="key">
         <router-link v-bind:to="'item/'+item['.key']" class="itemicon">
           <img :src="item.icon" alt="" width="100%" height="auto">
           <span>{{item.name}}</span>
@@ -39,10 +33,25 @@ var itemDB = Firebase.database().ref('/Items')
 export default {
   name: 'ItemsList',
   data() {
-    return {}
+    return {
+      itemSearch: ''
+    }
   },
   firebase: {
     items: itemDB
+  },
+  computed: {
+    filteredItemList() {
+      if (this.itemSearch.length > 0) {
+        return this.items.filter(item => {
+          return (
+            item.name.toLowerCase().indexOf(this.itemSearch.toLowerCase()) >= 0
+          )
+        })
+      } else {
+        return this.items
+      }
+    }
   }
 }
 </script>
