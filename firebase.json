@@ -1,5 +1,8 @@
 {
   "database": {
     "rules": "firebase.bolt"
+  },
+  "hosting": {
+    "public": "./dist"
   }
 }
