@@ -26,9 +26,9 @@
       <div class="columns" v-if="items">
         <div v-for="purchase in guide.purchaseCategory" :key="purchase.slot" class="column">
           <h3 class="title is-4">{{purchase.name}}</h3>
-          <div v-for="item in purchase.items" :key="item">
-            <img :src="items[item].icon" :alt="item"> {{items[item].name}}
-          </div>
+          <router-link v-for="item in purchase.items" :key="item" :to="'/item/'+item">
+            <img :src="items[item].icon" :alt="items[item].name">
+          </router-link>
         </div>
       </div>
     </section>
