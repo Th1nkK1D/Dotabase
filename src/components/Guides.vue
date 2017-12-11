@@ -1,9 +1,9 @@
 <template>
   <div>
-
     <div class="columns">
       <div class="column">
         <h1 class="title is-1">{{guide.name}}</h1>
+        Create by {{guide.memberID}} on {{guide.dateCreated | moment("ddd D MMM YY, HH:mm")}}
       </div>
       <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
         <router-link :to="'/updateguide/'+guideKey">
@@ -12,27 +12,33 @@
       </div>
     </div>
 
-    <h5 class="title is-5" v-if="hero && guide.name">
-      <p>Hero : {{hero.name}}</p>
-    </h5>
-    <img :src="hero.avatar" :alt="hero.name">
-    <div class="columns">
-      <div v-for="purchase in guide.purchaseCategory" :key="purchase.slot" class="column">
-        <h3 class="title is-3">{{purchase.name}}</h3>
-        <div v-for="item in purchase.items" :key="item">
-          <img :src="items[item].icon" :alt="item"> {{item}}
-        </div>
-      </div>
-      <br>
-    </div>
+    <router-link :to="'/hero/'+guide.hero">
+      <h1 class="title is-5" v-if="hero && guide.name">
+        Hero : {{hero.name}}
+      </h1>
 
-    <table>
-      <tr v-for="(skill,Sindex) in hero.skills" :key="skill.name">
-        <h4 class="title is-4">
-          <div>{{skill.name}}</div>
-        </h4>
-        <div class="columns">
-          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined" class="column">
+      <img :src="hero.avatar" :alt="hero.name">
+    </router-link>
+
+    <section class="section">
+      <h3 class="title is-3">Purchase Order</h3>
+      <div class="columns" v-if="items">
+        <div v-for="purchase in guide.purchaseCategory" :key="purchase.slot" class="column">
+          <h3 class="title is-4">{{purchase.name}}</h3>
+          <div v-for="item in purchase.items" :key="item">
+            <img :src="items[item].icon" :alt="item"> {{items[item].name}}
+          </div>
+        </div>
+        <br>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="title is-3">Learn Order</h3>
+      <table class="table">
+        <tr v-for="(skill,Sindex) in hero.skills" :key="skill.name">
+          <td><img :src="skill.icon" width="50px" height="auto"></td>
+          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined">
             <div class="yes" v-if="learn != 0 && Sindex == learn.slot">
               <center>
                 {{Lindex+1}}
@@ -45,14 +51,10 @@
               {{Lindex+1}}
             </div>
           </td>
-        </div>
-      </tr>
-      <tr>
-        <h4 class="title is-4">
-          <div>TarentTree</div>
-        </h4>
-        <div class="columns">
-          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined" class="column">
+        </tr>
+        <tr>
+          <td><img src="../assets/talent.png" width="50px" height="auto"></td>
+          <td v-for="(learn,Lindex) in guide.learnOrder" :key="Lindex" v-if="learn != undefined">
             <div class="column is-three-quarters">
             </div>
             <div class="nope" v-if="learn != 0 && learn.isSkill">
@@ -67,25 +69,37 @@
               {{Lindex+1}}
             </div>
           </td>
-        </div>
-      </tr>
-    </table>
-    <br>
-    <h5 class="title is-5">
-      <center>
-        <table>
+        </tr>
+      </table>
+      <br>
+    </section>
+
+    <center>
+      <h3 class="title is-4">Talent Tree</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Talent 1</th>
+            <th style="text-align: center;">Level</th>
+            <th style="text-align: center;">Talent 2</th>
+          </tr>
+        </thead>
+        <tbody>
           <tr v-for="(talentEachLvl,index) in sortedTalent" :key="talentEachLvl[0]">
             <td :class="guide.talentTree[index] == 0 ? 'use' : ''">{{talentEachLvl[0]}}</td>
-            <td>Level{{25-(5*index)}}</td>
+
+            <td style="text-align: center;">{{25-(5*index)}}</td>
+
             <td :class="guide.talentTree[index] == 1 ? 'use' : ''">{{talentEachLvl[1]}}</td>
             <br>
           </tr>
-        </table>
-      </center>
-    </h5>
+        </tbody>
+      </table>
+    </center>
+
     <br>
 
-    <div>
+    <section class="section">
       <h3 class="title is-3">Comment</h3>
       <b-field>
         <b-radio-button v-model="myRating.rating" :native-value="1" type="is-success" @input="saveRating()">
@@ -109,7 +123,7 @@
         <br><br> by {{com.memberID}} at {{com.dateCreated | moment("ddd D MMM YY, HH:mm")}}
         <br><br> ----------------------------------------------------------------------------------------------------------------
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
