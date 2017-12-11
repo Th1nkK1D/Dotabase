@@ -3,7 +3,8 @@
     <div class="columns">
       <div class="column">
         <h1 class="title is-1">{{guide.name}}</h1>
-        Create by {{guide.memberID}} on {{guide.dateCreated | moment("ddd D MMM YY, HH:mm")}}
+        Create by {{guide.memberID}} on
+        <span v-if="guide.dateCreated">{{guide.dateCreated | moment("ddd D MMM YY, HH:mm")}}</span>
       </div>
       <div class="column is-narrow" v-if="$store.state.user && $store.state.user.admin">
         <router-link :to="'/updateguide/'+guideKey">
@@ -29,7 +30,6 @@
             <img :src="items[item].icon" :alt="item"> {{items[item].name}}
           </div>
         </div>
-        <br>
       </div>
     </section>
 
@@ -71,7 +71,6 @@
           </td>
         </tr>
       </table>
-      <br>
     </section>
 
     <center>
@@ -97,10 +96,10 @@
       </table>
     </center>
 
-    <br>
-
     <section class="section">
-      <h3 class="title is-3">Comment</h3>
+      <h3 class="title is-3">Rating and Comments</h3>
+      <strong>Rating: {{ overallRating.sum }}</strong> ({{ overallRating.count }} votes)
+
       <b-field>
         <b-radio-button v-model="myRating.rating" :native-value="1" type="is-success" @input="saveRating()">
           <span>Like</span>
@@ -110,19 +109,26 @@
         </b-radio-button>
       </b-field>
 
-      Rating: {{ overallRating.sum }} ({{ overallRating.count }} votes)
-
       <b-field>
         <b-input maxlength="100" type="textarea" placeholder="Comment" v-model="myComment.comment"></b-input>
       </b-field>
 
-      <button class="button is-primary" @click="saveComment()">Add Comment</button><br> ----------------------------------------------------------------------------------------------------------------
-      <div v-for="(com,index) in comments" :key="index" v-if="com != undefined">
-        <div class="title is-4">Comment {{index+1}} </div>
-        {{com.comment}}
-        <br><br> by {{com.memberID}} at {{com.dateCreated | moment("ddd D MMM YY, HH:mm")}}
-        <br><br> ----------------------------------------------------------------------------------------------------------------
-      </div>
+      <button class="button is-primary" @click="saveComment()">Add Comment</button>
+      <section class="section">
+        <div class="box" v-for="(com,index) in comments" :key="index" v-if="com != undefined">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>{{com.memberID}}</strong>
+                  <small>on {{com.dateCreated | moment("ddd D MMM YY, HH:mm")}}</small>
+                  <br> {{com.comment}}
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
     </section>
   </div>
 </template>
