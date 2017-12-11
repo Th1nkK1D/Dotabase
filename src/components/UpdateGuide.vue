@@ -100,9 +100,9 @@
 
       </table>
       <!-- End of Talent Tree -->
-    </section>
 
-    <button class="button is-primary" @click="save()">Save</button>
+      <button class="button is-primary" @click="save()">Save</button>
+    </section>
 
   </div>
 
