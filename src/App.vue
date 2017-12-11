@@ -20,82 +20,28 @@
 
       <div id="navbarExampleTransparentExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
-            <router-link to="/hero">
-              Heroes
-            </router-link>
-          </a>
-          <a class="navbar-item">
-            <router-link to="/item">
-              Items
-            </router-link>
-          </a>
-          <a class="navbar-item">
-            <router-link to="/guide">
-              Guides
-            </router-link>
-          </a>
-
-          <a class="navbar-item">
-            <router-link to="/player">
-              Players
-            </router-link>
-          </a>
-          <a class="navbar-item">
-            <router-link to="/team">
-              Teams
-            </router-link>
-          </a>
-
-          <!-- <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Docs
-        </a>
-        <div class="navbar-dropdown is-boxed">
-          <a class="navbar-item" >
-            Overview
-          </a>
-          <a class="navbar-item">
-            Modifiers
-          </a>
-          <a class="navbar-item">
-            Columns
-          </a>
-          <a class="navbar-item">
-            Layout
-          </a>
-          <a class="navbar-item">
-            Form
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Elements
-          </a>
-          <a class="navbar-item is-active">
-            Components
-          </a>
-        </div>
-      </div> -->
+          <router-link class="navbar-item" to="/hero">
+            Heroes
+          </router-link>
+          <router-link class="navbar-item" to="/item">
+            Items
+          </router-link>
+          <router-link class="navbar-item" to="/guide">
+            Guides
+          </router-link>
+          <router-link class="navbar-item" to="/player">
+            Players
+          </router-link>
+          <router-link class="navbar-item" to="/team">
+            Teams
+          </router-link>
         </div>
 
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="field is-grouped">
-              <a class="button is-info is-outlined" href="https://www.facebook.com/Th1nkK1D">
-                Contract Us
-              </a>
-
-              <p class="control">
-                <a class="button is-success is-outlined">
-                  <span v-if="!user">
-                    <router-link to="login">Login</router-link>
-                  </span>
-                  <span v-else>
-
-                    <a @click="logout()">Hi, {{user.username}} (Logout)</a>
-                  </span>
-                </a>
-              </p>
+              <router-link v-if="!user" class="button is-success is-outlined" to="login">Login</router-link>
+              <a v-else class="button is-success is-outlined" @click="logout()">Hi, {{user.username}} (Logout)</a>
             </div>
           </div>
         </div>
