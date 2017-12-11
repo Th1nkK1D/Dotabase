@@ -21,6 +21,9 @@
             <a @click="sortKey = 'name'">Name</a>
           </th>
           <th>
+            <a @click="sortKey = 'teamName'">Team</a>
+          </th>
+          <th>
             <a @click="sortKey = 'mmrSolo'">Solo MMR</a>
           </th>
           <th>
@@ -39,6 +42,9 @@
           </td>
           <td>
             <router-link v-bind:to="'player/'+player['.key']">{{player.name}} </router-link>
+          </td>
+          <td>
+            {{player.teamName ? player.teamName : '-'}}
           </td>
           <td>
             {{player.mmrSolo}}
@@ -77,7 +83,7 @@ export default {
       if (!this.sortKey) {
         return this.players
       } else {
-        if (this.sortKey == 'name') {
+        if (this.sortKey == 'name' || this.sortKey == 'teamName') {
           // String compare ASC
           return this.players.sort((a, b) =>
             a[this.sortKey].localeCompare(b[this.sortKey])
