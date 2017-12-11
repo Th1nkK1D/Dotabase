@@ -44,6 +44,7 @@
 
 <script>
 import Firebase from 'firebase'
+import md5 from 'md5'
 
 var MemberDB = Firebase.database().ref('/Members')
 
@@ -77,6 +78,7 @@ export default {
             this.userCheck = false
           } else {
             this.Member.admin = false
+            this.Member.password = md5(this.Member.password)
             MemberDB.child(this.Member.username).set(this.Member)
 
             // Redirect to login

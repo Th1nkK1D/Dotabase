@@ -43,6 +43,8 @@
 
 <script>
 import Firebase from 'firebase'
+import md5 from 'md5'
+
 var MemberDB = Firebase.database().ref('/Members')
 
 export default {
@@ -67,7 +69,7 @@ export default {
             console.log('Can not find this user.')
             this.invalidUsername = false
           } else {
-            if (this.member.password != this.password) {
+            if (this.member.password != md5(this.password)) {
               console.log('No matching password.')
               this.wrongPassword = false
             } else {
