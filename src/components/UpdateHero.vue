@@ -141,32 +141,32 @@
 					<div class="column"></div>
 					<div class="column is-narrow">
 						<table class="table" v-if="Hero.talents">
-					<thead>
-						<tr>
-							<th class="subtitle">Talent 1</th>
-							<th class="subtitle">Level</th>
-							<th class="subtitle">Talent 2</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="tl in 4" :key="tl">
-							<td>
-								<b-input type="text" name="talent3_0" v-model="Hero.talents[4-tl][0]"></b-input>
-							</td>
-							<td>
-								<strong>{{25 - tl*5}}</strong>
-							</td>
-							<td>
-								<b-input type="text" name="talent3_1" v-model="Hero.talents[4-tl][1]"></b-input>
-							</td>
-						</tr>
-					</tbody>
+							<thead>
+								<tr>
+									<th class="subtitle">Talent 1</th>
+									<th class="subtitle">Level</th>
+									<th class="subtitle">Talent 2</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="tl in 4" :key="tl">
+									<td>
+										<b-input type="text" name="talent3_0" v-model="Hero.talents[4-tl][0]"></b-input>
+									</td>
+									<td>
+										<strong>{{25 - tl*5}}</strong>
+									</td>
+									<td>
+										<b-input type="text" name="talent3_1" v-model="Hero.talents[4-tl][1]"></b-input>
+									</td>
+								</tr>
+							</tbody>
 
-				</table>
-			</div>
-			<div class="column">
-			</div>
-			</div>
+						</table>
+					</div>
+					<div class="column">
+					</div>
+				</div>
 
 				<!--
 				<div >
@@ -319,7 +319,7 @@ export default {
   methods: {
     submit: function() {
       herodb
-        .child(this.Hero.name.replace(' ', '_').toLowerCase())
+        .child(this.Hero.name.replace(/ /g, '_').toLowerCase())
         .set(this.Hero)
     },
     addRole: function() {

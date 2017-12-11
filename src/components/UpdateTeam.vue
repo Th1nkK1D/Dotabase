@@ -42,7 +42,9 @@ export default {
   },
   methods: {
     submit: function() {
-      teamdb.child(this.Team.name).set(this.Team)
+      teamdb
+        .child(this.Team.name.replace(/ /g, '_').toLowerCase())
+        .set(this.Team)
     }
   },
   mounted() {

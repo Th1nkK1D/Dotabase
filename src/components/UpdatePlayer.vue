@@ -123,7 +123,9 @@ export default {
   },
   methods: {
     submit: function() {
-      playerdb.child(this.Player.name).set(this.Player)
+      playerdb
+        .child(this.Player.name.replace(/ /g, '_').toLowerCase())
+        .set(this.Player)
     },
     addHero: function() {
       this.Player.heroRanks.push({
