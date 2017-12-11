@@ -19,7 +19,9 @@
           <span v-for="role in hero.roles" :key="role">{{role}} </span>
         </p>
         <p>Attribute: {{hero.attribute}}</p>
-        <h2>Stat</h2>
+        <br>
+
+        <h2 class="title is-h2">Stat</h2>
         <p>Strength: {{hero.strBase}} +{{hero.strGain}}</p>
         <p>Agility: {{hero.agiBase}} +{{hero.agiGain}}</p>
         <p>Intelligence: {{hero.intBase}} +{{hero.intGain}}</p>
@@ -31,11 +33,15 @@
         <p>Move Speed: {{hero.moveSpeed}}</p>
         <p>Attack Range: {{hero.attackRange}}</p>
         <p>Attack Speed: {{hero.attackSpeed}}</p>
+        <br>
+
+        <h2 class="title is-h2">Lore</h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{hero.lore}}</p>
       </div>
       <div class="column">
         <h3 class="title is-3">Skills</h3>
         <div v-for="skill in hero.skills" :key="skill.slot">
-          <h4>{{skill.name}}</h4>
+          <h4 class="title is-4">{{skill.name}}</h4 class="title is-4">
           <img :src="skill.icon" :alt="skill.name">
           <p>{{skill.description}}</p>
           <ul>
@@ -43,25 +49,28 @@
               <i>{{attr.value}}</i>
             </li>
           </ul>
+          <br>
         </div>
+        <h3 class="title is-3">Talents</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: center;">Talent 1</th>
+              <th style="text-align: center;">Level</th>
+              <th style="text-align: center;">Talent 2</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr v-for="(talentEachLvl,index) in sortedTalent" :key="talentEachLvl[0]">
+              <td>{{talentEachLvl[0]}}</td>
+              <td style="text-align: center;">{{25-(5*index)}}</td>
+              <td>{{talentEachLvl[1]}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <center>
-      <h3 class="title is-3">Talents</h3>
-      <table>
-        <tr v-for="(talentEachLvl,index) in sortedTalent" :key="talentEachLvl[0]">
-          <td>{{talentEachLvl[0]}}</td>
-          <td>Level{{25-(5*index)}}</td>
-          <td>{{talentEachLvl[1]}}</td>
-        </tr>
-      </table>
-    </center>
-    <br>
-    <br>
-    <p>{{hero.lore}}</p>
-    <h3>Best Score For Sven</h3>
-    <br>
-
   </div>
 </template>
 
